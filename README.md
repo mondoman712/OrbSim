@@ -7,8 +7,8 @@ It will simulate the orbits of user entered planets and satellites, written in C
 ## ToDo List
 
 1. Write Algorithm for the maths and stuff [-]
-..* Code the Algorithm []
-..* Test the algoritm []
+	..* Code the Algorithm []
+	..* Test the algoritm []
 2. learn some more OpenGL []
 3. Make OpenGL circles, map them to the maths and stuff []
 4. Make a UI of some sort []
