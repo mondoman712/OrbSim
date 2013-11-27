@@ -1,4 +1,6 @@
 \documentclass[a4paper,11pt,titlepage]{article}
+\usepackage{graphicx}
+\DeclareGraphicsExtensions{.png}
 
 \author{Sam Smith}
 \title{Orbit Simulator}
@@ -8,7 +10,7 @@
 \tableofcontents
 \clearpage
 \part{Analysis}
-
+\iffalse
 \begin{description}
 	\item[What is your idea?] \hfill \\
 		A program to help visualize the orbits of planets and satellites
@@ -41,17 +43,29 @@
 		reference while I am programming in C.
 		\\
 \end{description}
-
+\fi
 \section{Investigation}
+\iffalse
 \subsection{Background}
 
 King Edward VI Five Ways school teaches Astronomy at GCSE level. One part of the
 coarse involves understanding the orbits of planets. It is very hard to
 visualize without some sort of animation to help. At the moment they use a basic
 web applet, with minimal features.
-
+\fi
 \subsection{Problem}
+Dr.~Naylor, who teaches astronomy, needs a way to help his students visualise
+the orbits of the planets to help them to understand Kepler's laws. 
 
 \subsection{Description of the Current System}
+\includegraphics[width=\textwidth]{existing-solution.png}
+The current system shows the solar system in 2 dimensions. It only shows one
+planet by default but there is the option to show the others. It only allows one
+planet's properties to be manipulated at a time, and the properties that can be
+changed are the semimajor axis and eccentricity (and these can be set to the
+values of a real planet using the drop-down menu). The animation speed can also
+be adjusted. The program has strict limits to what values these parameters can
+be set to. The strength of this solution is its visualisations of Kepler's laws,
+which is what the end user really needs from the program. 
 
 \end{document}
