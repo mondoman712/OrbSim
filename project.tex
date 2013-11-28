@@ -1,6 +1,11 @@
 \documentclass[a4paper,11pt,titlepage]{article}
-\usepackage{graphicx}
+\usepackage{graphicx, fancyhdr}
 \DeclareGraphicsExtensions{.png}
+\pagestyle{fancy}
+\setlength{\headheight}{15pt}
+
+\lhead{Name: Sam Smith}
+\rhead{Center Name: King Edward VI Five Ways School}
 
 \author{Sam Smith}
 \title{Orbit Simulator}
@@ -57,7 +62,7 @@ web applet, with minimal features.
 Dr.~Naylor, who teaches astronomy, needs a way to help his students visualise
 the orbits of the planets to help them to understand Kepler's laws. 
 
-\subsection{Description of the Current System}
+\subsection{Current Solution}
 \includegraphics[width=\textwidth]{existing-solution.png}
 The current system shows the solar system in 2 dimensions. It only shows one
 planet by default but there is the option to show the others. It only allows one
