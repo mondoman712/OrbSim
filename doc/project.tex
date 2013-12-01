@@ -15,8 +15,10 @@
 \tableofcontents
 \clearpage
 
-\input{./tex/analysis.tex}
-\clearpage
-\input{./tex/design.tex}
+\newcommand{\add}[1]{\input{./tex/#1.tex} \clearpage}
+
+\add{analysis}
+\add{design}
+\add{implementation}
 
 \end{document}
