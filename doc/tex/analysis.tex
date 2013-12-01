@@ -1,41 +1,11 @@
 %!TEX root = ../project.tex
 \part{Analysis}
-\iffalse
-\begin{description}
-	\item[What is your idea?] \hfill \\
-		A program to help visualize the orbits of planets and satellites
-	\item[Is your idea complex enough?] \hfill \\
-		It will require a lot of complex equations to calculate the
-		positions of each object at any given time, and the use of
-		graphics libraries to display the objects.
-	\item[Who is your user?] \hfill \\
-		My end user is Dr.~Naylor (dnaylor@kefw.org). I have not yet
-		decided whether to aim it towards use in front of a class, or
-		for the students to use themselves.
-	\item[What programming languages do you know?] \hfill \\
-		My main language is C, but I also know some Python and I am
-		currently learning some Common Lisp. I plan to write the program
-		mainly in C because of its good performance and compatibility
-		with many external libraries. I might try to include some Lisp
-		in as well.
-	\item[Do you need to use a database or other data stored?] \hfill \\
-		I don't think I will require any large databasing tool like SQL,
-		but I might have external files for storing information about
-		planets.
-	\item[What do you need to learn?] \hfill \\
-		I will need to learn how to use the external libraries that I
-		intend to use for graphics. I plan on using either OpenGL or
-		SDL.
-	\item[What websites and books can help you?] \hfill \\
-		Wikipedia will be very useful for finding figures like the mass
-		of a planet. I have a copy of \emph{The C Programming Language}
-		by Dennis Ritchie and Brian Kernighan, which I use as a
-		reference while I am programming in C.
-		\\
-\end{description}
-\fi
+
+%%%%
 \section{Investigation}
 \iffalse
+
+%%
 \subsection{Background}
 
 King Edward VI Five Ways school teaches Astronomy at GCSE level. One part of the
@@ -43,12 +13,20 @@ coarse involves understanding the Kepler's laws of planetary motion. It is very 
 visualize without some sort of animation to help. At the moment they use a basic
 web applet, with minimal features.
 \fi
+
+%%
 \subsection{Problem}
 Dr.~Naylor, who teaches astronomy, needs a way to help his students visualise
 the orbits of the planets to help them to understand Kepler's laws. 
 
+%%
 \subsection{Current Solution}
-\includegraphics[width=\textwidth]{./img/existing-solution.png}
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{./img/existing-solution.png}
+	\caption{Screenshot of the current system}
+	\label{fig:existing-solution}
+\end{figure}
+%\includegraphics[width=\textwidth]{./img/existing-solution.png}
 
 The current system shows the solar system in 2 dimensions. It only shows one
 planet by default but there is the option to show the others. It only allows one
@@ -59,6 +37,7 @@ be adjusted. The program has strict limits to what values these parameters can
 be set to. The strength of this solution is its visualisations of Kepler's laws,
 which is what the end user really needs from the program.
 
+%%
 \subsection{Prospective Users}
 My main user will be Dr.~Naylor, as he is the
 astronomy teacher at my school. He would like to be able to stand in front of a
@@ -70,9 +49,55 @@ more interested. Dr.~Naylor isn't very computer literate, so the interface
 should be easy to understand. Also if I'm aiming to have the students use it do
 there will be a wide variety of abilities. 
 
-
+%%
 \subsection{User's Needs and Limitations} 
 
 
+%%%
 \section{Objectives and Constraints of the New System}
+
+
+%%%
 \section{Potential Solutions}
+
+%%
+\subsection{Standalone Client}
+This is a standalone application to be installed on the users computer. The
+user's data and preferences would all be stored on the host computer. This would
+allow the user to use the application without an internet connection, but they
+will need permission to install programs to their computer, and it would take up
+space on their hard drive. If I choose to do a standalone client I will need to
+choose the language it is written in and the graphics library I choose to use.
+The languages I am choosing between are C and Common Lisp, and the graphics
+libraries are OpenGL and SDL.
+
+\paragraph{C}
+Writing the program in C would produce a very fast application however it would
+be hard to code. The speed of my application is quite important because it will
+be run on the school computers, which are not the fastest. Also C is the native
+language for both OpenGL and SDL so they both work very well with it and are
+well documented. C is a very popular language so finding answers to any
+questions that I might have will be very easy.
+
+\paragraph{Common Lisp} 
+Common Lisp allows be to write and debug programs very quickly compared to C,
+and good Lisp code can be almost as fast as C. However it will most likely be
+slower than the C solution. There are bindings for OpenGL and SDL so I can use
+whichever I decide on, but neither have very good documentation.
+
+\paragraph{OpenGL}
+
+\paragraph{SDL}
+
+%%
+\subsection{Web Based Client}
+Another option is an application that runs inside the browser. The advantage of
+this is that the user doesn't have to store anything on their own computer, and
+it would be easier for the students to use. However I don't know any languages
+that would allow me to do this, so I would have to learn a new one. The best
+option for me would be Clojure, as it is a Lisp dialect that compiles to
+Javascript. This shouldn't be too hard for me to learn as I already use another
+Lisp dialect. If I decide to use 3D graphics a web based client would not be as
+good as it would run very slowly. Also I would have to worry about my program
+being compatible with different browsers as well as different operating systems
+but it should be very easy to make it work on any platform. 
