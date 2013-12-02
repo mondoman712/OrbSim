@@ -1,8 +1,10 @@
 (defclass object ()
-  (mass
+  (name
+    desc
+    mass
     diameter))
 
 (defclass planet (object)
-  ((pos
-     direction
-     speed)))
+  (pos
+    direction
+    speed))
