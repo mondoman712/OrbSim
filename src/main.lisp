@@ -52,6 +52,7 @@
   (and (< a (largest x y)) (>= a (smallest x y))))
 
 (defun get-quad-pt (qd x)
+  "Returns the x or y coordinate from a quad"
   (if x
     (point-x (quad-pt qd))
     (point-y (quad-pt qd))))

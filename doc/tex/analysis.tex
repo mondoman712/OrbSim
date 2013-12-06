@@ -104,8 +104,17 @@ Lisp over C is that it allows for object oriented programming, which I think
 could help a lot with my program.
 
 \paragraph{OpenGL}
+OpenGL is an API used to interface with the GPU. It will allow me to create the
+graphics that I need for my program in either C or Common Lisp. OpenGL is a low
+level API so it will require more programming on my part, but it means I have
+more control over it, and I have more room for optimizations.
 
 \paragraph{SDL}
+SDL is a library that provides access to things like audio, peripherals and
+graphics hardware. It uses OpenGL (or Direct3D on Windows) to interact with the
+GPU but ultimately it is a high level library. It has good cross platform
+library, with support for all of the major platforms (even mobile but that isn't
+relevant to for my application).
 
 %%
 \subsection{Web Based Client}
