@@ -1,5 +1,7 @@
 (asdf:operate 'asdf:load-op :lispbuilder-sdl)
 
+(defparameter *bods* '())
+
 (defclass point () 
   ((x :type number
       :accessor point-x
@@ -31,10 +33,14 @@
   ((body :type body)
    (quad :type quad
          :initarg :qd)
-   (nw :type bh-tree)
-   (ne :type bh-tree)
-   (sw :type bh-tree)
-   (se :type bh-tree)))
+   (nw :type bh-tree
+       :accessor bhnw)
+   (ne :type bh-tree
+       :accessor bhne)
+   (sw :type bh-tree
+       :accessor bhsw)
+   (se :type bh-tree
+       :accessor bhse)))
 
 (defun make-point (x y)
   (make-instance 'point :x x :y y))
@@ -74,3 +80,10 @@
 (defun bhtree (q)
   (make-instance 'bh-tree :qd q))
 
+(defun mapcount (fn lst)
+  "Counts the number of values in lst for which fn returns t"
+  (loop for i in lst
+         counting (funcall fn i)))
+
+(defun build-tree (lst)
+  (loop for node in lst ))
