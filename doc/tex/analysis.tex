@@ -87,7 +87,9 @@ program.
 		\hfill \\
 		The main objective of my system is to provide a clear
 		visualisation of Kepler's Laws of Planetary Motion to be showed
-		in front of a class.	
+		in front of a class. As part of this the program should be able
+		to run in full screen, so it will be easier for the whole class
+		to see.
 	\item[The system should allow the user to edit certain parameters] 
 		\hfill \\
 		The system should allow the user to edit the eccentricity, and
@@ -115,7 +117,7 @@ program.
 \end{description}
 
 %%%
-\section{Potential Solutions}
+\section{Potential Solutions and Chosen Solution}
 
 %%
 \subsection{Standalone Client}
@@ -170,3 +172,15 @@ Lisp dialect. If I decide to use 3D graphics a web based client would not be as
 good as it would run very slowly. Also I would have to worry about my program
 being compatible with different browsers as well as different operating systems
 but it should be very easy to make it work on any platform. 
+
+%%
+\subsection{Chosen Solution}
+I have chosen to create a standalone client using Lisp and SDL. I have chosen to
+do a standalone client over a web based solution because I think a web based
+solution would be too slow be able to do what I want to do, without spending a
+lot of time on optimization. Also it allows me to use a language that I already
+know. The language that I have chosen to use is Common Lisp. I have chosen it
+mainly because it will allow me to program the system very quickly. I have
+chosen SDL over OpenGL mainly because it will allow me to write the program more
+quickly (as it is a higher level library), and because the documentation is
+better.
