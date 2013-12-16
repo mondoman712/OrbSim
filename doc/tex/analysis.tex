@@ -66,18 +66,6 @@ laws of planetary motion in front of a class of students. He needs to be able
 to change the semi-major axis and eccentricity of a planets orbit, and have
 presets for different planets in our solar system. 
 
-\section{Data Flow Diagram}
-\begin{figure}[h]
-	%\centerline{\input{./img/data-flow-diagram2.tex}}
-	\includegraphics[width=\textwidth]{./img/data-flow-diagram2.eps}
-	\caption{A data flow diagram for the system}
-	\label{fig:dfd}
-\end{figure}
-My program will not require any data to be stored in a program, or saved into
-external files as all the data can be processed within the program. This means
-that the only data \emph{flowing} in my program is between the user and the
-program. 
-
 %%%
 \section{Objectives and Constraints of the New System}
 
@@ -185,3 +173,51 @@ mainly because it will allow me to program the system very quickly. I have
 chosen SDL over OpenGL mainly because it will allow me to write the program more
 quickly (as it is a higher level library), and because the documentation is
 better.
+
+%%%
+\section{Planning}
+
+%%
+\subsection{Data Flow Diagram}
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{./img/data-flow-diagram2.eps}
+	\caption{A data flow diagram for the system}
+	\label{fig:dfd}
+\end{figure}
+My program will not require any data to be stored in a program, or saved into
+external files as all the data can be processed within the program. The program
+could be expanded to allow the user to save the state of the simulation to an
+external file to be restored later, but it is not necessary.
+
+%%
+\subsection{Object Orientation Planning}
+The first class I will need to create is a point, which describes the X and Y
+coordinates of something in Cartesian space, or it could mean the velocity on X
+and Y directions of an object. \\
+
+\begin{tabular}{l | l | l | l}
+	Field Name & Field Type & Initial Value & Description \\ \hline
+	X & Integer & nil & The X value of the point \\
+	Y & Integer & nil & The Y value of the point \\
+\end{tabular} \\
+
+The body class will make use of the point class, and is used to describe a body
+in the simulation. \\
+
+\begin{tabular}{l | l | l | p{4.5cm}}
+	Field Name & Field Type & Initial Value & Description \\ \hline
+	pos	& Point		& nil		& The position of the body \\
+	mass	& Integer	& 0		& The mass of the body \\
+	name	& String	& nil 		& The human-readable name of the
+							body \\
+	colour	& Integer	& 0		& The Hex code for the colour to
+							use for this object \\
+\end{tabular} \\
+
+The planet class will then inherit the body class, adding the velocity as a sun
+would not require because it will be stationary.
+
+\begin{tabular}{l | l | l | p{4.5cm}}
+	Field Name & Field Type & Initial Value & Description \\ \hline
+	vel	& Point		& 0, 0		& The velocity of the body \\
+\end{tabular}
