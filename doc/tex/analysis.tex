@@ -195,16 +195,16 @@ The first class I will need to create is a point, which describes the X and Y
 coordinates of something in Cartesian space, or it could mean the velocity on X
 and Y directions of an object. \\
 
-\begin{tabular}{l | l | l | l}
+\begin{tabularx}{\linewidth}{l | l | l | X}
 	Field Name & Field Type & Initial Value & Description \\ \hline
 	X & Integer & nil & The X value of the point \\
 	Y & Integer & nil & The Y value of the point \\
-\end{tabular} \\
+\end{tabularx} \\
 
 The body class will make use of the point class, and is used to describe a body
 in the simulation. \\
 
-\begin{tabular}{l | l | l | p{4.5cm}}
+\begin{tabularx}{\linewidth}{l | l | l | X}
 	Field Name & Field Type & Initial Value & Description \\ \hline
 	pos	& Point		& nil		& The position of the body \\
 	mass	& Integer	& 0		& The mass of the body \\
@@ -212,12 +212,23 @@ in the simulation. \\
 							body \\
 	colour	& Integer	& 0		& The Hex code for the colour to
 							use for this object \\
-\end{tabular} \\
+\end{tabularx} \\
 
 The planet class will then inherit the body class, adding the velocity as a sun
-would not require because it will be stationary.
+would not require because it will be stationary. \\
 
-\begin{tabular}{l | l | l | p{4.5cm}}
+\begin{tabularx}{\linewidth}{ l | l | l | X } 
 	Field Name & Field Type & Initial Value & Description \\ \hline
 	vel	& Point		& 0, 0		& The velocity of the body \\
-\end{tabular}
+\end{tabularx} \\
+
+The methods I will need are: \\
+
+\begin{tabularx}{\linewidth}{l | l | l | X }
+	Class & Name & Parameters & Return Values \\ \hline
+	planet & calc-pos & pos, mass, vel & The new position and velocity of
+	the planet. \\
+	body & render-body & pos, colour & Renders the body onto the screen
+\end{tabularx} \\
+
+
