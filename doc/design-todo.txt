@@ -1,0 +1,42 @@
+> High level (overall) design
+> System Flowcharts
+> The system -> Inputs/Processes/Storage/Outputs
+> Human Computer Interface Design
+> Lower level design
+> Hardware Specification
+> Hierarchy/Structure Charts
+> Design Data Dictionary
+> File Organisation
+> ERDs
+> Normalisation of DB
+> Object and Class Defanitions
+> Algorithms
+> DB Queries
+> Output Design
+> Initial Test Plan
+> Detailed Test Plan
+
+OVERALL DESIGN
+
+> How is your problem solved?
+	Input -> Process -> Output
+> What componants are required for the I/O and what programs are needed to process this.
+
+HCI
+
+> Elements to consider:
+	User Type
+	Needs and acessabilliyyty
+	I/O devices requires
+	Colour and themes
+	Icons
+	Graphical or command line
+	Menus
+	Design consistancy
+> You must consider:
+	User Feedback
+	Confirmation of processing
+	Navigation
+	Online help for your system
+	Error message that are relevant
+	Keyboard shortcuts
