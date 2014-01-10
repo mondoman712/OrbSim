@@ -3,7 +3,7 @@
 > The system -> Inputs/Processes/Storage/Outputs
 > Human Computer Interface Design
 > Lower level design
-> Hardware Specification
+> Hardware Specification					DONE
 > Hierarchy/Structure Charts
 > Design Data Dictionary
 > File Organisation
