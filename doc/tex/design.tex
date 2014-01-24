@@ -46,3 +46,32 @@ My program needs to run on the computers at school, which have:
 	\item[Operating System:] Windows 7
 \end{description}
 
+%%%
+\section{Possible Algorithms to Use}
+
+A big part of my program is the actual simulation of the orbits of some
+simulated planets. To simulate and orbit a complex algorithm is required, and
+there's a few different ones to choose from.
+
+The Barnes-Hut Tree is a method for performing N-Body simulations, which means
+that every body in the simulation will be interacting with every other body.
+This, however, isn't very useful for a basic model of a simulation of a solar
+system, as the planets generally don't interact with each other very much. It
+will allow for more complex simulations, but this isn't necessary for my
+project.
+
+The simulation can be simplified to a two body problem, between one planet and
+the sun, because the planets aren't affecting each other. This can then be
+further simplified to a one body problem, because the sun is much more massive
+than a planet, so it can be thought of as the centre of mass. 
+
+Newton's \emph{law of universal gravitation} states that two bodies, with masses
+$m_1$ and $m_2$, separated my $r$ are attracted to each other with equal and
+opposite forces directed along the line joining the bodies. The magnitude of
+this force is given by:
+
+\begin{equation}
+	F = G (\frac{m_1 m_2}{r^2})	
+\end{equation}
+
+where G is the constant of gravitation (approx. $6.67 N-m^2/kg^2$)
