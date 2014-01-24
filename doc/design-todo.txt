@@ -1,4 +1,4 @@
-> High level (overall) design
+> High level (overall) design					DONE
 > System Flowcharts
 > The system -> Inputs/Processes/Storage/Outputs
 > Human Computer Interface Design
