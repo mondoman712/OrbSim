@@ -74,4 +74,21 @@ this force is given by:
 	F = G (\frac{m_1 m_2}{r^2})	
 \end{equation}
 
-where G is the constant of gravitation (approx. $6.67 N-m^2/kg^2$)
+where G is the constant of gravitation (approx. $6.67 N-m^2/kg^2$). We can then
+ignore one of the masses, because its significantly less than the other, and
+calculate the acceleration towards the object using:
+
+\begin{equation}
+	g = \frac{GM}{r^2}
+\end{equation}
+
+where $g$ is the acceleration due to gravity and M is the mass of the larger
+body. The new position of the body can then be calculated using its current
+position and velocity.
+
+\begin{pseudocode}{calc-new-pos}{pos, vel, parentbody}
+	r \GETS dist(pos, parentbody)	 \\
+	g \GETS (G \cdot parentmass)/r^2 \\
+	newpos \GETS pos + (vel \cdot interval) \\
+	\RETURN {newpos}
+\end{pseudocode}
