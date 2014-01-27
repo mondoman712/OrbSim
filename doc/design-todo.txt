@@ -1,17 +1,13 @@
 > High level (overall) design					DONE
 > System Flowcharts
-> The system -> Inputs/Processes/Storage/Outputs
+> The system -> Inputs/Processes/Storage/Outputs		DONE
 > Human Computer Interface Design
 > Lower level design
 > Hardware Specification					DONE
 > Hierarchy/Structure Charts
-> Design Data Dictionary
 > File Organisation
-> ERDs
-> Normalisation of DB
 > Object and Class Defanitions
 > Algorithms
-> DB Queries
 > Output Design
 > Initial Test Plan
 > Detailed Test Plan
