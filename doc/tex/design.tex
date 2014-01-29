@@ -89,6 +89,6 @@ position and velocity.
 \begin{pseudocode}{calc-new-pos}{pos, vel, parentbody}
 	r \GETS dist(pos, parentbody)	 \\
 	g \GETS (G \cdot parentmass)/r^2 \\
-	newpos \GETS pos + (vel \cdot interval) \\
-	\RETURN {newpos}
+	newvel \GETS vel + g \\
+	\RETURN {pos + (newvel \cdot interval)}
 \end{pseudocode}
