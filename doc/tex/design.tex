@@ -18,25 +18,17 @@
 \end{tabular}
 
 %%%
-\section{Modular Design}
+\section{Human Computer Interface}
 
-%%
-\subsection{User Interface}
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{./img/interface.png}
+	\caption{A mockup of the interface}
+	\label{fig:hci}
+\end{figure}
 
-\begin{enumerate}
-	\item Main Interface
-		\begin{enumerate}
-			\item Visual Simulation
-			\item Menus Section
-				
-		\end{enumerate}	
-\end{enumerate}
-
-%%
-\subsection{Code}
-
-%%%
-\section{System Flow Chart}
+This is a basic mockup of what I intend for the interface to look like. It looks
+quite similar to the old system's interface, so it will be familiar to the user
+and they won't have to learn a lot in order to use it.
 
 %%%
 \section{Hardware Specification}
@@ -48,6 +40,14 @@ My program needs to run on the computers at school, which have:
 	\item[Graphics:] Intel HD 2000
 	\item[Operating System:] Windows 7
 \end{description}
+
+%%%
+\section{System Flowchart}
+
+\begin{figure}[h]
+	\includegraphics[width=\textwidth]{./img/flow,png}
+	\label{fig:flow}	
+\end{figure}
 
 %%%
 \section{Possible Algorithms to Use}
@@ -92,6 +92,6 @@ position and velocity.
 \begin{pseudocode}{calc-new-pos}{pos, vel, parentbody}
 	r \GETS dist(pos, parentbody)	 \\
 	g \GETS (G \cdot parentmass)/r^2 \\
-	newpos \GETS pos + (vel \cdot interval) \\
-	\RETURN {newpos}
+	newvel \GETS vel + g \\
+	\RETURN {pos + (newvel \cdot interval)}
 \end{pseudocode}

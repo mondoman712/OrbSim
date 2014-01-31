@@ -1,0 +1,10 @@
+digraph flowchart {
+	graph [autosize=false, size="25.7,8.3!", resolution=100];
+	a [shape=parallelogram,label="User is shown the interface"];
+	b [shape=parallelogram,label="User edits one of the parameters"];
+	c [label="Program collects user input"];
+
+
+	a -> c;
+	b -> c;
+}
