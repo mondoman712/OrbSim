@@ -1,10 +1,13 @@
 digraph flowchart {
-	graph [autosize=false, size="25.7,8.3!", resolution=100];
-	a [shape=parallelogram,label="User is shown the interface"];
-	b [shape=parallelogram,label="User edits one of the parameters"];
-	c [label="Program collects user input"];
+	graph [autosize=false, size="7.3,8.3!", resolution=100];
+	a [shape=parallelogram,label="User is shown\n the interface"];
+	b [shape=parallelogram,label="User edits one of\n the parameters"];
+	c [shape=box,label="Program collects\n user input"];
+	d [shape=box,label="New parameters\n passed into main loop"];
+	e [shape=box,label="New positions\n calculated"];
+	f [shape=box,label="Environment rendered"];
+	g [shape=parallelogram,label="Graphical Output"];
 
-
-	a -> c;
-	b -> c;
+	a -> b -> c -> d -> e -> f -> g;
+	a -> e -> e;
 }
