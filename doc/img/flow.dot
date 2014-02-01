@@ -1,5 +1,5 @@
 digraph flowchart {
-	graph [autosize=false, size="7.3,8.3!", resolution=100];
+	graph [autosize=false, size="5.3,5.3!", resolution=330];
 	a [shape=parallelogram,label="User is shown\n the interface"];
 	b [shape=parallelogram,label="User edits one of\n the parameters"];
 	c [shape=box,label="Program collects\n user input"];

@@ -1,13 +1,13 @@
 > High level (overall) design					DONE
-> System Flowcharts
+> System Flowcharts 						DONE
 > The system -> Inputs/Processes/Storage/Outputs		DONE
-> Human Computer Interface Design
+> Human Computer Interface Design 				DONE
 > Lower level design
 > Hardware Specification					DONE
 > Hierarchy/Structure Charts
 > File Organisation
 > Object and Class Defanitions
-> Algorithms
+> Algorithms 							DONE
 > Output Design
 > Initial Test Plan
 > Detailed Test Plan
