@@ -2,8 +2,10 @@ digraph hierarchy {
 	a [label="main interface"];
 	b [label="Visual Output"];
 	c [label="Menus"];
-	d [label
+	d [label="Planet Options"]
+	e [label="Environment Options"]
 
 	a -> b;
-	a -> c;
+	a -> c -> d;
+	c -> e;
 }
