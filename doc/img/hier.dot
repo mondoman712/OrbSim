@@ -1,0 +1,9 @@
+digraph hierarchy {
+	a [label="main interface"];
+	b [label="Visual Output"];
+	c [label="Menus"];
+	d [label
+
+	a -> b;
+	a -> c;
+}
