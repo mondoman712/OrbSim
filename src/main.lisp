@@ -1,0 +1,10 @@
+(sdl:with-init ()
+               (sdl:window 320 240)
+               (sdl:draw-surface (sdl:load-image "./img/icon.png"))
+               (sdl:update-display)
+               (sdl:with-events ()
+                                (:quit-event () t)
+                                (:video-expose-event () (sdl:update-display))))
+
+(ql:quickload "lispbuilder-sdl")
+(load "~/quicklisp.lisp")
