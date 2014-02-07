@@ -31,6 +31,25 @@
        ;; Redraw the display
        (sdl:update-display)))))
 
+(defvar *G* 6.67)
+(defvar *sun-M* 1.99e30)
+(defvar *earth-M* 5.97e24)
+
+#|
+(defclass point ()
+  ((x :type number
+      :accessor point-x
+      :initarg :x
+      :initform 0)
+   (y :type number
+      :accessor point-y
+      :initarg :y
+      :initform 0)))
+|#
+
+(defun newpos (oldpos)
+  )
+
 (defun proto ()
   (sdl:with-init ()
     (sdl:window 640 480 :title-caption "OrbSim Prototype v1.04e-23")
