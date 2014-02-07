@@ -100,6 +100,12 @@ position and velocity.
 	\RETURN {pos + (newvel \cdot interval)}
 \end{pseudocode}
 
+\begin{pseudocode}{dist}{body1, body2}
+	x \GETS \lvert body1x - body2x \lvert \\
+	y \GETS \lvert body1y - body2y \lvert \\
+	\RETURN {\sqrt{x^2 + y^2}}
+\end{pseudocode}
+
 %%%
 \section{Structure Chart}
 \begin{figure}[h]
