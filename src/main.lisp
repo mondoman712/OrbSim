@@ -1,5 +1,6 @@
 
 (ql:quickload "lispbuilder-sdl")
+(ql:quickload "lispbuilder-sdl-gfx")
 
 (defparameter *random-color* sdl:*white*)
 (defun mouse-rect-2d ()
@@ -11,21 +12,21 @@
       (:quit-event () t)
       (:key-down-event ()
        (sdl:push-quit-event))
-      (:idle ()
+;      (:idle ()
        ;; Change the color of the box if the left mouse button is depressed
-       (when (sdl:mouse-left-p)
-         (setf *random-color* 
-               (sdl:color :r (random 255) :g (random 255) :b (random 255))))
+;       (when (sdl:mouse-left-p)
+;         (setf *random-color* 
+;               (sdl:color :r (random 255) :g (random 255) :b (random 255))))
+)
 
        ;; Clear the display each game loop
        (sdl:clear-display sdl:*black*)
 
-       ;; Draw the box having a center at the mouse x/y coordinates.
-       (sdl:draw-box 
-         (sdl:rectangle-from-midpoint-* 
-           (sdl:mouse-x) 
-           (sdl:mouse-y) 20 20)
-                     :color *random-color*)
+        (sdl-gfx:draw-filled-circle-*
+          (sdl:mouse-x)
+          (sdl:mouse-y)
+          20 
+          :color *random-color*)
 
        ;; Redraw the display
        (sdl:update-display)))))
@@ -37,15 +38,15 @@
     
     (sdl:with-events ()
       (:quit-event () t)
-      (:key-down-event ()
-       (sdl:push-quit-event))
       (:key-down-event (:key key)
        (when (sdl:key= key :sdl-key-escape)
          (sdl:push-quit-event)))
+      (:idle ()  (sdl:clear-display sdl:*black*)
 
-      (sdl:clear-display sdl:*black*)
-      (sdl:draw-circle-* (sdl:mouse-x) (sdl:mouse-y) 
-                              20 :color sdl:*white*
-                              :surface *default-surface*)
-      (sdl:update-display)
-      )))
+       (sdl-gfx:draw-filled-circle-*
+         320
+         240
+         10 
+         :color sdl:*yellow*)
+
+      (sdl:update-display)))))
