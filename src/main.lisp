@@ -17,6 +17,9 @@
 
 (defvar *screen-size* (make-instance 'point :x 640 :y 480))
 (defvar *sun-pos* (make-instance 'point :x 0 :y 0))
+(defvar *earth-pos* (make-instance 'point :x 1000000 :y 1000000))
+(defvar i 0)
+(defvar j 0)
 
 (defun mid-x (val)
   (/ (slot-value val 'x) 2))
@@ -30,7 +33,17 @@
              :y (+ (mid-y *screen-size*) (/ (point-y pos) 468750))))
 
 (defun newpos (oldpos)
-  )
+  (make-instance 'point :x (+ (point-x oldpos) 1e5) :y (point-y oldpos)))
+
+(defun calc-g (M r)
+  (/ (* *G* M) (* r r)))
+
+(defun calc-a (m f)
+  (/ f m))
+
+(defun dist (a b)
+  (sqrt (+ (expt (abs (- (point-x a) (point-x b))) 2)
+           (expt (abs (- (point-y a) (point-y b))) 2))))
 
 (defun proto ()
   (sdl:with-init ()
@@ -50,5 +63,16 @@
          (pos2pos *sun-pos*)
          10 
          :color sdl:*yellow*)
+
+       (setf j (+ j (calc-a *earth-M* 
+                            (calc-g *sun-M* 
+                                    (dist (*sun-pos* *earth-pos*))))))
+
+       (setf i (+ i j))
+
+       (sdl-gfx:draw-filled-circle
+         (sdl:point :x 520 :y i) ; (pos2pos *earth-pos*)
+         3 
+         :color sdl:*blue*)
 
       (sdl:update-display)))))
