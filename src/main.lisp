@@ -64,11 +64,11 @@
          10 
          :color sdl:*yellow*)
 
-       (setf j (+ j (calc-a *earth-M* 
-                            (calc-g *sun-M* 
-                                    (dist (*sun-pos* *earth-pos*))))))
+;       (setf j (+ j (calc-a *earth-M* 
+;                            (calc-g *sun-M* 
+;                                    (dist (*sun-pos* *earth-pos*))))))
 
-       (setf i (+ i j))
+       (setf i (+ i 1))
 
        (sdl-gfx:draw-filled-circle
          (sdl:point :x 520 :y i) ; (pos2pos *earth-pos*)
