@@ -1,7 +1,7 @@
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
 
-(defvar *G* 6.67)
+(defvar *G* 6.67e-11)
 (defvar *sun-M* 1.99e30)
 (defvar *earth-M* 5.97e24)
 
@@ -38,14 +38,11 @@
 (defun calc-g (M r)
   (/ (* *G* M) (* r r)))
 
-(defun calc-a (m f)
-  (/ f m))
-
 (defun dist (a b)
   (sqrt (+ (expt (abs (- (point-x a) (point-x b))) 2)
            (expt (abs (- (point-y a) (point-y b))) 2))))
 
-(defun proto ()
+(defun main ()
   (sdl:with-init ()
     (sdl:window (point-x *screen-size*)
                 (point-y *screen-size*)
@@ -64,9 +61,9 @@
          10 
          :color sdl:*yellow*)
 
-;       (setf j (+ j (calc-a *earth-M* 
+;       (setf j (+ j 
 ;                            (calc-g *sun-M* 
-;                                    (dist (*sun-pos* *earth-pos*))))))
+;                                    (dist (*sun-pos* *earth-pos*)))))
 
        (setf i (+ i 1))
 
