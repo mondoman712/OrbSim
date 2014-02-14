@@ -1,5 +1,13 @@
 \documentclass[a4paper,11pt,titlepage]{article}
-\usepackage{graphicx, fancyhdr, tikz, tabularx, pseudocode, hyperref, amsmath}
+\usepackage{graphicx,
+       	fancyhdr,
+       	tikz,
+       	tabularx,
+       	pseudocode,
+       	hyperref,
+      	amsmath,
+	listings
+	}
 \DeclareGraphicsExtensions{.png, .eps}
 \pagestyle{fancy}
 \setlength{\headheight}{15pt}
@@ -15,6 +23,21 @@
 \tableofcontents
 \clearpage
 
+\lstset{language=lisp,
+	basicstyle=\footnotesize\ttfamily,
+	numberstyle=\tiny
+	numbersep=5pt,
+        tabsize=2,                
+        extendedchars=true,      
+        breaklines=true,        
+        showspaces=false,      
+        showtabs=false,       
+        xleftmargin=17pt,
+        framexleftmargin=17pt,
+        framexrightmargin=5pt,
+        framexbottommargin=4pt,
+        showstringspaces=false,
+	keywordstyle=\color{blue}}
 \newcommand{\add}[1]{\input{./tex/#1.tex} \clearpage}
 
 \add{analysis}

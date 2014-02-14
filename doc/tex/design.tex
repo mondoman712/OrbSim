@@ -110,23 +110,31 @@ position and velocity.
 \end{pseudocode}
 
 %
-\subsection{testing}
+\subsection{Testing}
 
-\begin{tabular}{|p{\textwidth}}
+\begin{tabular}{|p{\textwidth}|}
 	\hline
-	Algorithm: Calculating the accelleration of the planet towards its parent body \\
+	Algorithm: \\
+       	Calculating the acceleration of the planet towards its parent body \\
 	\hline 
 	Description: \\
-	This algoritm takes the position of the body in question, its mass 
-	and the mass and position of the parent body. It then calculates the body's
-	accelleration towards its parent, which can be used to calculate its new postion. \\
+	This algorithm takes the position of the body in question, its mass and
+	the mass and position of the parent body. It then calculates the body's
+	acceleration towards its parent, which can be used to calculate its new
+	position. \\
 	\hline
 	Pseudocode: \\
 	\begin{equation}
 	g = \frac{GM}{r^2}
 	\end{equation} \\ \hline
 	Code: \\
-	
+	\begin{lstlisting}
+	(defvar *G* 6.67e-11)
+	(defun calc-g (M r)
+	  (/ (* *G* M) (* r r)))
+	\end{lstlisting} \\ \hline
+		
+
 
 \end{tabular}
 
