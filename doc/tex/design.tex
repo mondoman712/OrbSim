@@ -84,9 +84,9 @@ this force is given by:
 	F = G (\frac{m_1 m_2}{r^2})	
 \end{equation}
 
-where G is the constant of gravitation (approx. $6.67 N-m^2/kg^2$). We can then
-ignore one of the masses, because its significantly less than the other, and
-calculate the acceleration towards the object using:
+where G is the constant of gravitation (approx. $6.67 \times 10^{-11}
+N(m/kg)^2$). We can then ignore one of the masses, because its significantly
+less than the other, and calculate the acceleration towards the object using:
 
 \begin{equation}
 	g = \frac{GM}{r^2}
@@ -112,30 +112,32 @@ position and velocity.
 %
 \subsection{Testing}
 
-\begin{tabular}{|p{\textwidth}|}
+\begin{tabular}{|p{0.5\textwidth}|p(0,5\textwidth|}
 	\hline
-	Algorithm: \\
-       	Calculating the acceleration of the planet towards its parent body \\
+	\multicolumn{2}{|p{\textwidth}|}{Algorithm:} \\
+	\multicolumn{2}{|p{\textwidth}|}{Calculating the acceleration of the
+		planet towards its parent body}\\
 	\hline 
-	Description: \\
-	This algorithm takes the position of the body in question, its mass and
-	the mass and position of the parent body. It then calculates the body's
-	acceleration towards its parent, which can be used to calculate its new
-	position. \\
+	\multicolumn{2}{|p{\textwidth}|}{Description:} \\
+	\multicolumn{2}{|p{\textwidth}|}{This algorithm takes the position of
+		the body in question, its mass and the mass and position of the
+		parent body.  It then calculates the body's acceleration towards
+		its parent, which can be used to calculate its new position.} \\
 	\hline
-	Pseudocode: \\
-	\begin{equation}
+	\multicolumn{2}{|p{\textwidth}|}{Pseudocode:} \\
+	\multicolumn{2}{|p{\textwidth}|}{\begin{equation}
 	g = \frac{GM}{r^2}
-	\end{equation} \\ \hline
-	Code: \\
+	\end{equation}} \\ \hline
+	\multicolumn{2}{|p{\textwidth}|}{Code:} \\
 	\begin{lstlisting}
 	(defvar *G* 6.67e-11)
 	(defun calc-g (M r)
 	  (/ (* *G* M) (* r r)))
 	\end{lstlisting} \\ \hline
-	Inputs &
-	\multicolumn{2}{c}{outputs}
-		
+	Inputs & Outputs \\
+	$M = 5.97 \times 10^{24}$ (The mass of Earth) \\
+	$r = 6378$ (The radius of the Earth) &
+	\\ \hline
 
 
 \end{tabular}

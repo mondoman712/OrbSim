@@ -1,9 +1,9 @@
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
 
-(defvar *G* 6.67e-11)
+(defparameter *G* 6.67e-11)
 (defvar *sun-M* 1.99e30)
-(defvar *earth-M* 5.97e24)
+(defparameter *earth-M* 5.97e24)
 
 (defclass point () 
   ((x :type number
