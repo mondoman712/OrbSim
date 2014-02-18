@@ -106,7 +106,7 @@ position and velocity.
 \begin{pseudocode}{dist}{body1, body2}
 	x \GETS \lvert body1x - body2x \lvert \\
 	y \GETS \lvert body1y - body2y \lvert \\
-	\RETURN {\sqrt{x^2 + y^2}}
+	\RETURN{\sqrt{x^2 + y^2}}
 \end{pseudocode}
 
 %
@@ -124,20 +124,23 @@ position and velocity.
 		parent body.  It then calculates the body's acceleration towards
 		its parent, which can be used to calculate its new position.} \\
 	\hline
-	\multicolumn{2}{|p{\textwidth}|}{Pseudocode:} \\
-	\multicolumn{2}{|p{\textwidth}|}{\begin{equation}
-	g = \frac{GM}{r^2}
-	\end{equation}} \\ \hline
-	\multicolumn{2}{|p{\textwidth}|}{Code:} \\
+	\multicolumn{2}{|p{\textwidth}|}{
+		Pseudocode: \\
+		\begin{equation}
+			g = \frac{GM}{r^2}
+		\end{equation}} \\ \hline
+	\multicolumn{2}{|p{\textwidth}|}{
+	Code:} \\
+	\parbox{\textwidth}{
 	\begin{lstlisting}
 	(defvar *G* 6.67e-11)
 	(defun calc-g (M r)
 	  (/ (* *G* M) (* r r)))
-	\end{lstlisting} \\ \hline
-	Inputs & Outputs \\
-	$M = 5.97 \times 10^{24}$ (The mass of Earth) \\
-	$r = 6378$ (The radius of the Earth) &
+	\end{lstlisting}}} Inputs 
+	$M = 5.97 \times 10^{24}$ (The mass of Earth) 
+	$r = 6378$ (The radius of the Earth)
 	\\ \hline
+
 
 
 \end{tabular}

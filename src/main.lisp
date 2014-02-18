@@ -2,24 +2,50 @@
 (ql:quickload "lispbuilder-sdl-gfx")
 
 (defparameter *G* 6.67e-11)
-(defvar *sun-M* 1.99e30)
+(defparameter *sun-M* 1.99e30)
 (defparameter *earth-M* 5.97e24)
 
 (defclass point () 
   ((x :type number
-      :accessor point-x
+      :accessor x
       :initarg :x
       :initform 0)
    (y :type number
-      :accessor point-y
+      :accessor y
       :initarg :y
       :initform 0)))
 
-(defvar *screen-size* (make-instance 'point :x 640 :y 480))
-(defvar *sun-pos* (make-instance 'point :x 0 :y 0))
-(defvar *earth-pos* (make-instance 'point :x 1000000 :y 1000000))
-(defvar i 0)
-(defvar j 0)
+(defclass body ()
+  ((pos :type point
+        :accessor pos
+        :initarg :pos
+        :initform 0)
+   (vel :type point
+        :accessor vel
+        :initarg :vel
+        :initform 0)
+   (mass :type number
+         :accessor mass
+         :initarg :mass
+         :initform 0)))
+
+(defun make-body (&key pos-x pos-y vel-x vel-y)
+  (make-instance 'body
+                 :pos (make-instance 'point
+                                     :x pos-x
+                                     :y pos-y)
+                 :vel (make-instance 'point
+                                     :x vel-x
+                                     :y vel-y)))
+
+(defparameter *earth* (make-body :pos-x 1e8 :pos-y 0 :vel-x 0 :vel-y 0))
+
+(defparameter *screen-size* (make-instance 'point :x 640 :y 480))
+(defparameter *sun-pos* (make-instance 'point :x 0 :y 0))
+(defparameter *earth-pos* (make-instance 'point :x 1e8 :y 0))
+(defparameter i 0)
+(defparameter j 0)
+(defparameter *earth-vel* (make-instance 'point))
 
 (defun mid-x (val)
   (/ (slot-value val 'x) 2))
@@ -61,14 +87,12 @@
          10 
          :color sdl:*yellow*)
 
-;       (setf j (+ j 
-;                            (calc-g *sun-M* 
-;                                    (dist (*sun-pos* *earth-pos*)))))
-
-       (setf i (+ i 1))
+       (setf (point-x *earth-pos*) 
+             (- (point-x *earth-pos*) 
+                (/ (calc-g *sun-M* (dist *earth-pos* *sun-pos*)) 1)))
 
        (sdl-gfx:draw-filled-circle
-         (sdl:point :x 520 :y i) ; (pos2pos *earth-pos*)
+         (pos2pos *earth-pos*)
          3 
          :color sdl:*blue*)
 
