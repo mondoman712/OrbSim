@@ -1,10 +1,6 @@
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
 
-(defparameter *G* 6.67e-11)
-(defparameter *sun-M* 1.99e30)
-(defparameter *earth-M* 5.97e24)
-
 (defclass point () 
   ((x :type number
       :accessor x
@@ -29,49 +25,46 @@
          :initarg :mass
          :initform 0)))
 
-(defun make-body (&key pos-x pos-y vel-x vel-y)
+(defun make-body (&key pos-x pos-y vel-x vel-y mass)
+  "A function to help create instances of the body class more easily"
   (make-instance 'body
                  :pos (make-instance 'point
                                      :x pos-x
                                      :y pos-y)
                  :vel (make-instance 'point
                                      :x vel-x
-                                     :y vel-y)))
+                                     :y vel-y)
+                 :mass mass))
 
-(defparameter *earth* (make-body :pos-x 1e8 :pos-y 0 :vel-x 0 :vel-y 0))
-
-(defparameter *screen-size* (make-instance 'point :x 640 :y 480))
-(defparameter *sun-pos* (make-instance 'point :x 0 :y 0))
-(defparameter *earth-pos* (make-instance 'point :x 1e8 :y 0))
-(defparameter i 0)
-(defparameter j 0)
-(defparameter *earth-vel* (make-instance 'point))
-
-(defun mid-x (val)
-  (/ (slot-value val 'x) 2))
-
-(defun mid-y (val)
-  (/ (slot-value val 'y) 2))
+(defparameter *earth* (make-body :pos-y 1e8 :pos-x 0 
+                                 :vel-x 0 :vel-y 0 :mass 5.97e24))
+(defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
 
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
-  (sdl:point :x (+ (mid-x *screen-size*) (/ (point-x pos) 468750))
-             :y (+ (mid-y *screen-size*) (/ (point-y pos) 468750))))
-
-(defun newpos (oldpos)
-  (make-instance 'point :x (+ (point-x oldpos) 1e5) :y (point-y oldpos)))
+  (flet ((new-coord (xy)
+           (+ (/ (slot-value *screen-size* xy)) 
+              (/ (slot-value xy pos) 468750))))
+    (sdl:point :x (new-coord 'x)
+               :y (new-coord 'y))))
 
 (defun calc-g (M r)
   (/ (* *G* M) (* r r)))
 
 (defun dist (a b)
-  (sqrt (+ (expt (abs (- (point-x a) (point-x b))) 2)
-           (expt (abs (- (point-y a) (point-y b))) 2))))
+  "Calculates the distance between positions a and b"
+  (sqrt (+ (expt (abs (- (x a) (x b))) 2)
+           (expt (abs (- (y a) (y b))) 2))))
+
+(defun ang (a b)
+  "Calculates the bearing of a line between a and b"
+  (tan (/ (abs (- (y a) (y b)))
+          (abs (- (x a) (x b))))))
 
 (defun main ()
   (sdl:with-init ()
-    (sdl:window (point-x *screen-size*)
-                (point-y *screen-size*)
+    (sdl:window (x *screen-size*)
+                (y *screen-size*)
                 :title-caption "OrbSim Prototype v1.04e-23")
     (setf (sdl:frame-rate) 60)
     
@@ -87,13 +80,18 @@
          10 
          :color sdl:*yellow*)
 
-       (setf (point-x *earth-pos*) 
-             (- (point-x *earth-pos*) 
-                (/ (calc-g *sun-M* (dist *earth-pos* *sun-pos*)) 1)))
+       (setf (x (vel *earth*)) (+ (x (vel *earth*))
+                                  (calc-g (mass *sun*)
+                                             (dist (pos *earth*)
+                                                   (pos *sun*)))))
 
+       (setf (x (pos *earth*)) (- (x (pos *earth*)) (x (vel *earth*))))
+        
+   (setf (x (vel *earth*)) 0)
        (sdl-gfx:draw-filled-circle
-         (pos2pos *earth-pos*)
+         (pos2pos (pos *earth*))
          3 
          :color sdl:*blue*)
 
       (sdl:update-display)))))
+
