@@ -9,7 +9,8 @@
    (y :type number
       :accessor y
       :initarg :y
-      :initform 0)))
+      :initform 0))
+  (:documentation "Describes anything with an x and y value"))
 
 (defclass body ()
   ((pos :type point
@@ -23,7 +24,8 @@
    (mass :type number
          :accessor mass
          :initarg :mass
-         :initform 0)))
+         :initform 0))
+  (:documentation "Describes a body (planet etc)"))
 
 (defun make-body (&key pos-x pos-y vel-x vel-y mass)
   "A function to help create instances of the body class more easily"
@@ -36,19 +38,22 @@
                                      :y vel-y)
                  :mass mass))
 
-(defparameter *earth* (make-body :pos-y 1e8 :pos-x 0 
+(defparameter *earth* (make-body :pos-x -1e8 :pos-y -1e8 
                                  :vel-x 0 :vel-y 0 :mass 5.97e24))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
+(defparameter *screen-size* (make-instance 'point :x 640 :y 640))
+(defparameter *G* 6.67e-11)
 
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
-  (flet ((new-coord (xy)
-           (+ (/ (slot-value *screen-size* xy)) 
-              (/ (slot-value xy pos) 468750))))
-    (sdl:point :x (new-coord 'x)
-               :y (new-coord 'y))))
+  (flet ((new-coord (fn xy)
+           (funcall fn (/ (slot-value *screen-size* xy) 2) 
+                       (/ (slot-value pos xy) 468750))))
+    (sdl:point :x (new-coord #'+ 'x)
+               :y (new-coord #'- 'y))))
 
 (defun calc-g (M r)
+  "Calculates the acceleration due to gravity"
   (/ (* *G* M) (* r r)))
 
 (defun dist (a b)
@@ -58,34 +63,48 @@
 
 (defun ang (a b)
   "Calculates the bearing of a line between a and b"
-  (tan (/ (abs (- (y a) (y b)))
-          (abs (- (x a) (x b))))))
+  (atan (- (y a) (y b))
+        (- (x a) (x b))))
 
-(defun main ()
-  (sdl:with-init ()
-    (sdl:window (x *screen-size*)
-                (y *screen-size*)
-                :title-caption "OrbSim Prototype v1.04e-23")
-    (setf (sdl:frame-rate) 60)
-    
-    (sdl:with-events ()
+(defun split-force (mag ang)
+  "Splits the force into its x and y components, returning them as a point"
+  (make-instance 'point :x (* mag (cos ang))
+                        :y (* mag (sin ang))))
+
+(defmacro sets (fn a b)
+  "like setf, but applies fn to the values"
+  `(setf ,a (funcall ,fn ,a ,b)))
+
+(defun update-vel ()
+  (let ((accel (split-force 
+                 (calc-g (mass *sun*) (dist (pos *earth*) (pos *sun*)))
+                 (ang (pos *earth*) (pos *sun*)))))
+    (sets #'- (x (vel *earth*)) (x accel))
+    (sets #'- (y (vel *earth*)) (y accel))))
+
+(defun init ()
+  (sdl:window (x *screen-size*)
+              (y *screen-size*)
+              :title-caption "OrbSim Prototype v1.04e-23")
+    (setf (sdl:frame-rate) 60))
+
+(defun main-loop ()
+  (sdl:with-events ()
       (:quit-event () t)
       (:key-down-event (:key key)
        (when (sdl:key= key :sdl-key-escape)
          (sdl:push-quit-event)))
-      (:idle ()  (sdl:clear-display sdl:*black*)
+      (:idle ()  
+       (sdl:clear-display sdl:*black*)
 
        (sdl-gfx:draw-filled-circle
-         (pos2pos *sun-pos*)
+         (pos2pos (pos *sun*))
          10 
          :color sdl:*yellow*)
 
-       (setf (x (vel *earth*)) (+ (x (vel *earth*))
-                                  (calc-g (mass *sun*)
-                                             (dist (pos *earth*)
-                                                   (pos *sun*)))))
-
-       (setf (x (pos *earth*)) (- (x (pos *earth*)) (x (vel *earth*))))
+       (update-vel)
+       (sets #'+ (x (pos *earth*)) (x (vel *earth*)))
+       (sets #'+ (y (pos *earth*)) (y (vel *earth*)))
         
    (setf (x (vel *earth*)) 0)
        (sdl-gfx:draw-filled-circle
@@ -93,5 +112,10 @@
          3 
          :color sdl:*blue*)
 
-      (sdl:update-display)))))
+      (sdl:update-display))))
+
+(defun main ()
+  (sdl:with-init ()
+    (init)
+    (main-loop)))
 
