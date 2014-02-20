@@ -1,4 +1,5 @@
 (ql:quickload "lispbuilder-sdl")
+(ql:quickload "lispbuilder-sdl-examples")
 (ql:quickload "lispbuilder-sdl-gfx")
 
 (defclass point () 
@@ -38,11 +39,15 @@
                                      :y vel-y)
                  :mass mass))
 
-(defparameter *earth* (make-body :pos-x -1e8 :pos-y -1e8 
-                                 :vel-x 0 :vel-y 0 :mass 5.97e24))
+(defparameter *earth* (make-body :pos-x -1e8 :pos-y 0 
+                                 :vel-x 5e7 :vel-y 0 :mass 5.97e24))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 (defparameter *G* 6.67e-11)
+
+(defun pos= (a b)
+  (if (and (= (x a) (x b)) (= (y a) (y b)))
+    't 'nil))
 
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
@@ -85,7 +90,7 @@
 (defun init ()
   (sdl:window (x *screen-size*)
               (y *screen-size*)
-              :title-caption "OrbSim Prototype v1.04e-23")
+              :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
 (defun main-loop ()
