@@ -1,5 +1,4 @@
 (ql:quickload "lispbuilder-sdl")
-(ql:quickload "lispbuilder-sdl-examples")
 (ql:quickload "lispbuilder-sdl-gfx")
 
 (defclass point () 
@@ -39,13 +38,14 @@
                                      :y vel-y)
                  :mass mass))
 
-(defparameter *earth* (make-body :pos-x -1e8 :pos-y 0 
-                                 :vel-x 5e7 :vel-y 0 :mass 5.97e24))
+(defparameter *earth* (make-body :pos-x -1e8 :pos-y 1e8 
+                                 :vel-x 0 :vel-y 0 :mass 5.97e24))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 (defparameter *G* 6.67e-11)
 
 (defun pos= (a b)
+  "Checks if two points are equal"
   (if (and (= (x a) (x b)) (= (y a) (y b)))
     't 'nil))
 
@@ -83,9 +83,9 @@
 (defun update-vel ()
   (let ((accel (split-force 
                  (calc-g (mass *sun*) (dist (pos *earth*) (pos *sun*)))
-                 (ang (pos *earth*) (pos *sun*)))))
-    (sets #'- (x (vel *earth*)) (x accel))
-    (sets #'- (y (vel *earth*)) (y accel))))
+                 (ang (pos *sun*) (pos *earth*)))))
+    (sets #'+ (x (vel *earth*)) (x accel))
+    (sets #'+ (y (vel *earth*)) (y accel))))
 
 (defun init ()
   (sdl:window (x *screen-size*)
@@ -111,7 +111,6 @@
        (sets #'+ (x (pos *earth*)) (x (vel *earth*)))
        (sets #'+ (y (pos *earth*)) (y (vel *earth*)))
         
-   (setf (x (vel *earth*)) 0)
        (sdl-gfx:draw-filled-circle
          (pos2pos (pos *earth*))
          3 
