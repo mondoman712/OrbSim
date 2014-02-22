@@ -9,11 +9,14 @@
 	listings
 	}
 
-\usepackage{multirow}
-
 \DeclareGraphicsExtensions{.png, .eps}
 \pagestyle{fancy}
 \setlength{\headheight}{15pt}
+
+\renewenvironment{description}[1][0pt]
+  {\list{}{\labelwidth=0pt \leftmargin=#1
+   \let\makelabel\descriptionlabel}}
+  {\endlist}
 
 \lhead{Name: Sam Smith}
 \rhead{Center Name: King Edward VI Five Ways School}

@@ -109,41 +109,6 @@ position and velocity.
 	\RETURN{\sqrt{x^2 + y^2}}
 \end{pseudocode}
 
-%
-\subsection{Testing}
-
-\begin{tabular}{|p{0.5\textwidth}|p{0.5\textwidth|}
-	\hline
-	\multicolumn{2}{|p{\textwidth}|}{Algorithm:} \\
-	\multicolumn{2}{|p{\textwidth}|}{Calculating the acceleration of the
-		planet towards its parent body}\\
-	\hline 
-	\multicolumn{2}{|p{\textwidth}|}{Description:} \\
-	\multicolumn{2}{|p{\textwidth}|}{This algorithm takes the position of
-		the body in question, its mass and the mass and position of the
-		parent body.  It then calculates the body's acceleration towards
-		its parent, which can be used to calculate its new position.} \\
-	\hline
-	\multicolumn{2}{|p{\textwidth}|}{
-		Pseudocode: \\
-		\begin{equation}
-			g = \frac{GM}{r^2}
-		\end{equation}} \\ \hline
-	\multicolumn{2}{|p{\textwidth}|}{
-	Code:} \\
-	\parbox{\textwidth}{
-	\begin{lstlisting}
-	(defvar *G* 6.67e-11)
-	(defun calc-g (M r)
-	  (/ (* *G* M) (* r r)))
-	\end{lstlisting}}} Inputs 
-	$M = 5.97 \times 10^{24}$ (The mass of Earth) 
-	$r = 6378$ (The radius of the Earth)
-	\\ \hline
-
-
-
-\end{tabular}
 
 %%%
 \section{Structure Chart}
@@ -155,4 +120,19 @@ position and velocity.
 \section{Class Definitions}
 Object oriented programming in Lisp works differently than it does in other
 languages, so some things, such as private and public attributes aren't used. 
-\\
+
+\paragraph{Point} The point class is used to describe anything with X and Y
+values, so positions and velocities. It's attributes are:
+\begin{description}[\parindent]
+	\item[X] - The X value of the point, stored as a number.
+	\item[Y] - The Y value of the point, stored as a number.
+\end{description}
+
+\paragraph{Body} The body class is used to describe any body in space. This
+could be the Sun or a planet. It's attributes are:
+\begin{description}[\parindent]
+	\item[pos] - The current position of the body in space, stored as a
+		point with X and Y values.
+	\item[vel] - The current velocity of the body, also stored as a point.
+	\item[mass] - The mass of the body, stored as a number.
+\end{description}
