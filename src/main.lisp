@@ -1,6 +1,11 @@
+;;;; OrbSim
+;; main source file
+
+; Load required libraries
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
 
+; Define Classes
 (defclass point () 
   ((x :type number
       :accessor x
@@ -31,15 +36,14 @@
   "A function to help create instances of the body class more easily"
   (make-instance 'body
                  :pos (make-instance 'point
-                                     :x pos-x
-                                     :y pos-y)
-                 :vel (make-instance 'point
-                                     :x vel-x
-                                     :y vel-y)
+                                     :x pos-x :y pos-y)
+		 :vel (make-instance 'point
+				     :x vel-x :y vel-y)
                  :mass mass))
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
-                                 :vel-x 2e6 :vel-y 0 :mass 5.97e24))
+				   :vel-x 1e6 :vel-y 0 
+				   :mass 5.97e24))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 (defparameter *G* 6.67e-11)
@@ -80,25 +84,29 @@
   "like setf, but applies fn to the values"
   `(setf ,a (funcall ,fn ,a ,b)))
 
-(defun update-vel ()
+(defun update-vel (body)
   (let ((accel (split-force 
-                 (calc-g (mass *sun*) (dist (pos *earth*) (pos *sun*)))
-                 (ang (pos *sun*) (pos *earth*)))))
-    (sets #'+ (x (vel *earth*)) (x accel))
-    (sets #'+ (y (vel *earth*)) (y accel))))
+                 (calc-g (mass *sun*) (dist (pos body) (pos *sun*)))
+                 (ang (pos *sun*) (pos body)))))
+    (sets #'+ (x (vel body)) (x accel))
+    (sets #'+ (y (vel body)) (y accel))))
 
 (defun init ()
+  "Initialize SDL environment"
   (sdl:window (x *screen-size*)
               (y *screen-size*)
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
 (defun main-loop ()
+  ; Define key events
   (sdl:with-events ()
       (:quit-event () t)
       (:key-down-event (:key key)
-       (when (sdl:key= key :sdl-key-escape)
+       (when (or (sdl:key= key :sdl-key-escape) 
+		 (sdl:key= key :sdl-key-q))
          (sdl:push-quit-event)))
+      ; Main loop
       (:idle ()  
        (sdl:clear-display sdl:*black*)
 
@@ -107,7 +115,7 @@
          10 
          :color sdl:*yellow*)
 
-       (update-vel)
+       (update-vel *earth*)
        (sets #'+ (x (pos *earth*)) (x (vel *earth*)))
        (sets #'+ (y (pos *earth*)) (y (vel *earth*)))
         
