@@ -48,16 +48,13 @@ Kepler's laws in front of a class.
 %%%
 \section{System Flowchart}
 
-\begin{figure}[h]
-	\includegraphics[scale=0.23]{./img/flow.eps}
+\begin{figure}[h!]
+	\includegraphics[scale=0.2]{./img/flow.eps}
 	\label{fig:flow}	
 \end{figure}
 
 %%%
 \section{Possible Algorithms to Use}
-
-%
-\subsection{Description}
 
 A big part of my program is the actual simulation of the orbits of some
 simulated planets. To simulate and orbit a complex algorithm is required, and
@@ -109,7 +106,6 @@ position and velocity.
 	\RETURN{\sqrt{x^2 + y^2}}
 \end{pseudocode}
 
-
 %%%
 \section{Structure Chart}
 \begin{figure}[h]
@@ -135,4 +131,30 @@ could be the Sun or a planet. It's attributes are:
 		point with X and Y values.
 	\item[vel] - The current velocity of the body, also stored as a point.
 	\item[mass] - The mass of the body, stored as a number.
-\end{description}
+\end{description} \\
+
+%%%
+\section{Storage and Distribution}
+
+In its current state, the program takes up 65MB when compiled. I expect that
+this will be higher when I have completed the program but I would think that it
+would be no more than 200MB. The reason that the executable is so large for a
+small program is that the Lisp interpreter that I am using compiles itself and
+all of the libraries I use into the executable, which means that the program
+should run on any computer without having to install any extra software. \\
+
+The program will be stored on the computer that it is running on, and since it
+will be running on a school computer, and I cannot install software on the
+school computers I will need to ask one of the schools I.T technicians to
+install it for me. \\
+
+I would like to distribute my software via the internet, but due to its large
+size it will be easier for me to take it into school on a memory stick to be
+installed on a school computer. I can still have the file available for
+download, for if a student wishes to use the program themselves. I would also
+like to have the programs source code available for download, so a more
+technically inclined student could experiment further. Also having the source
+code available means that people can see exactly what the program does before
+they decide to run it, so they can be sure that I am not trying to do anything
+malicious with their computer. \\
+
