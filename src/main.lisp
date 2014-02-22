@@ -42,7 +42,7 @@
                  :mass mass))
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
-				   :vel-x 1e6 :vel-y 0 
+				   :vel-x 7e5 :vel-y 0 
 				   :mass 5.97e24))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
