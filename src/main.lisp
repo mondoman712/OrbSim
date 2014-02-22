@@ -122,4 +122,3 @@
   (sdl:with-init ()
     (init)
     (main-loop)))
-
