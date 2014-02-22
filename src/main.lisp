@@ -1,4 +1,4 @@
-;;;; OrbSim
+;;;; Orbsim
 ;; main source file
 
 ; Load required libraries
