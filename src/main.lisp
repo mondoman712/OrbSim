@@ -41,8 +41,8 @@
 				     :x vel-x :y vel-y)
                  :mass mass))
 
-(defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
-				   :vel-x 7e5 :vel-y 0 
+(defparameter *earth* (make-body :pos-x 0 :pos-y 2e7 
+				   :vel-x 1e6 :vel-y 55 
 				   :mass 5.97e24))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
@@ -98,6 +98,10 @@
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
+(defun draw-body (pos size colour)
+  (sdl-gfx:draw-filled-circle
+   (pos2pos pos) size :color colour))
+
 (defun main-loop ()
   ; Define key events
   (sdl:with-events ()
@@ -109,20 +113,14 @@
       ; Main loop
       (:idle ()  
        (sdl:clear-display sdl:*black*)
-
-       (sdl-gfx:draw-filled-circle
-         (pos2pos (pos *sun*))
-         10 
-         :color sdl:*yellow*)
+       
+       (draw-body (pos *sun*) 10 sdl:*yellow*)
 
        (update-vel *earth*)
        (sets #'+ (x (pos *earth*)) (x (vel *earth*)))
        (sets #'+ (y (pos *earth*)) (y (vel *earth*)))
         
-       (sdl-gfx:draw-filled-circle
-         (pos2pos (pos *earth*))
-         3 
-         :color sdl:*blue*)
+       (draw-body (pos *earth*) 3 sdl:*blue*)
 
       (sdl:update-display))))
 
