@@ -29,24 +29,36 @@
    (mass :type number
          :accessor mass
          :initarg :mass
-         :initform 0))
+         :initform 0)
+   (size :type number
+	 :accessor size
+	 :initarg :size
+	 :initform 1)
+   (colour :type sdl:color
+	   :accessor colour
+	   :initarg :colour
+	   :initform sdl:*white*))
   (:documentation "Describes a body (planet etc)"))
 
-(defun make-body (&key pos-x pos-y vel-x vel-y mass)
+(defun make-body (&key pos-x pos-y vel-x vel-y mass size colour)
   "A function to help create instances of the body class more easily"
   (make-instance 'body
                  :pos (make-instance 'point
                                      :x pos-x :y pos-y)
 		 :vel (make-instance 'point
 				     :x vel-x :y vel-y)
-                 :mass mass))
+                 :mass mass
+		 :size size
+		 :colour colour))
 
-(defparameter *earth* (make-body :pos-x 0 :pos-y 2e7 
+(defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
 				   :vel-x 1e6 :vel-y 55 
-				   :mass 5.97e24))
-(defparameter *sun* (make-body :pos-x 0 :pos-y 0 :mass 1.99e30))
+				   :mass 5.97e24 :size 3 :colour sdl:*blue*))
+(defparameter *sun* (make-body :pos-x 0 :pos-y 0 
+			       :mass 1.99e30 :size 10 :colour sdl:*yellow*))
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 (defparameter *G* 6.67e-11)
+(defparameter *bodies* '(*sun* *earth*))
 
 (defun pos= (a b)
   "Checks if two points are equal"
@@ -91,6 +103,14 @@
     (sets #'+ (x (vel body)) (x accel))
     (sets #'+ (y (vel body)) (y accel))))
 
+(defun update-pos (body)
+  (sets #'+ (x (pos body)) (x (vel body)))
+  (sets #'+ (y (pos body)) (y (vel body))))
+
+(defun update (body)
+  (update-vel body)
+  (update-pos body))
+
 (defun init ()
   "Initialize SDL environment"
   (sdl:window (x *screen-size*)
@@ -98,9 +118,9 @@
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
-(defun draw-body (pos size colour)
+(defun draw-body (body)
   (sdl-gfx:draw-filled-circle
-   (pos2pos pos) size :color colour))
+   (pos2pos (pos body)) (size body) :color (colour body)))
 
 (defun main-loop ()
   ; Define key events
@@ -114,13 +134,10 @@
       (:idle ()  
        (sdl:clear-display sdl:*black*)
        
-       (draw-body (pos *sun*) 10 sdl:*yellow*)
-
-       (update-vel *earth*)
-       (sets #'+ (x (pos *earth*)) (x (vel *earth*)))
-       (sets #'+ (y (pos *earth*)) (y (vel *earth*)))
+       (update *earth*)
         
-       (draw-body (pos *earth*) 3 sdl:*blue*)
+       (draw-body *sun*)
+       (draw-body *earth*)
 
       (sdl:update-display))))
 
