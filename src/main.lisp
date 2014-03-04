@@ -5,6 +5,8 @@
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
 
+(load "io.lisp")
+
 ; Define Classes
 (defclass point () 
   ((x :type number
@@ -122,6 +124,19 @@
   (sdl-gfx:draw-filled-circle
    (pos2pos (pos body)) (size body) :color (colour body)))
 
+(defun draw-bodies (bodies)
+  (mapc #'draw-body bodies))
+
+(defun draw-bodies (bodies)
+  (if bodies
+      (progn (draw-body (car bodies))
+	     (draw-bodies (cdr bodies)))
+      't))
+
+(defun draw-bodies (bodies)
+  (loop for bod in bodies
+       do (draw-body bod)))
+
 (defun main-loop ()
   ; Define key events
   (sdl:with-events ()
@@ -136,8 +151,7 @@
        
        (update *earth*)
         
-       (draw-body *sun*)
-       (draw-body *earth*)
+       (draw-bodies '(*sun* *earth*))
 
       (sdl:update-display))))
 
