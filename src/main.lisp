@@ -52,14 +52,16 @@
                  :mass mass
 		 :size size
 		 :colour colour))
+		 
+
+(defparameter *G* 6.67e-11) ; Gravitational Constant
+(defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
 				   :vel-x 1e6 :vel-y 55 
 				   :mass 5.97e24 :size 3 :colour sdl:*blue*))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 
 			       :mass 1.99e30 :size 10 :colour sdl:*yellow*))
-(defparameter *screen-size* (make-instance 'point :x 640 :y 640))
-(defparameter *G* 6.67e-11)
 (defparameter *bodies* '(*sun* *earth*))
 
 (defun pos= (a b)
@@ -106,6 +108,7 @@
     (sets #'+ (y (vel body)) (y accel))))
 
 (defun update-pos (body)
+  "Updates the position of a body using its velocities"
   (sets #'+ (x (pos body)) (x (vel body)))
   (sets #'+ (y (pos body)) (y (vel body))))
 
@@ -113,14 +116,8 @@
   (update-vel body)
   (update-pos body))
 
-(defun init ()
-  "Initialize SDL environment"
-  (sdl:window (x *screen-size*)
-              (y *screen-size*)
-              :title-caption "OrbSim Prototype v1.09e-23")
-    (setf (sdl:frame-rate) 60))
-
 (defun draw-body (body)
+  "Draws a body to the screen"
   (sdl-gfx:draw-filled-circle
    (pos2pos (pos body)) (size body) :color (colour body)))
 
@@ -136,6 +133,13 @@
 (defun draw-bodies (bodies)
   (loop for bod in bodies
        do (draw-body bod)))
+       
+(defun init ()
+  "Initialize SDL environment"
+  (sdl:window (x *screen-size*)
+              (y *screen-size*)
+              :title-caption "OrbSim Prototype v1.09e-23")
+    (setf (sdl:frame-rate) 60))
 
 (defun main-loop ()
   ; Define key events
