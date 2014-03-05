@@ -124,18 +124,14 @@
   (sdl-gfx:draw-filled-circle
    (pos2pos (pos body)) (size body) :color (colour body)))
 
-(defun draw-bodies (bodies)
+(defun draw-bodies (&rest bodies)
   (mapc #'draw-body bodies))
 
-(defun draw-bodies (bodies)
+(defun draw-bodies (&rest bodies)
   (if bodies
       (progn (draw-body (car bodies))
 	     (draw-bodies (cdr bodies)))
       't))
-
-(defun draw-bodies (bodies)
-  (loop for bod in bodies
-       do (draw-body bod)))
 
 (defun main-loop ()
   ; Define key events
@@ -151,7 +147,7 @@
        
        (update *earth*)
         
-       (draw-bodies '(*sun* *earth*))
+       (draw-bodies *sun* *earth*)
 
       (sdl:update-display))))
 
