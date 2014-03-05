@@ -151,7 +151,7 @@
        
        (update *earth*)
         
-       (draw-bodies *sun* *earth*)
+       (draw-bodies *bodies*)
 
       (sdl:update-display))))
 
