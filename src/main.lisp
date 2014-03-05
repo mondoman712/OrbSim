@@ -62,7 +62,7 @@
 				   :mass 5.97e24 :size 3 :colour sdl:*blue*))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 
 			       :mass 1.99e30 :size 10 :colour sdl:*yellow*))
-(defparameter *bodies* '(*sun* *earth*))
+(defparameter *bodies* (list *sun* *earth*))
 
 (defun pos= (a b)
   "Checks if two points are equal"
@@ -121,21 +121,15 @@
   (sdl-gfx:draw-filled-circle
    (pos2pos (pos body)) (size body) :color (colour body)))
 
-(defun draw-bodies (&rest bodies)
+(defun draw-bodies (bodies)
   (mapc #'draw-body bodies))
 
-(defun draw-bodies (&rest bodies)
+(defun draw-bodies (bodies)
   (if bodies
       (progn (draw-body (car bodies))
 	     (draw-bodies (cdr bodies)))
       't))
 
-<<<<<<< HEAD
-=======
-(defun draw-bodies (bodies)
-  (loop for bod in bodies
-       do (draw-body bod)))
-       
 (defun init ()
   "Initialize SDL environment"
   (sdl:window (x *screen-size*)
@@ -143,7 +137,6 @@
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
->>>>>>> 037d0c7ba84936960ecffd5212862d5bfdf6e054
 (defun main-loop ()
   ; Define key events
   (sdl:with-events ()

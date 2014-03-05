@@ -19,6 +19,9 @@
     (with-standard-io-syntax
       (print lst out))))
 
+(defun save-bodies (lst filename)
+  (save-list (bodies-to-list lst) filename))
+
 (defun read-list (filename)
   (with-open-file (in filename)
     (with-standard-io-syntax
