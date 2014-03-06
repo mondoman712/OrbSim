@@ -134,6 +134,13 @@
 	     (draw-bodies (cdr bodies))) ; Call this function on the rest of list
       't)) ; Return true when complete
 
+(defun add-body (&key pos-x pos-y vel-x vel-y mass size colour)
+  (setf *bodies* (append *bodies* (list
+				   (make-body :pos-x pos-x :pos-y pos-y
+					      :vel-x vel-x :vel-y vel-y
+					      :mass mass :size size
+					      :colour colour)))))
+
 (defun init ()
   "Initialize SDL environment"
   (sdl:window (x *screen-size*)
