@@ -65,7 +65,10 @@
 (defparameter *mars* (make-body :pos-x 0 :pos-y -7e7 
 				:vel-x -1e6 :vel-y 0
 				:size 2 :colour sdl:*red*))
-(defparameter *bodies* (list *sun* *earth* *mars*))
+(defparameter *venus* (make-body :pos-x 0 :pos-y 2e8 
+				:vel-x 7e5 :vel-y 0
+				:size 2 :colour sdl:*green*))
+(defparameter *bodies* (list *sun* *earth* *mars* *venus*))
 
 (defun pos= (a b)
   "Checks if two points are equal"
