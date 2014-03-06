@@ -58,11 +58,14 @@
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
-				   :vel-x 1e6 :vel-y 55 
-				   :mass 5.97e24 :size 3 :colour sdl:*blue*))
+				 :vel-x 1e6 :vel-y 0 
+				 :mass 5.97e24 :size 3 :colour sdl:*blue*))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 
 			       :mass 1.99e30 :size 10 :colour sdl:*yellow*))
-(defparameter *bodies* (list *sun* *earth*))
+(defparameter *mars* (make-body :pos-x 0 :pos-y -7e7 
+				:vel-x -1e6 :vel-y 0
+				:size 2 :colour sdl:*red*))
+(defparameter *bodies* (list *sun* *earth* *mars*))
 
 (defun pos= (a b)
   "Checks if two points are equal"
@@ -116,19 +119,20 @@
   (update-vel body)
   (update-pos body))
 
+(defun update-lst (bodies)
+  (mapc #'update bodies))
+
 (defun draw-body (body)
   "Draws a body to the screen"
   (sdl-gfx:draw-filled-circle
    (pos2pos (pos body)) (size body) :color (colour body)))
 
 (defun draw-bodies (bodies)
-  (mapc #'draw-body bodies))
-
-(defun draw-bodies (bodies)
-  (if bodies
-      (progn (draw-body (car bodies))
-	     (draw-bodies (cdr bodies)))
-      't))
+  "Calls draw-body on a list... recursivly!"
+  (if bodies    ; If there is anything left in the list
+      (progn (draw-body (car bodies)) ; Draw the first item
+	     (draw-bodies (cdr bodies))) ; Call this function on the rest of list
+      't)) ; Return true when complete
 
 (defun init ()
   "Initialize SDL environment"
@@ -149,7 +153,7 @@
       (:idle ()  
        (sdl:clear-display sdl:*black*)
        
-       (update *earth*)
+       (update-lst (cdr *bodies*))
         
        (draw-bodies *bodies*)
 
