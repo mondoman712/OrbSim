@@ -4,8 +4,10 @@
 ; Load required libraries
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
+(ql:quickload 'qt)
 
-(load "io.lisp")
+; (load "io.lisp")
+(named-readtables:in-readtable :qt)
 
 ; Define Classes
 (defclass point () 
@@ -144,14 +146,14 @@
 					      :mass mass :size size
 					      :colour colour)))))
 
-(defun init ()
+(defun sdl-init ()
   "Initialize SDL environment"
   (sdl:window (x *screen-size*)
               (y *screen-size*)
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
-(defun main-loop ()
+(defun sdl-main-loop ()
   ; Define key events
   (sdl:with-events ()
       (:quit-event () t)
@@ -169,7 +171,21 @@
 
       (sdl:update-display))))
 
+(defclass menu () ()
+  (:metaclass qt:qt-class)
+  (:qt-superclass "QWidget"))
+
+(defmethod initialize-instance :after
+  ((instance menu) &key)
+  (#_new instance)
+  (#_setGeometry instance 200 200 300 300)
+  (#_setWindowTitle instance "Orbsim Options"))
+
+(defun init-menu ()
+  (qt:make-qapplication)
+  (qt:with-main-window (window (make-instance 'menu))))
+
 (defun main ()
   (sdl:with-init ()
-    (init)
-    (main-loop)))
+    (sdl-init)
+    (sdl-main-loop)))
