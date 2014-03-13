@@ -4,10 +4,8 @@
 ; Load required libraries
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
-(ql:quickload 'qt)
 
-; (load "io.lisp")
-(named-readtables:in-readtable :qt)
+(load "menu.lisp")
 
 ; Define Classes
 (defclass point () 
@@ -175,20 +173,5 @@
   (sdl:with-init ()
     (sdl-init)
     (sdl-main-loop)))
-
-(defclass menu () ()
-  (:metaclass qt:qt-class)
-  (:qt-superclass "QWidget"))
-
-(defmethod qt:initialize-instance :after
-  ((instance menu) &key)
-  (#_new instance)
-  (#_setGeometry instance 200 200 300 300)
-  (#_setWindowTitle instance "Orbsim Options"))
-
-(defun init-menu ()
-  (qt:make-qapplication)
-  (qt:with-main-window (window (make-instance 'menu))))
-
 
 

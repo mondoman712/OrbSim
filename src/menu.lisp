@@ -1,5 +1,5 @@
 (ql:quickload 'qt)
-(in-package :qt)
+(use-package :qt)
 (named-readtables:in-readtable :qt)
 
 (defclass menu () ()
