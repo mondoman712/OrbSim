@@ -171,11 +171,16 @@
 
       (sdl:update-display))))
 
+(defun main ()
+  (sdl:with-init ()
+    (sdl-init)
+    (sdl-main-loop)))
+
 (defclass menu () ()
   (:metaclass qt:qt-class)
   (:qt-superclass "QWidget"))
 
-(defmethod initialize-instance :after
+(defmethod qt:initialize-instance :after
   ((instance menu) &key)
   (#_new instance)
   (#_setGeometry instance 200 200 300 300)
@@ -185,7 +190,5 @@
   (qt:make-qapplication)
   (qt:with-main-window (window (make-instance 'menu))))
 
-(defun main ()
-  (sdl:with-init ()
-    (sdl-init)
-    (sdl-main-loop)))
+
+
