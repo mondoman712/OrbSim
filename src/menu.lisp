@@ -30,19 +30,19 @@
   (#_move (epos-y instance) 10 70)
   (#_move (evel-x instance) 10 100)
   (#_move (evel-y instance) 10 130)
+  (#_move (submit instance) 10 160)
   (#_setMinimumWidth (epos-x instance) 270)
   (#_setMinimumWidth (epos-y instance) 270)
   (#_setMinimumWidth (evel-x instance) 270)
   (#_setMinimumWidth (evel-y instance) 270)
   (connect (submit instance) "clicked()" instance "submit()"))
 
-(defmethod show-name ((instance menu))
-  (let ((name (#_text (name-edit instance))))
-    (#_setText (name-label instance)
-	       (if name
-		   (concatenate 'string "Hello, "
-				(princ-to-string name))
-		   "Error"))))
+(defmethod submit ((instance menu))
+  (add-body (#_number (epos-x instance))
+	    (#_number (epos-y instance))
+	    (#_number (evel-x instance))
+	    (#_number (evel-y instance))
+	    10 3 sdl:*white*))
 
 (defun init ()
   (make-qapplication)

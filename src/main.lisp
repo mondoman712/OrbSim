@@ -5,7 +5,7 @@
 (ql:quickload "lispbuilder-sdl")
 (ql:quickload "lispbuilder-sdl-gfx")
 
-(load "menu.lisp")
+;(load "menu.lisp")
 
 ; Define Classes
 (defclass point () 
@@ -137,12 +137,19 @@
 	     (draw-bodies (cdr bodies))) ; Call this function on the rest of list
       't)) ; Return true when complete
 
-(defun add-body (&key pos-x pos-y vel-x vel-y mass size colour)
+(defun add-body (pos-x pos-y vel-x vel-y mass size colour)
   (setf *bodies* (append *bodies* (list
 				   (make-body :pos-x pos-x :pos-y pos-y
 					      :vel-x vel-x :vel-y vel-y
 					      :mass mass :size size
 					      :colour colour)))))
+
+(defmethod sumbit ((instance menu))
+  (add-body :pos-x (#_number (epos-x instance))
+	    :pos-y (#_number (epos-y instance))
+	    :vel-x (#_number (evel-x instance))
+	    :vel-y (#_number (evel-y instance))
+	    :mass 10 :size 3 :colour sdl:*white*))
 
 (defun sdl-init ()
   "Initialize SDL environment"
