@@ -39,10 +39,13 @@
    (colour :type sdl:color
 	   :accessor colour
 	   :initarg :colour
-	   :initform sdl:*white*))
+	   :initform sdl:*white*)
+   (id :type symbol
+       :accessor id
+       :initarg :id))
   (:documentation "Describes a body (planet etc)"))
 
-(defun make-body (&key pos-x pos-y vel-x vel-y mass size colour)
+(defun make-body (&key pos-x pos-y vel-x vel-y mass size colour id)
   "A function to help create instances of the body class more easily"
   (make-instance 'body
                  :pos (make-instance 'point
@@ -51,7 +54,8 @@
 				     :x vel-x :y vel-y)
                  :mass mass
 		 :size size
-		 :colour colour))
+		 :colour colour
+		 :id id))
 		 
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
@@ -59,15 +63,19 @@
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
 				 :vel-x 1e6 :vel-y 0 
-				 :mass 5.97e24 :size 3 :colour sdl:*blue*))
+				 :mass 5.97e24 :size 3 :colour sdl:*blue*
+				 :id 'earth))
 (defparameter *sun* (make-body :pos-x 0 :pos-y 0 
-			       :mass 1.99e30 :size 10 :colour sdl:*yellow*))
+			       :mass 1.99e30 :size 10 :colour sdl:*yellow*
+			       :id 'sun))
 (defparameter *mars* (make-body :pos-x 0 :pos-y -7e7 
 				:vel-x -1e6 :vel-y 0
-				:size 2 :colour sdl:*red*))
+				:size 2 :colour sdl:*red*
+				:id 'mars))
 (defparameter *venus* (make-body :pos-x 0 :pos-y 2e8 
 				:vel-x 7e5 :vel-y 0
-				:size 2 :colour sdl:*green*))
+				:size 2 :colour sdl:*green*
+				:id 'venus))
 (defparameter *bodies* (list *sun* *earth* *mars* *venus*))
 
 (defun pos= (a b)
@@ -150,6 +158,11 @@
 	    :vel-x (#_number (evel-x instance))
 	    :vel-y (#_number (evel-y instance))
 	    :mass 10 :size 3 :colour sdl:*white*))
+
+(defun rm-body (id)
+  (setf *bodies*
+	(remove-if #'(lambda (x) (eq (id x) id))
+		   *bodies*)))
 
 (defun sdl-init ()
   "Initialize SDL environment"
