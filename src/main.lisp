@@ -172,6 +172,17 @@
 (defun ls-bodies ()
   (mapcar #'(lambda (x) (id x)) *bodies*))
 
+(defun edit-body (id parameter value)
+  (mapcar #'(lambda (x) (if (eq (id x) id)
+			    (setf (funcall parameter x) value)
+			    'nil))
+	  *bodies*))
+
+(defun edit-body (id parameter value)
+
+	      (cond ((eq parameter 'mass)
+		     (setf (mass 
+
 (defun sdl-init ()
   "Initialize SDL environment"
   (sdl:window (x *screen-size*)
@@ -190,11 +201,8 @@
       ; Main loop
       (:idle ()  
        (sdl:clear-display sdl:*black*)
-       
        (update-lst (cdr *bodies*))
-        
        (draw-bodies *bodies*)
-
       (sdl:update-display))))
 
 (defun main ()
