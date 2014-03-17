@@ -59,7 +59,7 @@
 		 
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
-(defparameter *screen-size* (make-instance 'point :x 640 :y 640))
+(defparameter *screen-size* (make-instance 'point :x 320 :y 320))
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
 				 :vel-x 1e6 :vel-y 0 
@@ -77,11 +77,6 @@
 				:size 2 :colour sdl:*green*
 				:id 'venus))
 (defparameter *bodies* (list *sun* *earth* *mars* *venus*))
-
-(defun pos= (a b)
-  "Checks if two points are equal"
-  (if (and (= (x a) (x b)) (= (y a) (y b)))
-    't 'nil))
 
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
@@ -152,12 +147,22 @@
 					      :mass mass :size size
 					      :colour colour)))))
 
-(defmethod sumbit ((instance menu))
-  (add-body :pos-x (#_number (epos-x instance))
-	    :pos-y (#_number (epos-y instance))
-	    :vel-x (#_number (evel-x instance))
-	    :vel-y (#_number (evel-y instance))
-	    :mass 10 :size 3 :colour sdl:*white*))
+(defun point (x y)
+  (make-instance 'point :x x :y y))
+
+(defun add-body2 (ecc ap)
+  (setf 
+   *bodies* 
+   (append 
+    *bodies*
+    (list (make-body :pos-x 0 :pos-y ap
+		     :vel-y 0 :mass 10
+		     :size 2 :colour sdl:*white*
+		     :vel-x (* (sqrt (/ (* *G* (mass *sun*))
+					(dist (pos *sun*)
+					      (point 0 ap))))
+			       (1+ (expt ecc 2))))))))
+  
 
 (defun rm-body (id)
   (setf *bodies*
