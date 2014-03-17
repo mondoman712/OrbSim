@@ -169,6 +169,9 @@
 	(remove-if #'(lambda (x) (eq (id x) id))
 		   *bodies*)))
 
+(defun ls-bodies ()
+  (mapcar #'(lambda (x) (id x)) *bodies*))
+
 (defun sdl-init ()
   "Initialize SDL environment"
   (sdl:window (x *screen-size*)
