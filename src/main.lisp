@@ -59,7 +59,7 @@
 		 
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
-(defparameter *screen-size* (make-instance 'point :x 320 :y 320))
+(defparameter *screen-size* (make-instance 'point :x 640 :y 640))
 
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
 				 :vel-x 1e6 :vel-y 0 
@@ -178,10 +178,11 @@
 			    'nil))
 	  *bodies*))
 
-(defun edit-body (id parameter value)
-
-	      (cond ((eq parameter 'mass)
-		     (setf (mass 
+(defmacro edit-parameter (id parameter value)
+  `(setf (,parameter (nth (position ,id
+				    (mapcar #'(lambda (x) (id x)) *bodies*))
+			  *bodies*))
+	 ,value))
 
 (defun sdl-init ()
   "Initialize SDL environment"
@@ -189,6 +190,14 @@
               (y *screen-size*)
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
+
+(defparameter *a* (list))
+
+(defun draw-trails ()
+  (mapc #'(lambda (i) (sdl:draw-pixel i
+		       :color sdl:*red*))
+	*a*))
+
 
 (defun sdl-main-loop ()
   ; Define key events
@@ -203,6 +212,10 @@
        (sdl:clear-display sdl:*black*)
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
+       
+       (setf *a* (append *a* (list (pos2pos (pos (cadr *bodies*))))))
+       (draw-trails)
+	
       (sdl:update-display))))
 
 (defun main ()
