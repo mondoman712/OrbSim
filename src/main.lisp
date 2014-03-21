@@ -187,17 +187,27 @@
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
-(defparameter *a* (list))
+(defparameter *a* '())
+
+(defun add-trail ()
+  (setf *a* (append *a* (list (pos2pos (pos (cadr *bodies*)))))))
 
 (defun draw-trails ()
-  (mapc #'(lambda (i) (sdl:draw-pixel i
-		       :color sdl:*red*))
+  (mapc #'(lambda (i)
+	    (sdl:draw-pixel 
+	     i :color sdl:*red*))
 	*a*))
+
+(defun trails ()
+  (progn (add-trail)
+	 (draw-trails)))
 
 (defparameter *run* 't)
 
+(defun ex () (setf *run* 'nil))
+
 (defparameter *external-quit-on-exit*
-  (list #'(lambda () (setf *run* 'nil))))
+  (list '(lambda () (setf *run* 'nil))))
 
 (defun sdl-main-loop ()
   ; Define key events
@@ -206,17 +216,15 @@
       (:key-down-event (:key key)
        (when (or (sdl:key= key :sdl-key-escape) 
 		 (sdl:key= key :sdl-key-q))
-         (sdl:push-quit-event)))
+	 (sdl:push-quit-event)))
       ; Main loop
       (:idle ()  
        (sdl:clear-display sdl:*black*)
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
        
-;       (setf *a* (append *a* (list (pos2pos (pos (cadr *bodies*))))))
-;       (draw-trails)
-	
-      (sdl:update-display))))
+;       (trail)
+       (sdl:update-display))))
 
 (defun main ()
   (sb-thread:make-thread 
@@ -224,7 +232,9 @@
 		  (sdl:with-init ()
 		    (sdl-init)
 		    (sdl-main-loop)))))
-  (loop until (not *run*)
+  (loop while *run*
        do (progn
 	    (princ "OrbSim> ")
-	    (print (eval (read))))))
+	    (prin1 (eval (read)))
+	    (fresh-line))))
+
