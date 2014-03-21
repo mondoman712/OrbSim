@@ -3,9 +3,6 @@
 
 ; Load required libraries
 (ql:quickload "lispbuilder-sdl")
-(ql:quickload "lispbuilder-sdl-gfx")
-
-;(load "menu.lisp")
 
 ; Define Classes
 (defclass point () 
@@ -56,7 +53,6 @@
 		 :size size
 		 :colour colour
 		 :id id))
-		 
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
@@ -130,7 +126,7 @@
 
 (defun draw-body (body)
   "Draws a body to the screen"
-  (sdl-gfx:draw-filled-circle
+  (sdl:draw-filled-circle
    (pos2pos (pos body)) (size body) :color (colour body)))
 
 (defun draw-bodies (bodies)
@@ -198,6 +194,10 @@
 		       :color sdl:*red*))
 	*a*))
 
+(defparameter *run* 't)
+
+(defparameter *external-quit-on-exit*
+  (list #'(lambda () (setf *run* 'nil))))
 
 (defun sdl-main-loop ()
   ; Define key events
@@ -213,14 +213,18 @@
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
        
-       (setf *a* (append *a* (list (pos2pos (pos (cadr *bodies*))))))
-       (draw-trails)
+;       (setf *a* (append *a* (list (pos2pos (pos (cadr *bodies*))))))
+;       (draw-trails)
 	
       (sdl:update-display))))
 
 (defun main ()
-  (sdl:with-init ()
-    (sdl-init)
-    (sdl-main-loop)))
-
-
+  (sb-thread:make-thread 
+   #'(lambda () (progn
+		  (sdl:with-init ()
+		    (sdl-init)
+		    (sdl-main-loop)))))
+  (loop until (not *run*)
+       do (progn
+	    (princ "OrbSim> ")
+	    (print (eval (read))))))
