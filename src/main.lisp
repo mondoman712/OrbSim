@@ -140,6 +140,7 @@
       't)) ; Return true when complete
 
 (defun col (colour)
+  "converts a symbol of a colour name to an sdl colour"
   (let* ((colours (list (list 'red sdl:*red*)
 			(list 'blue sdl:*blue*)
 			(list 'green sdl:*green*)
@@ -152,8 +153,10 @@
 	(cdr (nth pos colours))
 	(cadr (nth (random (length colours)) colours)))))
 
-(defun add-body (pos-x pos-y vel-x vel-y &optional (mass 10) (size 3) 
+(defun add-body (pos-x pos-y vel-x vel-y &key (mass 10) (size 2) 
 					   (colour 'a))
+  "Adds a body to the system, with the x and y positions and velocities,
+   and optionally the mass, size and/or colour"
   (setf *bodies* (append *bodies* (list
 				   (make-body :pos-x pos-x :pos-y pos-y
 					      :vel-x vel-x :vel-y vel-y
@@ -163,29 +166,25 @@
 (defun point (x y)
   (make-instance 'point :x x :y y))
 
-(defun add-body2 (ecc ap)
-  (setf 
-   *bodies* 
-   (append 
-    *bodies*
-    (list (make-body :pos-x 0 :pos-y ap
-		     :vel-y 0 :mass 10
-		     :size 2 :colour sdl:*white*
-		     :vel-x (* (sqrt (/ (* *G* (mass *sun*))
-					(dist (pos *sun*)
-					      (point 0 ap))))
-			       (1+ (expt ecc 2))))))))
-  
+(defun add-body2 (ecc ap &key (mass 10) (size 2) (colour 'a))
+  "Adds a body to te system, with the eccentricity and  "
+  (add-body 0 ap (* (sqrt (/ (* *G* (mass *sun*))
+			     (dist (pos *sun*) (point 0 ap))))
+		    (1+ (expt ecc 2)))
+	    0 :mass mass :size size :colour colour))
 
 (defun rm-body (id)
+  "Removes a body from the system"
   (setf *bodies*
 	(remove-if #'(lambda (x) (eq (id x) id))
 		   *bodies*)))
 
 (defun ls-bodies ()
+  "Lists all the bodies in the system"
   (mapcar #'(lambda (x) (id x)) *bodies*))
 
 (defun edit-body (id parameter value)
+  "Edits a parameter of a body"
   (mapcar #'(lambda (x) (if (eq (id x) id)
 			    (set (funcall parameter x) value)
 			    'nil))
