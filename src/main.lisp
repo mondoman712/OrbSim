@@ -106,6 +106,7 @@
   `(setf ,a (funcall ,fn ,a ,b)))
 
 (defun update-vel (body)
+  "Updates velocity of 'body'"
   (let ((accel (split-force 
                  (calc-g (mass *sun*) (dist (pos body) (pos *sun*)))
                  (ang (pos *sun*) (pos body)))))
@@ -118,10 +119,12 @@
   (sets #'+ (y (pos body)) (y (vel body))))
 
 (defun update (body)
+  "Updates the position and velocity of 'body'"
   (update-vel body)
   (update-pos body))
 
 (defun update-lst (bodies)
+  "Calls 'update' on each item in a list of bodies"
   (mapc #'update bodies))
 
 (defun draw-body (body)
@@ -136,12 +139,26 @@
 	     (draw-bodies (cdr bodies))) ; Call this function on the rest of list
       't)) ; Return true when complete
 
-(defun add-body (pos-x pos-y vel-x vel-y mass size colour)
+(defun col (colour)
+  (let* ((colours (list (list 'red sdl:*red*)
+			(list 'blue sdl:*blue*)
+			(list 'green sdl:*green*)
+			(list 'yellow sdl:*yellow*)
+			(list 'black sdl:*black*)
+			(list 'white sdl:*white*)
+			(list 'magenta sdl:*magenta*)))
+	 (pos (position colour colours :key #'car)))
+    (if pos
+	(cdr (nth pos colours))
+	(cadr (nth (random (length colours)) colours)))))
+
+(defun add-body (pos-x pos-y vel-x vel-y &optional (mass 10) (size 3) 
+					   (colour 'a))
   (setf *bodies* (append *bodies* (list
 				   (make-body :pos-x pos-x :pos-y pos-y
 					      :vel-x vel-x :vel-y vel-y
 					      :mass mass :size size
-					      :colour colour)))))
+					      :colour (col colour))))))
 
 (defun point (x y)
   (make-instance 'point :x x :y y))
@@ -170,7 +187,7 @@
 
 (defun edit-body (id parameter value)
   (mapcar #'(lambda (x) (if (eq (id x) id)
-			    (setf (funcall parameter x) value)
+			    (set (funcall parameter x) value)
 			    'nil))
 	  *bodies*))
 
