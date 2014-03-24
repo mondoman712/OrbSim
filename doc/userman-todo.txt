@@ -1,0 +1,6 @@
+Intro - what it covers and who can use it
+How to install it
+A tutorial on how to use it
+Explanation of possible error messages
+A description of limitations, validations and things that the system will not do
+
