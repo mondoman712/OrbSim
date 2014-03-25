@@ -204,10 +204,10 @@
 
 (defparameter *run* 't)
 
-(defun ex () (setf *run* 'nil))
-
 (defparameter *external-quit-on-exit*
   (list '(lambda () (setf *run* 'nil))))
+
+(pushnew #'ex *external-quit-on-exit*)
 
 (defun sdl-main-loop ()
   ; Define key events
