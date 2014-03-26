@@ -29,10 +29,13 @@
 \tableofcontents
 \clearpage
 
+\definecolor{darkgreen}{rgb}{0,0.6,0}
+
 \lstset{language=lisp,
-	basicstyle=\footnotesize\ttfamily,
-	numberstyle=\tiny
-	numbersep=5pt,
+	basicstyle=\scriptsize\ttfamily,
+	numbers=left,
+	numberstyle=\tiny,
+	numbersep=9pt,
         tabsize=2,                
         extendedchars=true,      
         breaklines=true,        
@@ -43,7 +46,10 @@
         framexrightmargin=5pt,
         framexbottommargin=4pt,
         showstringspaces=false,
-	keywordstyle=\color{blue}}
+	keywordstyle=\color{blue},
+	commentstyle=\color{gray},
+	stringstyle=\color{darkgreen},
+	}
 \newcommand{\add}[1]{\input{./tex/#1.tex} \clearpage}
 
 \add{analysis}
