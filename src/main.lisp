@@ -31,7 +31,7 @@
          :initform 0)
    (size :type number
 	 :accessor size
-	 :initarg :size
+	 :initarg :size 
 	 :initform 1)
    (colour :type sdl:color
 	   :accessor colour
@@ -222,8 +222,6 @@
 
 (defparameter *external-quit-on-exit*
   (list '(lambda () (setf *run* 'nil))))
-
-(pushnew #'ex *external-quit-on-exit*)
 
 (defun sdl-main-loop ()
   ; Define key events
