@@ -3,9 +3,36 @@
 
 \section{System Overview}
 
-\section{Development Environment}
+\section{Code}
 
-\section{Code listing}
+
+
+\subsection{Code Listing}
 \lstinputlisting{../src/main.lisp}
 
+\subsection{Function Design}
 
+\paragraph{draw-bodies}
+The draw-bodies function is used to call the draw-body function on a list of
+bodies. This allows the bodies to be kept in a list and outputted easily from
+that list.
+\begin{pseudocode}{draw-bodies}{bodies}
+	\IF bodies
+	\THEN \BEGIN
+		draw first item in list of bodies
+		call draw-bodies on rest of list
+		\END
+	\ELSE
+	
+\end{pseudocode}
+
+
+
+\section{Development Environment}
+
+\section{External Libraries used}
+\subsection{SDL}
+I used SDL (Simple DirectMedia Layer) to produce graphics for my program, so SDL
+is required for my program to run. I used a library called "Lispbuilder-SDL" to
+allow me to interface with SDL from Lisp, this is not required for the program
+to run as it compiles itself into the executable.
