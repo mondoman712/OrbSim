@@ -203,21 +203,6 @@
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
-(defparameter *a* '())
-
-(defun add-trail ()
-  (setf *a* (append *a* (list (pos2pos (pos (cadr *bodies*)))))))
-
-(defun draw-trails ()
-  (mapc #'(lambda (i)
-	    (sdl:draw-pixel 
-	     i :color sdl:*red*))
-	*a*))
-
-(defun trails ()
-  (progn (add-trail)
-	 (draw-trails)))
-
 (defparameter *run* 't)
 
 (defparameter *external-quit-on-exit*
@@ -237,7 +222,6 @@
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
        
-;       (trail)
        (sdl:update-display))))
 
 (defun main ()

@@ -1,13 +1,13 @@
 (defun body-to-list (body)
-  (list :pos-x (x (pos body))
-	:pos-y (y (pos body))
-	:vel-x (x (vel body))
-	:vel-y (y (vel body))
-	:mass (mass body)
-	:size (size body)
-	:r (sdl:r (colour body))
-	:g (sdl:g (colour body))
-	:b (sdl:b (colour body))))
+  (list (x (pos body))
+	(y (pos body))
+	(x (vel body))
+	(y (vel body))
+	(mass body)
+	(size body)
+	(sdl:r (colour body))
+	(sdl:g (colour body))
+	(sdl:b (colour body))))
 
 (defun bodies-to-list (bodies)
   (mapcar #'body-to-list bodies))
@@ -19,8 +19,8 @@
     (with-standard-io-syntax
       (print lst out))))
 
-(defun save-bodies (lst filename)
-  (save-list (bodies-to-list lst) filename))
+(defun save-bodies (filename)
+  (save-list (bodies-to-list *bodies*) filename))
 
 (defun read-list (filename)
   (with-open-file (in filename)
@@ -29,7 +29,20 @@
 
 (defun read-bodies (filename)
   (loop for bod in (read-list filename)
-     and bod2 = (list (butlast bod 6)
-		      :colour
-		      (apply #'sdl:color (last bod 6)))
-     collecting (apply #'make-instance bod2)))
+       collecting (make-instance 
+		   'body
+		   :pos (make-instance
+			 'point
+			 :x (nth 0 bod)
+			 :y (nth 1 bod))
+		   :vel (make-instance
+			 'point
+			 :x (nth 2 bod)	
+			 :y (nth 3 bod))
+		   :mass (nth 4 bod)
+		   :size (nth 5 bod)
+		   :colour (sdl:color :r (nth 6 bod)
+				      :g (nth 7 bod)
+				      :b (nth 8 bod)))))
+
+
