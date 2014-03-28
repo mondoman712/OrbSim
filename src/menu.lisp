@@ -1,49 +1,27 @@
-(ql:quickload 'qt)
-(use-package :qt)
-(named-readtables:in-readtable :qt)
-
-(defclass menu ()
-  ((pos-x :accessor epos-x)
-   (pos-y :accessor epos-y)
-   (vel-x :accessor evel-x)
-   (vel-y :accessor evel-y)
-   (submit :accessor submit))
-  (:metaclass qt-class)
-  (:qt-superclass "QWidget")
-  (:slots ("submit()" submit)))
-
-(defmethod initialize-instance :after
-    ((instance menu) &key)
-  (new instance)
-  (init-ui instance))
-
-(defmethod init-ui ((instance menu))
-  (#_setGeometry instance 200 200 300 300)
-  (#_setWindowTitle instance "hello")
-  (setf (epos-x instance) (#_new QLineEdit "X Pos" instance)
-	(epos-y instance) (#_new QLineEdit "Y Pos" instance)
-	(evel-x instance) (#_new QLineEdit "X Vel" instance)
-	(evel-y instance) (#_new QLineEdit "Y Vel" instance)
-	(submit instance) (#_new QPushButton "Submit" instance))
-  (#_move (#_new QLabel "Hello" instance) 10 10)
-  (#_move (epos-x instance) 10 40)
-  (#_move (epos-y instance) 10 70)
-  (#_move (evel-x instance) 10 100)
-  (#_move (evel-y instance) 10 130)
-  (#_move (submit instance) 10 160)
-  (#_setMinimumWidth (epos-x instance) 270)
-  (#_setMinimumWidth (epos-y instance) 270)
-  (#_setMinimumWidth (evel-x instance) 270)
-  (#_setMinimumWidth (evel-y instance) 270)
-  (connect (submit instance) "clicked()" instance "submit()"))
-
-(defmethod submit ((instance menu))
-  (add-body (#_number (epos-x instance))
-	    (#_number (epos-y instance))
-	    (#_number (evel-x instance))
-	    (#_number (evel-y instance))
-	    10 3 sdl:*white*))
+(ql:quickload 'cl-tk)
 
 (defun init ()
-  (make-qapplication)
-  (with-main-window (window (make-instance 'menu))))
+  (cl-tk:with-tk ()
+    #|
+    (cl-tk:tcl "grid" (cl-tk:tcl[
+		       "ttk::frame" ".c" :padding "3 3 12 12") 
+	       :column 0 :row 0 :sticky "nwes")
+    (cl-tk:tcl "grid" "columnconfigure" "." 0 :weight 1
+	       "grid" "rowconfigure" "." 0 :weight 1)
+    (cl-tk:tcl "grid" (cl-tk:tcl[ 
+		       "ttk::button" ".exit" :text "yolo"
+		       :command (cl-tk:event-handler #'cl-tk:destroy))
+	       :column "1" :row "1" :sticky "e")
+    (cl-tk:tcl "grid" (cl-tk:tcl[
+		       "ttk::button" ".c.b" :text "save"
+		       :command (save-bodies "a.txt"))
+	       :column "1" :row "2" :sticky "e")
+    (cl-tk:tcl "grid" (cl-tk:tcl[
+		       "ttk::button" ".c.b" :text "load"
+		       :command (read-bodies "a.txt"))
+	       :column "2" :row "1" :sticky "e")
+    |#
+    (cl-tk:tcl "grid [ttk::frame .c -padding {3 3 12 12}] -column 0 -row 0 -sticky news")
+    (cl-tk:tcl "grid columnconfigure . 0 -weight 1; grid rowconfigure . 0 -weight 1")
+    (cl-tk:tcl "grid [ttk::button .exit -text {yolo} -command (cl-tk:event-handler #'cl-tk:destroy)")
+    (cl-tk:mainloop)))
