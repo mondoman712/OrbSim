@@ -106,7 +106,7 @@
   `(setf ,a (funcall ,fn ,a ,b)))
 
 (defun update-vel (body)
-  "Updates velocity of 'body'"
+  "updates velocity of 'body'"
   (let ((accel (split-force 
                  (calc-g (mass *sun*) (dist (pos body) (pos *sun*)))
                  (ang (pos *sun*) (pos body)))))

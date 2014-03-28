@@ -16,17 +16,45 @@
 The draw-bodies function is used to call the draw-body function on a list of
 bodies. This allows the bodies to be kept in a list and outputted easily from
 that list.
+
 \begin{pseudocode}{draw-bodies}{bodies}
 	\IF bodies
-	\THEN \BEGIN
-		draw first item in list of bodies
-		call draw-bodies on rest of list
-		\END
-	\ELSE
-	
+	  \THEN 
+	    \BEGIN
+		$draw first item in list of bodies$ \\
+		$call draw-bodies on rest of list$
+	    \END
+	  \ELSE
+      	    \RETURN{True}	
 \end{pseudocode}
 
+\begin{lstlisting}
+(defun draw-bodies (bodies)
+  (if bodies
+      (progn (draw-body (car bodies))
+	     (draw-bodies (cdr bodies)))
+      `t)) 
+\end{lstlisting}
 
+\paragraph{update-vel}
+This function is used to update the velocity of a body.
+
+\begin{pseudocode}{update-vel}{body}
+	\BEGIN
+	accel \GETS \CALL{split-force}{\CALL{calc-g}{sun, body}, 
+					\CALL{ang}{sun, body}} \\
+	bodyvel \GETS bodyvel + accel
+	\END
+\end{pseudocode}
+
+\begin{lstlisting}
+(defun update-vel (body)
+  (let ((accel (split-force 
+                 (calc-g (mass *sun*) (dist (pos body) (pos *sun*)))
+                 (ang (pos *sun*) (pos body)))))
+    (sets #'+ (x (vel body)) (x accel))
+    (sets #'+ (y (vel body)) (y accel))))
+\end{lstlisting}
 
 \section{Development Environment}
 

@@ -94,8 +94,8 @@ body. The new position of the body can then be calculated using its current
 position and velocity.
 
 \begin{pseudocode}{calc-new-pos}{pos, vel, parentbody}
-	r \GETS dist(pos, parentbody)	 \\
-	g \GETS (G \cdot parentmass)/r^2 \\
+	r \GETS \CALL{dist}{pos, parentbody}	 \\
+	g \GETS \frac{G \cdot parentmass}{r^2} \\
 	newvel \GETS vel + g \\
 	\RETURN {pos + (newvel \cdot interval)}
 \end{pseudocode}
@@ -161,10 +161,8 @@ malicious with their computer. \\
 %%%
 \section{Testing Plan}
 
-\begin{tabular}{|p{0.2\linewidth}|p{0.15\linewidth}|p{0.2\linewidth}
-		|p{0.15\linewidth}|p{0.2\linewidth}|} \hline
-	Description & Typical, Erroneous, Extreme & Expected Outcome
-	& Actual Outcome & Comments and Corrective Actions \\ \hline
+\begin{tabular}{|p{0.2\linewidth}|p{0.15\linewidth}|p{0.2\linewidth}|} \hline
+	Description & Typical, Erroneous, Extreme & Expected Outcome \\ \hline
 	Starting the program & N/A & The program will start && \\ \hline
 	
 \end{tabular}
