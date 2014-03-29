@@ -4,6 +4,8 @@
 ; Load required libraries
 (ql:quickload "lispbuilder-sdl")
 
+(load "io.lisp")
+
 ; Define Classes
 (defclass point () 
   ((x :type number
@@ -56,7 +58,7 @@
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
-
+#|
 (defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
 				 :vel-x 1e6 :vel-y 0 
 				 :mass 5.97e24 :size 3 :colour sdl:*blue*
@@ -73,6 +75,9 @@
 				:size 2 :colour sdl:*green*
 				:id 'venus))
 (defparameter *bodies* (list *sun* *earth* *mars* *venus*))
+|#
+
+(defparameter *bodies* (read-bodies "bodies.txt"))
 
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
@@ -108,8 +113,8 @@
 (defun update-vel (body)
   "updates velocity of 'body'"
   (let ((accel (split-force 
-                 (calc-g (mass *sun*) (dist (pos body) (pos *sun*)))
-                 (ang (pos *sun*) (pos body)))))
+                 (calc-g (mass (car *bodies*)) (dist (pos body) (pos (car *bodies*))))
+                 (ang (pos (car *bodies*)) (pos body)))))
     (sets #'+ (x (vel body)) (x accel))
     (sets #'+ (y (vel body)) (y accel))))
 
@@ -225,14 +230,15 @@
        (sdl:update-display))))
 
 (defun main ()
-  (sb-thread:make-thread 
-   #'(lambda () (progn
+;  (sb-thread:make-thread 
+ ;  #'(lambda () (progn
 		  (sdl:with-init ()
 		    (sdl-init)
-		    (sdl-main-loop)))))
-  (loop while *run*
-       do (progn
-	    (princ "OrbSim> ")
-	    (prin1 (eval (read)))
-	    (fresh-line))))
+		    (sdl-main-loop)))
+; ))
+  ;(loop while *run*
+;       do (progn
+;	    (princ "OrbSim> ")
+;	    (prin1 (eval (read)))
+;	    (fresh-line))))
 

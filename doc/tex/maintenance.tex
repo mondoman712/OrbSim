@@ -3,16 +3,17 @@
 
 \section{System Overview}
 
-\section{Code}
 
-
-
-\subsection{Code Listing}
+\section{Code Listing}
+\subsection{main.lisp}
 \lstinputlisting{../src/main.lisp}
+\subsection{io.lisp}
+\lstinputlisting{../src/io.lisp}
 
-\subsection{Function Design}
 
-\paragraph{draw-bodies}
+\section{Function Design}
+
+\subsection{draw-bodies}
 The draw-bodies function is used to call the draw-body function on a list of
 bodies. This allows the bodies to be kept in a list and outputted easily from
 that list.
@@ -36,8 +37,10 @@ that list.
       `t)) 
 \end{lstlisting}
 
-\paragraph{update-vel}
-This function is used to update the velocity of a body.
+\subsection{update-vel}
+This function is used to update the velocity of a body. The pseudocode is
+simplified to make it easier to understand, I've just removed some of the
+function calls for $accel$ and grouped the $x$ and $y$ values. 
 
 \begin{pseudocode}{update-vel}{body}
 	\BEGIN
@@ -56,16 +59,16 @@ This function is used to update the velocity of a body.
     (sets #'+ (y (vel body)) (y accel))))
 \end{lstlisting}
 
+\section{Variable and Function Listings}
 \subsection{Global Variable List}
 \begin{tabular}{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.6\textwidth}|}
 	\hline
 	Name & Type & Description \\ \hline
 	G & Number & Stores the gravitational constant.\\
-	Screen Size & Point & Stores the screen size of the SDL window.
-	
+	screen-size & Point & Stores the screen size of the SDL window. \\
+	bodies & list & Stores all of the bodies in the system \\
 
-
-	
+	\hline
 \end{tabular}
 
 \section{Development Environment}
@@ -75,4 +78,6 @@ This function is used to update the velocity of a body.
 I used SDL (Simple DirectMedia Layer) to produce graphics for my program, so SDL
 is required for my program to run. I used a library called "Lispbuilder-SDL" to
 allow me to interface with SDL from Lisp, this is not required for the program
+\hline
+
 to run as it compiles itself into the executable.
