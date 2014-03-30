@@ -22,11 +22,11 @@ that list.
 	\IF bodies
 	  \THEN 
 	    \BEGIN
-		$draw first item in list of bodies$ \\
-		$call draw-bodies on rest of list$
+	    	\CALL{draw-body}{$first item in bodies$} \\
+		\CALL{draw-bodies}{$rest of bodies$}
 	    \END
 	  \ELSE
-      	    \RETURN{True}	
+      	    \RETURN{\TRUE}	
 \end{pseudocode}
 
 \begin{lstlisting}
@@ -59,25 +59,75 @@ function calls for $accel$ and grouped the $x$ and $y$ values.
     (sets #'+ (y (vel body)) (y accel))))
 \end{lstlisting}
 
+\subsection{read-bodies}
+
+\begin{pseudocode}{read-bodies}{filename}
+	\FOREACH bod $ in $ \CALL{read-list}{filename}
+	\DO $collect $ \CALL{make-body}{bod} $ into $ bods\\
+	\RETURN{bods}
+\end{pseudocode}
+
+\begin{lstlisting}
+(defun read-bodies (filename)
+  (loop for bod in (read-list filename)
+       collecting (make-instance 
+		   'body
+		   :pos (make-instance
+			 'point
+			 :x (nth 0 bod)
+			 :y (nth 1 bod))
+		   :vel (make-instance
+			 'point
+			 :x (nth 2 bod)	
+			 :y (nth 3 bod))
+		   :mass (nth 4 bod)
+		   :size (nth 5 bod)
+		   :colour (sdl:color :r (nth 6 bod)
+				      :g (nth 7 bod)
+				      :b (nth 8 bod)))))
+\end{lstlisting}
+
 \section{Variable and Function Listings}
 \subsection{Global Variable List}
-\begin{tabular}{|p{0.2\textwidth}|p{0.2\textwidth}|p{0.6\textwidth}|}
-	\hline
+\begin{tabular}{p{0.2\textwidth}p{0.2\textwidth}p{0.6\textwidth}}
 	Name & Type & Description \\ \hline
 	G & Number & Stores the gravitational constant.\\
 	screen-size & Point & Stores the screen size of the SDL window. \\
 	bodies & list & Stores all of the bodies in the system \\
 
-	\hline
+\end{tabular}
+
+\subsection{Function List --- main.lisp}
+\begin{tabular}{p{0.2\textwidth}p{0.4\textwidth}p{0.5\textwidth}}
+	Name & Arguments & Description\\ \hline
+	make-body & pos-x, pos-y, vel-x, vel-y, mass, size, colour, id &
+		Makes the process of creating instances of the body class a
+		little easier\\
+\end{tabular}
+
+\subsection{Function List --- io.lisp}
+\begin{tabular}{p{0.2\textwidth}p{0.4\textwidth}p{0.5\textwidth}}
+	Name & Arguments & Description\\ \hline
+	body-to-list & body & Converts an instance of the body class into a list
+	of values \\ 
+	bodies-to-list & bodies & Calls body-to-list on a list of bodies \\
+	save-list & lst, filename & Opens a file and prints a list into it \\
+	save-bodies & filename & Calls save-list and bodies-to-list on the
+	global variable bodies \\
+	read-list & filename & Reads a list from a file \\
+	read-bodies & filename & Reads a list from a file and converts it into a
+	list of bodies \\ 
 \end{tabular}
 
 \section{Development Environment}
+Orbsim should run using any ANSI Common Lisp interpreter, but it was developed
+using, and has been tested with SBCL (Steel Bank Common Lisp). The
+"Lispbuilder-SDL" package is required, and it is advised that QuickLisp is used
+to install it (if not the start of "main.lisp" will need to be changed). 
 
 \section{External Libraries used}
 \subsection{SDL}
 I used SDL (Simple DirectMedia Layer) to produce graphics for my program, so SDL
 is required for my program to run. I used a library called "Lispbuilder-SDL" to
 allow me to interface with SDL from Lisp, this is not required for the program
-\hline
-
 to run as it compiles itself into the executable.
