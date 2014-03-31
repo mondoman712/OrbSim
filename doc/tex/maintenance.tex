@@ -60,7 +60,8 @@ function calls for $accel$ and grouped the $x$ and $y$ values.
 \end{lstlisting}
 
 \subsection{read-bodies}
-
+This is used to read through the list of lists in a file and turn each list
+within the main list into a body in the system. \\
 \begin{pseudocode}{read-bodies}{filename}
 	\FOREACH bod $ in $ \CALL{read-list}{filename}
 	\DO $collect $ \CALL{make-body}{bod} $ into $ bods\\
@@ -98,7 +99,7 @@ function calls for $accel$ and grouped the $x$ and $y$ values.
 \end{tabular}
 
 \subsection{Function List --- main.lisp}
-\begin{tabular}{p{0.2\textwidth}p{0.4\textwidth}p{0.5\textwidth}}
+\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
 	Name & Arguments & Description\\ \hline
 	make-body & pos-x, pos-y, vel-x, vel-y, mass, size, colour, id &
 		Makes the process of creating instances of the body class a
@@ -106,7 +107,7 @@ function calls for $accel$ and grouped the $x$ and $y$ values.
 \end{tabular}
 
 \subsection{Function List --- io.lisp}
-\begin{tabular}{p{0.2\textwidth}p{0.4\textwidth}p{0.5\textwidth}}
+\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
 	Name & Arguments & Description\\ \hline
 	body-to-list & body & Converts an instance of the body class into a list
 	of values \\ 
