@@ -1,4 +1,4 @@
-ql:quickload 'cl-tk)
+(ql:quickload 'cl-tk)
 
 (defun init ()
   (cl-tk:with-tk ()
