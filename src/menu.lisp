@@ -37,10 +37,13 @@
 					   (ltk:text in-posy)
 					   (ltk:text in-velx)
 					   (ltk:text in-vely)))))))
-	   (bod-list (mapcar #'id *bodies*))
-	   (list (make-instance 'ltk:listbox
-				:master nil
-				:listvariable bod-list)))
+;	   (bod-list (mapcar #'id *bodies*))
+;	   (list (make-instance 'ltk:listbox
+;				:master nil
+;				:listvariable bod-list)))
+	   (spin (make-instance 'ltk:spinbox
+				:master nil))
+)
     (progn
       (ltk:grid exit 2 1 :padx 3 :pady 3)
       (ltk:grid sub 1 1 :padx 3 :pady 3)
@@ -48,6 +51,8 @@
       (ltk:grid in-posy 2 2 :padx 3 :pady 3)
       (ltk:grid in-velx 3 2 :padx 3 :pady 3)
       (ltk:grid in-vely 4 2 :padx 3 :pady 3)
-      (ltk:grid list 1 3 :padx 3 :pady 3)))))
+ ;     (ltk:grid list 1 3 :padx 3 :pady 3)
+      (ltk:grid spin 5 2)
+     ))))
 
 
