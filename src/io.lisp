@@ -10,7 +10,8 @@
 	(size body)
 	(sdl:r (colour body))
 	(sdl:g (colour body))
-	(sdl:b (colour body))))
+	(sdl:b (colour body))
+	(id body)))
 
 (defun bodies-to-list (bodies)
   (mapcar #'body-to-list bodies))
@@ -46,6 +47,7 @@
 		   :size (nth 5 bod)
 		   :colour (sdl:color :r (nth 6 bod)
 				      :g (nth 7 bod)
-				      :b (nth 8 bod)))))
+				      :b (nth 8 bod))
+		   :id (nth 9 bod))))
 
 
