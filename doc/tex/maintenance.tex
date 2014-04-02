@@ -9,6 +9,8 @@
 \lstinputlisting{../src/main.lisp}
 \subsection{io.lisp}
 \lstinputlisting{../src/io.lisp}
+\subsection{menu.lisp}
+\lstinputlisting{../src/menu.lisp}
 
 
 \section{Function Design}
@@ -120,6 +122,12 @@ within the main list into a body in the system. \\
 	list of bodies \\ 
 \end{tabular}
 
+\subsection{Function List --- menu.lisp}
+\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
+	Name & Arguments & Description\\ \hline
+
+\end{tabular}
+
 \section{Development Environment}
 Orbsim should run using any ANSI Common Lisp interpreter, but it was developed
 using, and has been tested with SBCL (Steel Bank Common Lisp). The
@@ -132,3 +140,5 @@ I used SDL (Simple DirectMedia Layer) to produce graphics for my program, so SDL
 is required for my program to run. I used a library called "Lispbuilder-SDL" to
 allow me to interface with SDL from Lisp, this is not required for the program
 to run as it compiles itself into the executable.
+
+\subsection{Tk}
