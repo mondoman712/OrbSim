@@ -5,6 +5,7 @@
 (ql:quickload "lispbuilder-sdl")
 
 (load "io.lisp")
+(load "menu.lisp")
 
 ; Define Classes
 (defclass point () 
@@ -230,15 +231,11 @@
        (sdl:update-display))))
 
 (defun main ()
-;  (sb-thread:make-thread 
- ;  #'(lambda () (progn
+  (sb-thread:make-thread 
+   #'(lambda () (progn
 		  (sdl:with-init ()
 		    (sdl-init)
-		    (sdl-main-loop)))
-; ))
-  ;(loop while *run*
-;       do (progn
-;	    (princ "OrbSim> ")
-;	    (prin1 (eval (read)))
-;	    (fresh-line))))
+		    (sdl-main-loop)))))
+  (menu))
+
 
