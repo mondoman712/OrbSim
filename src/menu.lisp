@@ -17,6 +17,7 @@
 				:master nil
 				:text "exit"
 				:command (lambda () 
+					   (setf *quit* 't)
 					   (setf ltk:*exit-mainloop* 't))))
 	   (frame (make-instance 'ltk:frame
 				 :master nil))
@@ -60,19 +61,16 @@
 		 'ltk:button :master frame :text "submit"
 		 :command (lambda ()
 			    (apply #'add-body
-				   (mapcar #'parse-int
-					  (list
-					   (ltk:text in-posx)
-					   (ltk:text in-posy)
-					   (ltk:text in-velx)
-					   (ltk:text in-vely)))
-				   :size (parse-int (ltk:text in-size))
-				   :id (ltk:text in-id)))))
-;	   (bod-list (mapcar #'id *bodies*))
-;	   (list (make-instance 'ltk:listbox
-;				:master nil
-;				:listvariable bod-list)))
-)
+				   (append
+				    (mapcar #'parse-int
+					    (list
+					     (ltk:text in-posx)
+					     (ltk:text in-posy)
+					     (ltk:text in-velx)
+					     (ltk:text in-vely)))
+				    (list :size (parse-int (ltk:text in-size))
+					  :id (ltk:text in-id)
+					  :colour 'a)))))))
     (progn
       (ltk:grid exit 2 1 :padx 3 :pady 3)
       (ltk:grid sub 7 1 :padx 3 :pady 3)
@@ -88,6 +86,4 @@
       (ltk:grid label-vy 4 1)
       (ltk:grid label-sz 5 1)
       (ltk:grid label-id 6 1)
-      (ltk:grid frame 1 1)
- ;     (ltk:grid list 1 3 :padx 3 :pady 3)
-     ))))
+      (ltk:grid frame 1 1)))))

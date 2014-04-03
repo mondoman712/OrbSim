@@ -80,6 +80,8 @@
 
 (defparameter *bodies* (read-bodies "bodies.txt"))
 
+(defparameter *quit* 'nil)
+
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
   (flet ((new-coord (fn xy)
@@ -210,11 +212,6 @@
               :title-caption "OrbSim Prototype v1.09e-23")
     (setf (sdl:frame-rate) 60))
 
-(defparameter *run* 't)
-
-(defparameter *external-quit-on-exit*
-  (list '(lambda () (setf *run* 'nil))))
-
 (defun sdl-main-loop ()
   ; Define key events
   (sdl:with-events ()
@@ -228,15 +225,17 @@
        (sdl:clear-display sdl:*black*)
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
-       
-       (sdl:update-display))))
+       (sdl:update-display)
+       (when *quit*
+	 (sb-thread:terminate-thread 'main)))))
 
 (defun main ()
   (sb-thread:make-thread 
    #'(lambda () (progn
 		  (sdl:with-init ()
 		    (sdl-init)
-		    (sdl-main-loop)))))
+		    (sdl-main-loop))))
+   :name 'main)
   (menu))
 
 
