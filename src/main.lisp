@@ -160,14 +160,15 @@
 	(cadr (nth (random (length colours)) colours)))))
 
 (defun add-body (pos-x pos-y vel-x vel-y &key (mass 10) (size 2) 
-					   (colour 'a))
+					   (colour 'a) (id 'nil))
   "Adds a body to the system, with the x and y positions and velocities,
    and optionally the mass, size and/or colour"
   (setf *bodies* (append *bodies* (list
 				   (make-body :pos-x pos-x :pos-y pos-y
 					      :vel-x vel-x :vel-y vel-y
 					      :mass mass :size size
-					      :colour (col colour))))))
+					      :colour (col colour)
+					      :id id)))))
 
 (defun point (x y)
   (make-instance 'point :x x :y y))
