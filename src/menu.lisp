@@ -78,6 +78,12 @@
 				    :text "Remove Body"))
 	   (bod-list (make-instance 'ltk:listbox
 				    :master frame2))
+	   (rm (make-instance 'ltk:button
+			      :master frame2
+			      :text "remove"
+			      :command (lambda ()
+					 (rm-body 
+					  (ltk:listbox-get-selection bod-list)))))
 )
     (progn
       (ltk:grid exit 3 1 :padx 3 :pady 3)
@@ -98,7 +104,7 @@
 
       (ltk:grid label-rm 1 1)
       (ltk:listbox-append bod-list (mapcar #'id *bodies*))
-      
+      (ltk:grid rm 2 1)      
       (ltk:grid bod-list 2 2)
       (ltk:grid frame2 2 1)
 ))))
