@@ -11,6 +11,14 @@
       (parse-integer str)
       (error 'not-valid-int str)))
 
+(defun remove-nth (n list)
+  (declare
+   (type (integer 0) n)
+   (type list list))
+  (if (or (zerop n) (null list))
+      (cdr list)
+      (cons (car list) (remove-nth (1- n) (cdr list)))))
+
 (defun menu ()
   (ltk:with-ltk ()
     (let* ((exit (make-instance 'ltk:button
@@ -86,9 +94,14 @@
 			      :master frame2
 			      :text "remove"
 			      :command (lambda ()
-					 (rm-body 
-					  (ltk:listbox-get-selection bod-list)))))
-)
+					 (setf 
+					  *bodies*
+					  (remove-nth 
+					   (1+ 
+					    (car 
+					     (ltk:listbox-get-selection 
+					      bod-list)))
+					   *bodies*))))))
     (progn
       (ltk:grid exit 3 1 :padx 3 :pady 3)
       (ltk:grid sub 7 1 :padx 3 :pady 3)
@@ -107,7 +120,7 @@
       (ltk:grid frame 1 1)
 
       (ltk:grid label-rm 1 1)
-      (ltk:listbox-append bod-list (mapcar #'id *bodies*))
+      (ltk:listbox-append bod-list (cdr (mapcar #'id *bodies*)))
       (ltk:grid rm 2 1)      
       (ltk:grid bod-list 2 2)
       (ltk:grid frame2 2 1)
