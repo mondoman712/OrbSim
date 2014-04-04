@@ -234,8 +234,7 @@
    #'(lambda () (progn
 		  (sdl:with-init ()
 		    (sdl-init)
-		    (sdl-main-loop))))
-   :name 'main)
+		    (sdl-main-loop)))))
   (menu))
 
 

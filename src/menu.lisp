@@ -70,9 +70,17 @@
 					     (ltk:text in-vely)))
 				    (list :size (parse-int (ltk:text in-size))
 					  :id (ltk:text in-id)
-					  :colour 'a)))))))
+					  :colour 'a))))))
+	   (frame2 (make-instance 'ltk:frame
+				  :master nil))
+	   (label-rm (make-instance 'ltk:label
+				    :master frame2
+				    :text "Remove Body"))
+	   (bod-list (make-instance 'ltk:listbox
+				    :master frame2))
+)
     (progn
-      (ltk:grid exit 2 1 :padx 3 :pady 3)
+      (ltk:grid exit 3 1 :padx 3 :pady 3)
       (ltk:grid sub 7 1 :padx 3 :pady 3)
       (ltk:grid in-posx 1 2 :padx 3 :pady 3)
       (ltk:grid in-posy 2 2 :padx 3 :pady 3)
@@ -86,4 +94,11 @@
       (ltk:grid label-vy 4 1)
       (ltk:grid label-sz 5 1)
       (ltk:grid label-id 6 1)
-      (ltk:grid frame 1 1)))))
+      (ltk:grid frame 1 1)
+
+      (ltk:grid label-rm 1 1)
+      (ltk:listbox-append bod-list (mapcar #'id *bodies*))
+      
+      (ltk:grid bod-list 2 2)
+      (ltk:grid frame2 2 1)
+))))
