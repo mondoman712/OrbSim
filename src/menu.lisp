@@ -90,7 +90,6 @@
 					  (ltk:listbox-get-selection bod-list)))))
 )
     (progn
-<<<<<<< HEAD
       (ltk:grid exit 3 1 :padx 3 :pady 3)
       (ltk:grid sub 7 1 :padx 3 :pady 3)
       (ltk:grid in-posx 1 2 :padx 3 :pady 3)
@@ -113,21 +112,3 @@
       (ltk:grid bod-list 2 2)
       (ltk:grid frame2 2 1)
 ))))
-=======
-      (ltk:grid exit 2 1 :padx 3 :pady 3)
-      (ltk:grid sub 8 1 :padx 3 :pady 3)
-      (ltk:grid in-posx 2 2 :padx 3 :pady 3)
-      (ltk:grid in-posy 3 2 :padx 3 :pady 3)
-      (ltk:grid in-velx 4 2 :padx 3 :pady 3)
-      (ltk:grid in-vely 5 2 :padx 3 :pady 3)
-      (ltk:grid in-size 6 2 :padx 3 :pady 3)
-      (ltk:grid in-id 7 2 :padx 3 :pady 3)
-      (ltk:grid label-px 2 1)
-      (ltk:grid label-py 3 1)
-      (ltk:grid label-vx 4 1)
-      (ltk:grid label-vy 5 1)
-      (ltk:grid label-sz 6 1)
-      (ltk:grid label-id 7 1)
-      (ltk:grid label-ad 1 1)
-      (ltk:grid frame 1 1)))))
->>>>>>> 79b4f102bef212c1ba833ea66ea5e143aba7c613
