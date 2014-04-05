@@ -12,9 +12,6 @@
       (error 'not-valid-int str)))
 
 (defun remove-nth (n list)
-  (declare
-   (type (integer 0) n)
-   (type list list))
   (if (or (zerop n) (null list))
       (cdr list)
       (cons (car list) (remove-nth (1- n) (cdr list)))))
@@ -29,6 +26,10 @@
 					   (setf ltk:*exit-mainloop* 't))))
 	   (frame (make-instance 'ltk:frame
 				 :master nil))
+	   (frame2 (make-instance 'ltk:frame
+				  :master nil))
+	   (bod-list (make-instance 'ltk:listbox
+				    :master frame2))
 	   (label-ad (make-instance 'ltk:label
 				    :master frame
 				    :text "add-body"
@@ -82,14 +83,11 @@
 					     (ltk:text in-vely)))
 				    (list :size (parse-int (ltk:text in-size))
 					  :id (ltk:text in-id)
-					  :colour 'a))))))
-	   (frame2 (make-instance 'ltk:frame
-				  :master nil))
+					  :colour 'a)))
+			    (listbox-update bod-list))))
 	   (label-rm (make-instance 'ltk:label
 				    :master frame2
 				    :text "Remove Body"))
-	   (bod-list (make-instance 'ltk:listbox
-				    :master frame2))
 	   (rm (make-instance 'ltk:button
 			      :master frame2
 			      :text "remove"
@@ -101,7 +99,8 @@
 					    (car 
 					     (ltk:listbox-get-selection 
 					      bod-list)))
-					   *bodies*))))))
+					   *bodies*))
+					 (listbox-update bod-list)))))
     (progn
       (ltk:grid exit 3 1 :padx 3 :pady 3)
       (ltk:grid sub 7 1 :padx 3 :pady 3)
@@ -118,10 +117,14 @@
       (ltk:grid label-sz 5 1)
       (ltk:grid label-id 6 1)
       (ltk:grid frame 1 1)
-
-      (ltk:grid label-rm 1 1)
+      
       (ltk:listbox-append bod-list (cdr (mapcar #'id *bodies*)))
+      (ltk:grid label-rm 1 1)
       (ltk:grid rm 2 1)      
       (ltk:grid bod-list 2 2)
       (ltk:grid frame2 2 1)
 ))))
+
+(defun listbox-update (listbox)
+  (ltk:listbox-clear listbox)
+  (ltk:listbox-append listbox (cdr (mapcar #'id *bodies*))))

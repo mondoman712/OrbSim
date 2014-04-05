@@ -226,8 +226,7 @@
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
        (sdl:update-display)
-       (when *quit*
-	 (sb-thread:terminate-thread 'main)))))
+       )))
 
 (defun main ()
   (sb-thread:make-thread 
