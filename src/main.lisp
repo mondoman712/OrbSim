@@ -59,25 +59,6 @@
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
 (defparameter *screen-size* (make-instance 'point :x 640 :y 640))
-#|
-(defparameter *earth* (make-body :pos-x 0 :pos-y 1e8 
-				 :vel-x 1e6 :vel-y 0 
-				 :mass 5.97e24 :size 3 :colour sdl:*blue*
-				 :id 'earth))
-(defparameter *sun* (make-body :pos-x 0 :pos-y 0 
-			       :mass 1.99e30 :size 10 :colour sdl:*yellow*
-			       :id 'sun))
-(defparameter *mars* (make-body :pos-x 0 :pos-y -7e7 
-				:vel-x -1e6 :vel-y 0
-				:size 2 :colour sdl:*red*
-				:id 'mars))
-(defparameter *venus* (make-body :pos-x 0 :pos-y 2e8 
-				:vel-x 7e5 :vel-y 0
-				:size 2 :colour sdl:*green*
-				:id 'venus))
-(defparameter *bodies* (list *sun* *earth* *mars* *venus*))
-|#
-
 (defparameter *bodies* (read-bodies "bodies.txt"))
 
 (defparameter *quit* 'nil)
@@ -153,7 +134,6 @@
 			(list 'blue sdl:*blue*)
 			(list 'green sdl:*green*)
 			(list 'yellow sdl:*yellow*)
-			(list 'black sdl:*black*)
 			(list 'white sdl:*white*)
 			(list 'magenta sdl:*magenta*)))
 	 (pos (position colour colours :key #'car)))
@@ -172,38 +152,11 @@
 					      :colour (col colour)
 					      :id id)))))
 
-(defun point (x y)
-  (make-instance 'point :x x :y y))
-
-(defun add-body2 (ecc ap &key (mass 10) (size 2) (colour 'a))
-  "Adds a body to te system, with the eccentricity and  "
-  (add-body 0 ap (* (sqrt (/ (* *G* (mass *sun*))
-			     (dist (pos *sun*) (point 0 ap))))
-		    (1+ (expt ecc 2)))
-	    0 :mass mass :size size :colour colour))
-
 (defun rm-body (id)
   "Removes a body from the system"
   (setf *bodies*
 	(remove-if #'(lambda (x) (eq (id x) id))
 		   *bodies*)))
-
-(defun ls-bodies ()
-  "Lists all the bodies in the system"
-  (mapcar #'(lambda (x) (id x)) *bodies*))
-
-(defun edit-body (id parameter value)
-  "Edits a parameter of a body"
-  (mapcar #'(lambda (x) (if (eq (id x) id)
-			    (set (funcall parameter x) value)
-			    'nil))
-	  *bodies*))
-
-(defmacro edit-parameter (id parameter value)
-  `(setf (,parameter (nth (position ,id
-				    (mapcar #'(lambda (x) (id x)) *bodies*))
-			  *bodies*))
-	 ,value))
 
 (defun sdl-init ()
   "Initialize SDL environment"
@@ -225,8 +178,7 @@
        (sdl:clear-display sdl:*black*)
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)
-       (sdl:update-display)
-       )))
+       (sdl:update-display))))
 
 (defun main ()
   (progn 
@@ -235,6 +187,6 @@
 		    (sdl:with-init ()
 		      (sdl-init)
 		      (sdl-main-loop)))))
-    (menu))
+    (menu)))
 
 

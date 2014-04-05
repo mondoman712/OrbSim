@@ -144,5 +144,4 @@
       (ltk:grid in-fn 1 1 :padx 3 :pady 3)
       (ltk:grid save 2 1 :padx 3 :pady 3)
       (ltk:grid load 2 2 :padx 3 :pady 3)
-      (ltk:grid frame3 3 1)
-))))
+      (ltk:grid frame3 3 1)))))
