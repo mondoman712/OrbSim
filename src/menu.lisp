@@ -16,6 +16,10 @@
       (cdr list)
       (cons (car list) (remove-nth (1- n) (cdr list)))))
 
+(defun listbox-update (listbox)
+  (ltk:listbox-clear listbox)
+  (ltk:listbox-append listbox (cdr (mapcar #'id *bodies*))))
+
 (defun menu ()
   (ltk:with-ltk ()
     (let* ((exit (make-instance 'ltk:button
@@ -24,15 +28,17 @@
 				:command (lambda () 
 					   (setf *quit* 't)
 					   (setf ltk:*exit-mainloop* 't))))
-	   (frame (make-instance 'ltk:frame
+	   (frame (make-instance 'ltk:frame ; for add body
 				 :master nil))
-	   (frame2 (make-instance 'ltk:frame
+	   (frame2 (make-instance 'ltk:frame ; for remove body
+				  :master nil))
+	   (frame3 (make-instance 'ltk:frame ; for save system
 				  :master nil))
 	   (bod-list (make-instance 'ltk:listbox
 				    :master frame2))
 	   (label-ad (make-instance 'ltk:label
 				    :master frame
-				    :text "add-body"
+				    :text "Add body"
 				    :anchor :n))
 	   (in-posx (make-instance 'ltk:entry
 				   :master frame
@@ -100,9 +106,20 @@
 					     (ltk:listbox-get-selection 
 					      bod-list)))
 					   *bodies*))
-					 (listbox-update bod-list)))))
+					 (listbox-update bod-list))))
+	   (in-fn (make-instance 'ltk:entry ;filename input
+				 :master frame3
+				 :text "bodies.txt"))
+	   (save (make-instance 'ltk:button
+				:master frame3
+				:text "Save"
+				:command (save-bodies (ltk:text in-fn))))
+	   (load (make-instance 'ltk:button
+				:master frame3
+				:text "Load"
+				:command (read-bodies (ltk:text in-fn)))))
     (progn
-      (ltk:grid exit 3 1 :padx 3 :pady 3)
+      (ltk:grid exit 4 1 :padx 3 :pady 3)
       (ltk:grid sub 7 1 :padx 3 :pady 3)
       (ltk:grid in-posx 1 2 :padx 3 :pady 3)
       (ltk:grid in-posy 2 2 :padx 3 :pady 3)
@@ -123,8 +140,9 @@
       (ltk:grid rm 2 1)      
       (ltk:grid bod-list 2 2)
       (ltk:grid frame2 2 1)
+      
+      (ltk:grid in-fn 1 1 :padx 3 :pady 3)
+      (ltk:grid save 2 1 :padx 3 :pady 3)
+      (ltk:grid load 2 2 :padx 3 :pady 3)
+      (ltk:grid frame3 3 1)
 ))))
-
-(defun listbox-update (listbox)
-  (ltk:listbox-clear listbox)
-  (ltk:listbox-append listbox (cdr (mapcar #'id *bodies*))))

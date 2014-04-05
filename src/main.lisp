@@ -229,11 +229,12 @@
        )))
 
 (defun main ()
-  (sb-thread:make-thread 
-   #'(lambda () (progn
-		  (sdl:with-init ()
-		    (sdl-init)
-		    (sdl-main-loop)))))
-  (menu))
+  (progn 
+    (sb-thread:make-thread 
+     #'(lambda () (progn
+		    (sdl:with-init ()
+		      (sdl-init)
+		      (sdl-main-loop)))))
+    (menu))
 
 
