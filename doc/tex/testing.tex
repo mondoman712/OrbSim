@@ -3,9 +3,12 @@
 \section{Starting the program}
 \paragraph{Expected Outcome} 
 Two windows will open, the graphical output of the simulation and a menu. The
-simulation should start running automatically.
-\paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
+simulation should start running automatically. 
+\paragraph{Actual Outcome} 
+The program started as expected.
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{./img/start.png}
+\end{figure}
 
 \section{Running the simulation}
 \subsection{Typical}
@@ -13,14 +16,18 @@ simulation should start running automatically.
 The planets will orbit the sun on their respective paths, the patterns should be
 repetitive and should not change.
 \paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
+The planets all move along their expected paths, with no problems.
 
-\subsection{Erroneous}
+\subsection{Extreme}
 \paragraph{Expected Outcome}
 The planets will orbit the sun on their respective paths, the patterns should be
 repetitive and should not change.
 \paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
+The simulation continues to run despite having a lot more bodies than should be
+needed, some of which were off the screen.
+\begin{figure}[h!]
+	\includegraphics[width=\textwidth]{./img/run.png}
+\end{figure}
 
 
 \section{Adding a body}
@@ -29,7 +36,10 @@ repetitive and should not change.
 The body will be added to the simulation and it will follow its path, which
 depends on the parameters it was added with.
 \paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
+The body is added with the given parameters, and follows the path of its orbit.
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{./img/add1.png}
+\end{figure}
 
 \subsection{Erroneous}
 \paragraph{Expected Outcome}
@@ -78,7 +88,8 @@ is not valid, and should be changed before saving.
 
 \subsection{Extreme}
 \paragraph{Expected Outcome}
-
+The current details of the simulation will be saved to a file, with the name
+given by the user.
 \paragraph{Actual Outcome}
 \paragraph{Comments and Corrective actions}
 
@@ -86,16 +97,22 @@ is not valid, and should be changed before saving.
 \section{Loading the system from a file}
 \subsection{Typical}
 \paragraph{Expected Outcome}
+The details of the saved simulation will be loaded from the given file and will
+replace the current system.
 \paragraph{Actual Outcome}
 \paragraph{Comments and Corrective actions}
 
 \subsection{Erroneous}
 \paragraph{Expected Outcome}
+A message box will appear to tell the user that the file name they have entered
+is invalid, or does not exist, and that they should enter a new one.
 \paragraph{Actual Outcome}
 \paragraph{Comments and Corrective actions}
 
 \subsection{Extreme}
 \paragraph{Expected Outcome}
+The details of the saved simulation will be loaded from the given file and will
+replace the current system.
 \paragraph{Actual Outcome}
 \paragraph{Comments and Corrective actions}
 
