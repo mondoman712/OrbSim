@@ -113,20 +113,23 @@ position and velocity.
 Object oriented programming in Lisp works differently than it does in other
 languages, so some things, such as private and public attributes aren't used. 
 
-\paragraph{Point} The point class is used to describe anything with X and Y
+\subsection{Point} The point class is used to describe anything with X and Y
 values, so positions and velocities. It's attributes are:
 \begin{description}[\parindent]
 	\item[X] - The X value of the point, stored as a number.
 	\item[Y] - The Y value of the point, stored as a number.
 \end{description}
 
-\paragraph{Body} The body class is used to describe any body in space. This
+\subsection{Body} The body class is used to describe any body in space. This
 could be the Sun or a planet. It's attributes are:
 \begin{description}[\parindent]
 	\item[pos] - The current position of the body in space, stored as a
 		point with X and Y values.
 	\item[vel] - The current velocity of the body, also stored as a point.
 	\item[mass] - The mass of the body, stored as a number.
+	\item[size] - The size that the body will be displayed as.
+	\item[colour] - The colour that the body will be displayed as.
+	\item[id] - An Identifier for each instance of the class.
 \end{description} \\
 
 %%%
@@ -157,8 +160,23 @@ malicious with their computer. \\
 %%%
 \section{Testing Plan}
 
-\begin{tabular}{p{0.3\linewidth}p{0.4\linewidth}p{0.3\linewidth}} 
+\begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.4\textwidth}} 
 	Description & Typical, Erroneous, Extreme & Expected Outcome \\ \hline
-	Starting the program & N/A & The program will start && \\ 
-	
+	Starting the program & Typical & The program will start \\ 
+	Running the simulation & Typical & The simulation will run as expected
+	\\
+	 & Extreme & The simulation will run as expected \\
+	Adding a body & Typical & A body will be added to the system \\
+	 & Erroneous & An Error message will show \\
+	 & Extreme & A body will be added \\
+	Removing a body & Typical & A body will be removed \\
+	 & Erroneous & An error message will show \\
+	Saving the system to a file & Typical & The system will be save \\
+	 & Erroneous & An error message will show \\
+	 & Extreme & A warning message will show \\
+	Loading the system from a file & Typical & The saved system will be
+	loaded \\
+	 & Erroneous & An error message will show \\
+	 & Extreme & The system will be loaded \\
+		
 \end{tabular}
