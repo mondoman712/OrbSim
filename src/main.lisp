@@ -175,6 +175,8 @@
 	 (sdl:push-quit-event)))
       ; Main loop
       (:idle ()  
+       (when *quit*
+	 (sdl:quit-sdl))
        (sdl:clear-display sdl:*black*)
        (update-lst (cdr *bodies*))
        (draw-bodies *bodies*)

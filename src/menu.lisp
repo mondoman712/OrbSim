@@ -3,18 +3,28 @@
 
 (ql:quickload 'ltk)
 
-(define-condition not-valid-int (error)
-  ((val :initarg val :reader val)))
-
-(defun parse-int (str)
-  (if (parse-integer str)
-      (parse-integer str)
-      (error 'not-valid-int str)))
-
 (defun remove-nth (n list)
   (if (or (zerop n) (null list))
       (cdr list)
       (cons (car list) (remove-nth (1- n) (cdr list)))))
+
+(defun error-message (message)
+  (ltk:with-ltk ()
+    (let ((label (make-instance 'ltk:label 
+				:text message))
+	  (button (make-instance 'ltk:button 
+				 :text "OK"
+				 :command (lambda ()
+					    (setf ltk:*break-mainloop* t)))))
+      (ltk:pack label)
+      (ltk:pack button)
+      (ltk:mainloop))))
+
+(defun parse-int (str)
+  (let ((int (parse-integer str :junk-allowed 't)))
+    (if int
+	int
+	(error-message "Please Enter a valid integer"))))
 
 (defun listbox-update (listbox)
   (ltk:listbox-clear listbox)
@@ -144,4 +154,5 @@
       (ltk:grid in-fn 1 1 :padx 3 :pady 3)
       (ltk:grid save 2 1 :padx 3 :pady 3)
       (ltk:grid load 2 2 :padx 3 :pady 3)
-      (ltk:grid frame3 3 1)))))
+      (ltk:grid frame3 3 1)
+      (ltk:mainloop)))))

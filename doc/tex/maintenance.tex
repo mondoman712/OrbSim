@@ -55,10 +55,10 @@ function calls for $accel$ and grouped the $x$ and $y$ values.
 \begin{lstlisting}
 (defun update-vel (body)
   (let ((accel (split-force 
-                 (calc-g (mass *sun*) (dist (pos body) (pos *sun*)))
-                 (ang (pos *sun*) (pos body)))))
-    (sets #'+ (x (vel body)) (x accel))
-    (sets #'+ (y (vel body)) (y accel))))
+                 (calc-g (mass *sun*) (dist (pos body) (pos (car *bodies*)))
+                 (ang (pos (car *bodies*)) (pos body)))))
+    (sets #`+ (x (vel body)) (x accel))
+    (sets #`+ (y (vel body)) (y accel))))
 \end{lstlisting}
 
 \subsection{read-bodies}
@@ -74,13 +74,13 @@ within the main list into a body in the system. \\
 (defun read-bodies (filename)
   (loop for bod in (read-list filename)
        collecting (make-instance 
-		   'body
+		   `body
 		   :pos (make-instance
-			 'point
+			 `point
 			 :x (nth 0 bod)
 			 :y (nth 1 bod))
 		   :vel (make-instance
-			 'point
+			 `point
 			 :x (nth 2 bod)	
 			 :y (nth 3 bod))
 		   :mass (nth 4 bod)
@@ -98,14 +98,6 @@ within the main list into a body in the system. \\
 	screen-size & Point & Stores the screen size of the SDL window. \\
 	bodies & list & Stores all of the bodies in the system \\
 
-\end{tabular}
-
-\subsection{Function List --- main.lisp}
-\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
-	Name & Arguments & Description\\ \hline
-	make-body & pos-x, pos-y, vel-x, vel-y, mass, size, colour, id &
-		Makes the process of creating instances of the body class a
-		little easier\\
 \end{tabular}
 
 \subsection{Function List --- io.lisp}
@@ -133,11 +125,45 @@ within the main list into a body in the system. \\
 	main & \emph{none}  & Creates the menu \\
 \end{tabular}
 
+\subsection{Function List --- main.lisp}
+\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
+	Name & Arguments & Description\\ \hline
+	make-body & pos-x, pos-y, vel-x, vel-y, mass, size, colour, id &
+		Makes the process of creating instances of the body class a
+		little easier\\
+	pos2pos & pos & Converts position relative to centre to sdl coordinates
+	\\
+	calc-g & M, r & Calculates the acceleration due to gravity \\
+	dist & a, b & Calculates the distance between two points \\
+	ang & a, b & Calculates the angle between two points \\
+	split-force & mag, ang & Splits a force into X and Y components \\
+	sets (macro) & fn, a, b & sets the variable a to the result of fn called
+	with a and b \\
+	update-vel & body & Updates the velocity of a body \\
+	update-pos & body & Updates the position of a body \\
+	update & body & Calls update-vel and update-pos on a body \\
+	update-list & bodies & Calls update on a list of bodies \\
+	draw-body & body & Draws a body to the screen \\
+	draw-bodies & bodies & Calls draw-body on a list of bodies \\
+	col & colour & Returns the colour given as an SDL colour, if no valid
+	colour is given a random one is returned \\
+	add-body & pos-x, pos-y, vel-x, vel-y, mass, size, colour, id & Adds a
+	body to the system \\
+	rm-body & id & Removes a body from the system \\
+	sdl-init & \emph{none} & Initialises the SDL Environment \\
+	sdl-main-loop & \emph{none} & The main SDL Loop \\
+	main & \emph{none} & Starts the SDL portion of the program in a thread,
+	and the menu in another
+\end{tabular}
+
+
 \section{Development Environment}
-Orbsim should run using any ANSI Common Lisp interpreter, but it was developed
-using, and has been tested with SBCL (Steel Bank Common Lisp). The
-"Lispbuilder-SDL" package is required, and it is advised that QuickLisp is used
-to install it (if not the start of "main.lisp" will need to be changed). 
+Orbsim has developed using, and has been tested with SBCL (Steel Bank Common
+Lisp). It will only run in SBCL due to the fact that I've used SBCL's threading
+features and not all Lisp Implementations support threading, and those that do
+implement it differently. The "Lispbuilder-SDL" package is required, and it is
+advised that QuickLisp is used to install it (if not the start of "main.lisp"
+will need to be changed). 
 
 \section{External Libraries used}
 \subsection{SDL}
@@ -147,3 +173,5 @@ allow me to interface with SDL from Lisp, this is not required for the program
 to run as it compiles itself into the executable.
 
 \subsection{Tk}
+I used Tk as it allowed me to easily create a graphical menu system. I used the
+LTk library to interface with Tk from Lisp.
