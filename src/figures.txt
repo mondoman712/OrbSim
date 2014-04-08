@@ -1,3 +1,0 @@
-gravitational constant = 6.673e-11
-mass of the sun = 1.989e30
-mass of earth = 5.972e24
