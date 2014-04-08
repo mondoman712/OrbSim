@@ -122,9 +122,12 @@
 
 (defun draw-bodies (bodies)
   "Calls draw-body on a list... recursivly!"
-  (if bodies    ; If there is anything left in the list
-      (progn (draw-body (car bodies)) ; Draw the first item
-	     (draw-bodies (cdr bodies))) ; Call this function on the rest of list
+  ; If there is anything left in the list
+  (if bodies    
+      ; Draw the first item
+      (progn (draw-body (car bodies)) 
+	     ; Call this function on the rest of list
+	     (draw-bodies (cdr bodies))) 
       't)) ; Return true when complete
 
 (defun col (colour)

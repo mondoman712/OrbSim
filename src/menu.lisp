@@ -29,7 +29,8 @@
 (defun parse-int (str)
   "Converts a string to an int, and creates an error message if its invalid"
   (let ((int (parse-integer str :junk-allowed 't)))
-    ; If parse-integer returns a value, return it, if not create an error message
+    ; If parse-integer returns a value, return it,
+    ;  else create an error message
     (if int
 	int
 	(error-message "Please Enter a valid integer"))))
@@ -125,7 +126,7 @@
 		   (apply #'add-body
 			  ; Creates one list from multiple
 			  (append
-			   ; Calls parse-int on all of the items in the list given
+			   ; Calls parse-int on all of the items in the list 
 			   (mapcar #'parse-int
 				   ; Creates list of values given
 				   (list
@@ -170,13 +171,15 @@
 				:master frame3
 				:text "Save"
 				; Calls save-bodies with the file name given
-				:command (lambda () (save-bodies (ltk:text in-fn)))))
+				:command (lambda () 
+					   (save-bodies (ltk:text in-fn)))))
 	   ; Button to load in save system
 	   (load (make-instance 'ltk:button
 				:master frame3
 				:text "Load"
 				; Calls read-bodies with the file name given
-				:command (lambda () (read-bodies (ltk:text in-fn))))))
+				:command (lambda () 
+					   (read-bodies (ltk:text in-fn))))))
     (progn
       ; Puts the add body items into the window
       (ltk:grid sub 7 1 :padx 3 :pady 3)
