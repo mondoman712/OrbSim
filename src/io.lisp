@@ -2,6 +2,7 @@
 ;; I/O functions
 
 (defun body-to-list (body)
+  "Converts a body into a list of its attributes"
   (list (x (pos body))
 	(y (pos body))
 	(x (vel body))
@@ -14,9 +15,11 @@
 	(id body)))
 
 (defun bodies-to-list (bodies)
+  "Calls body-to-list on a list of bodies"
   (mapcar #'body-to-list bodies))
 
 (defun save-list (lst filename)
+  "Saves the list given to a file with the name given"
   (with-open-file (out filename
 		       :direction :output
 		       :if-exists :supersede)
@@ -24,14 +27,18 @@
       (print lst out))))
 
 (defun save-bodies (filename)
+  "Calls save-list and body-to-list"
   (save-list (bodies-to-list *bodies*) filename))
 
 (defun read-list (filename)
+  "Reads from a file with the name given"
   (with-open-file (in filename)
     (with-standard-io-syntax
       (read in))))
 
 (defun read-bodies (filename)
+  "Reads from a file and converts the lists in the file
+   into instances of the body class"
   (loop for bod in (read-list filename)
        collecting (make-instance 
 		   'body
