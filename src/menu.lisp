@@ -26,6 +26,9 @@
       (ltk:pack button)
       (ltk:mainloop))))
 
+(define-condition invalid-input (error)
+  ((str :initarg :str :reader str)))
+
 (defun parse-int (str)
   "Converts a string to an int, and creates an error message if its invalid"
   (let ((int (parse-integer str :junk-allowed 't)))
@@ -33,7 +36,8 @@
     ;  else create an error message
     (if int
 	int
-	(error-message "Please Enter a valid integer"))))
+	(progn (error-message "Please Enter a valid integer")
+	       (error 'invalid-input :str int)))))
 
 (defun listbox-update (listbox)
   "Updates the listbox in remove body"
