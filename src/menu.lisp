@@ -126,24 +126,29 @@
 		 'ltk:button :master frame :text "submit" :command 
 		 ; Function called when button is pressed
 		 (lambda ()
-		   ; Calls add body with the arguments in the list given
-		   (apply #'add-body
-			  ; Creates one list from multiple
-			  (append
-			   ; Calls parse-int on all of the items in the list 
-			   (mapcar #'parse-int
-				   ; Creates list of values given
-				   (list
-				    (ltk:text in-posx)
-				    (ltk:text in-posy)
-				    (ltk:text in-velx)
-				    (ltk:text in-vely)))
-			   ; Creates list of size, id and colour
-			   (list :size (parse-int (ltk:text in-size))
-				 :id (ltk:text in-id)
-				 :colour 'a)))
-		   ; Updates the listbox in remove body
-		   (listbox-update bod-list))))
+		   (block submit
+		     ; Calls add body with the arguments in the list given
+		     (apply #'add-body
+			    ; Creates one list from multiple
+			    (append
+			     ; Calls parse-int on all of the items in the list 
+			     (mapcar #'(lambda (x)
+					 (handler-case
+					     (parse-int x)
+					     (invalid-input ()
+					       (return-from submit 'nil))))
+				     ; Creates list of values given
+				     (list
+				      (ltk:text in-posx)
+				      (ltk:text in-posy)
+				      (ltk:text in-velx)
+				      (ltk:text in-vely)))
+		      	     ; Creates list of size, id and colour
+			     (list :size (parse-int (ltk:text in-size))
+				   :id (ltk:text in-id)
+				   :colour 'a)))
+		     ; Updates the listbox in remove body
+		     (listbox-update bod-list)))))
 	   ; Label for remove body
 	   (label-rm (make-instance 'ltk:label
 				    :master frame2

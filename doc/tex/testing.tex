@@ -79,7 +79,25 @@ And parse-int looked like this:
 	(error-message "Please Enter a valid integer"))))
 \end{lstlisting}
 As you can see, it does check if parse-integer return a valid answer, but the
-only error handling it did was to create a message for the user.
+only error handling it did was to create a message for the user. I created a
+condition and had parse-int call it when it calls an error message.
+\begin{lstlisting}
+(define-condition invalid-input (error)
+  ((str :initarg :str :reader str)))
+
+(defun parse-int (str)
+  "Converts a string to an int, and creates an error message if its invalid"
+  (let ((int (parse-integer str :junk-allowed 't)))
+    (if int
+	int
+	(progn (error-message "Please Enter a valid integer")
+	       (error 'invalid-input :str int)))))
+\end{lstlisting}
+However the lambda function that's called when the button is pressed still needs
+to handle the error. The way to do this would be to have a return-from called
+when the error is signalled but this requires the block that it is returning
+from to be named, and this one isn't, so we have to wrap the contents of the
+lambda function in a named block.
 \subsection{Extreme}
 \paragraph{Expected Outcome}
 A message box will appear to tell the user that the values given could cause
