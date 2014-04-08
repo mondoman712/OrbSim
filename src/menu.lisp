@@ -10,7 +10,7 @@
       (cdr list)
       (cons (car list) (remove-nth (1- n) (cdr list)))))
 
-(defun error-message (message &optional (button-text "OK"))
+(defun error-message (message &optional (button-text "OK") button2-text)
   "Makes a box appear with the message given"
   (ltk:with-ltk ()
     (let (; Label that displays the message
@@ -20,25 +20,48 @@
 	  (button (make-instance 'ltk:button 
 				 :text button-text
 				 :command (lambda ()
-					    (setf ltk:*break-mainloop* t)))))
+					    (setf ltk:*break-mainloop* t))))
+	  (button2 (make-instance 'ltk:button
+				  :text button2-text
+				  :command (lambda ()
+					     (error 'extreme-input :str 'nil)
+					     (setf ltk:*break-mainloop* t)))))
       ; Place the items into the window
       (ltk:pack label)
+      (when button2-text
+	(ltk:pack button2))
       (ltk:pack button)
       (ltk:mainloop))))
 
 (define-condition invalid-input (error)
   ((str :initarg :str :reader str)))
 
-(defun parse-int (str)
+(define-condition extreme-input (error)
+  ((str :initarg :str :reader str)))
+
+(defun parse-int (str &key min max)
   "Converts a string to an int, and creates an error message if its invalid"
   (let ((int (parse-integer str :junk-allowed 't)))
     ; If parse-integer returns a value, return it,
     ;  else create an error message
     (if int
-	int
-	(progn (error-message "Please Enter a valid integer")
-	       (error 'invalid-input :str int)))))
-
+	(cond ((and min max) (if (and (> int min)
+				      (< int max))
+				 int
+				   (error-message "This input could cause errors,
+                                            would you like to continue?" "Yes" "No")))
+	      (min (if (> int min)
+		       int
+		       (error-message "This input could cause errors,
+                                          would you like to continue?" "Yes" "No")))
+	      (max (if (< int max)
+		       int
+		       (error-message "This input could cause errors,
+                                          would you like to continue?" "Yes" "No")))
+	      ('t int))
+	(progn (error-message "Please enter a valid integer")
+	       (error 'invalid-input)))))
+	  
 (defun listbox-update (listbox)
   "Updates the listbox in remove body"
   (ltk:listbox-clear listbox)
@@ -134,8 +157,11 @@
 			     ; Calls parse-int on all of the items in the list 
 			     (mapcar #'(lambda (x)
 					 (handler-case
-					     (parse-int x)
+					     (parse-int x :min 10000000
+							:max 100000000)
 					     (invalid-input ()
+					       (return-from submit 'nil))
+					     (extreme-input ()
 					       (return-from submit 'nil))))
 				     ; Creates list of values given
 				     (list
@@ -145,8 +171,10 @@
 				      (ltk:text in-vely)))
 		      	     ; Creates list of size, id and colour
 			     (list :size (handler-case 
-					     (parse-int (ltk:text in-size))
+					     (parse-int (ltk:text in-size) :max 40)
 					   (invalid-input ()
+					     (return-from submit 'nil))
+					   (extreme-input ()
 					     (return-from submit 'nil)))
 				   :id (ltk:text in-id)
 				   :colour 'a)))
@@ -178,6 +206,10 @@
 	   (in-fn (make-instance 'ltk:entry 
 				 :master frame3
 				 :text "bodies.txt"))
+	   ; Label for save/load system
+	   (label-sl (make-instance 'ltk:label
+				    :master frame3
+				    :text "Save/Load System"))
 	   ; Button to save in save system
 	   (save (make-instance 'ltk:button
 				:master frame3
@@ -194,19 +226,20 @@
 					   (read-bodies (ltk:text in-fn))))))
     (progn
       ; Puts the add body items into the window
-      (ltk:grid sub 7 1 :padx 3 :pady 3)
-      (ltk:grid in-posx 1 2 :padx 3 :pady 3)
-      (ltk:grid in-posy 2 2 :padx 3 :pady 3)
-      (ltk:grid in-velx 3 2 :padx 3 :pady 3)
-      (ltk:grid in-vely 4 2 :padx 3 :pady 3)
-      (ltk:grid in-size 5 2 :padx 3 :pady 3)
-      (ltk:grid in-id 6 2 :padx 3 :pady 3)
-      (ltk:grid label-px 1 1)
-      (ltk:grid label-py 2 1)
-      (ltk:grid label-vx 3 1)
-      (ltk:grid label-vy 4 1)
-      (ltk:grid label-sz 5 1)
-      (ltk:grid label-id 6 1)
+      (ltk:grid label-ad 1 1)
+      (ltk:grid sub 8 1 :padx 3 :pady 3)
+      (ltk:grid in-posx 2 2 :padx 3 :pady 3)
+      (ltk:grid in-posy 3 2 :padx 3 :pady 3)
+      (ltk:grid in-velx 4 2 :padx 3 :pady 3)
+      (ltk:grid in-vely 5 2 :padx 3 :pady 3)
+      (ltk:grid in-size 6 2 :padx 3 :pady 3)
+      (ltk:grid in-id 7 2 :padx 3 :pady 3)
+      (ltk:grid label-px 2 1)
+      (ltk:grid label-py 3 1)
+      (ltk:grid label-vx 4 1)
+      (ltk:grid label-vy 5 1)
+      (ltk:grid label-sz 6 1)
+      (ltk:grid label-id 7 1)
       (ltk:grid frame 1 1)
       
       ; Puts the remove body items into the window
@@ -217,9 +250,10 @@
       (ltk:grid frame2 2 1)
       
       ; Puts the save system items into the window
-      (ltk:grid in-fn 1 1 :padx 3 :pady 3)
-      (ltk:grid save 2 1 :padx 3 :pady 3)
-      (ltk:grid load 2 2 :padx 3 :pady 3)
+      (ltk:grid label-sl 1 1)
+      (ltk:grid in-fn 2 1 :padx 3 :pady 3)
+      (ltk:grid save 3 1 :padx 3 :pady 3)
+      (ltk:grid load 3 2 :padx 3 :pady 3)
       (ltk:grid frame3 3 1)
 
       ; Puts the exit button in the window

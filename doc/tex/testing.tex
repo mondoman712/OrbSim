@@ -106,23 +106,29 @@ lambda function in a named block. The lambda is now:
 		     (mapcar #`(lambda (x)
 				 (handler-case
 				     (parse-int x)
-				     (invalid-input ()
-				       (return-from submit `nil))))
+				   (invalid-input ()
+				     (return-from submit `nil))))
 			     (list
 			      (ltk:text in-posx)
 			      (ltk:text in-posy)
 			      (ltk:text in-velx)
 			      (ltk:text in-vely)))
-		     (list :size (parse-int (ltk:text in-size))
+		     (list :size (handler-case 
+		     	             (parse-int (ltk:text in-size))
+				   (invalid-input ()
+				     (return-from submit `nil)))
 			   :id (ltk:text in-id)
 			   :colour `a)))
 	     (listbox-update bod-list)))
 \end{lstlisting}
+I've added handler cases to everywhere that I've called parse-int, and they
+break from the block when they detect the invalid-input error.
 \subsection{Extreme}
 \paragraph{Expected Outcome}
 A message box will appear to tell the user that the values given could cause
 problems with the simulation, and it is advised that they change them.
 \paragraph{Actual Outcome}
+The Body is added regardless.
 \paragraph{Comments and Corrective actions}
 
 
