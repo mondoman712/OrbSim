@@ -93,14 +93,32 @@ within the main list into a body in the system. \\
 \subsection{remove-nth}
 This is used to remove the nth item from a list, which I am using to remove a
 body from the system. \\
+
 \begin{pseudocode}{remove-nth}{n, list}
+	\PROCEDURE{car}{list}
+	\RETURN{$First item in list$}
+	\ENDPROCEDURE
+
+	\PROCEDURE{cdr}{list}
+	\RETURN{$All items but first in list$}
+	\ENDPROCEDURE
+
+	\PROCEDURE{cons}{items}
+	\RETURN{$A list containing the given arguments$}
+	\ENDPROCEDURE
+
+	\MAIN
 	\IF n == 0 \OR list $ is empty$ 
-	\THEN \RETURN{\CALL{cdr}{list}} 
-	\ELSE \RETURN{\CALL{cons}{\CALL{car}{list}, \CALL{remove-nth}{n-1},
-			\CALL{cdr}{list}}} \\
+	\THEN \RETURN{$ all items but first in $ list} 
+	\ELSE \RETURN{\CALL{make-list}{\CALL{first-item}{list}, \CALL{remove-nth}{n-1},
+			\CALL{}{list}}} 
 \end{pseudocode}
-
-
+\begin{lstlisting}
+(defun remove-nth (n list)
+  (if (or (zerop n) (null list))
+      (cdr list)
+      (cons (car list) (remove-nth (1- n) (cdr list)))))
+\end{lstlisting}
 
 \section{Variable and Function Listings}
 \subsection{Global Variable List}
