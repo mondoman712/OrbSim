@@ -18,7 +18,8 @@
 \subsection{draw-bodies}
 The draw-bodies function is used to call the draw-body function on a list of
 bodies. This allows the bodies to be kept in a list and outputted easily from
-that list.
+that list. It does this by calling draw-body on the first item in the list, and
+then calling itself on all the items but the first.
 
 \begin{pseudocode}{draw-bodies}{bodies}
 	\IF bodies
@@ -92,7 +93,9 @@ within the main list into a body in the system. \\
 
 \subsection{remove-nth}
 This is used to remove the nth item from a list, which I am using to remove a
-body from the system. \\
+body from the system. It does this recursively, by creating a list containing
+the first item in the list and the result of calling itself on $n - 1$ and all
+the items but the first in the list.\\
 
 \begin{pseudocode}{remove-nth}{n, list}
 	\PROCEDURE{car}{list}
@@ -110,8 +113,10 @@ body from the system. \\
 	\MAIN
 	\IF n == 0 \OR list $ is empty$ 
 	\THEN \RETURN{$ all items but first in $ list} 
-	\ELSE \RETURN{\CALL{make-list}{\CALL{first-item}{list}, \CALL{remove-nth}{n-1},
-			\CALL{}{list}}} 
+	\ELSE
+	\RETURN{\CALL{make-list}{\CALL{first-item}{list},
+			\CALL{remove-nth}{n-1, \CALL{cdr}{list}}}} 
+	\ENDMAIN
 \end{pseudocode}
 \begin{lstlisting}
 (defun remove-nth (n list)

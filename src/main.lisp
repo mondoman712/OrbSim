@@ -4,6 +4,7 @@
 ; Load required libraries
 (ql:quickload "lispbuilder-sdl")
 
+; Load code from other files
 (load "io.lisp")
 (load "menu.lisp")
 
@@ -58,27 +59,25 @@
 		 :id id))
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
-(defparameter *screen-size* (make-instance 'point :x 640 :y 640))
+(defparameter *screen-size* (make-instance 'point :x 640 :y 640)) ; The size of the SDL window
 (defparameter *bodies* (read-bodies "bodies.txt"))
 
 (defparameter *quit* 'nil)
 
 (defun pos2pos (pos)
   "Converts position relative to centre in km to sdl coordinates"
+  ; Defines a local function to convert a coordinate relative to sun in km
+  ;  to SDL coodinates, which are in pixels and relative to the top right corner
   (flet ((new-coord (fn xy)
            (funcall fn (/ (slot-value *screen-size* xy) 2) 
                        (/ (slot-value pos xy) 468750))))
+    ; Calls new-coord on the x and y and creates an SDL point out of them
     (sdl:point :x (new-coord #'+ 'x)
                :y (new-coord #'- 'y))))
 
 (defun calc-g (M r)
   "Calculates the acceleration due to gravity"
   (/ (* *G* M) (* r r)))
-
-(defun dist (a b)
-  "Calculates the distance between positions a and b"
-  (sqrt (+ (expt (abs (- (x a) (x b))) 2)
-           (expt (abs (- (y a) (y b))) 2))))
 
 (defun ang (a b)
   "Calculates the bearing of a line between a and b"
