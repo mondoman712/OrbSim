@@ -24,8 +24,8 @@
 	  (button2 (make-instance 'ltk:button
 				  :text button2-text
 				  :command (lambda ()
-					     (error 'extreme-input :str 'nil)
-					     (setf ltk:*break-mainloop* t)))))
+					     (setf ltk:*break-mainloop* t)
+					     (error 'extreme-input :str 'nil)))))
       ; Place the items into the window
       (ltk:pack label)
       (when button2-text
