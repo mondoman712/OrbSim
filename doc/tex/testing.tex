@@ -6,7 +6,7 @@ Two windows will open, the graphical output of the simulation and a menu. The
 simulation should start running automatically. 
 \paragraph{Actual Outcome} 
 The program started as expected.
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width=\textwidth]{./img/start.png}
 \end{figure}
 
@@ -25,7 +25,7 @@ repetitive and should not change.
 \paragraph{Actual Outcome}
 The simulation continues to run despite having a lot more bodies than should be
 needed, some of which were off the screen.
-\begin{figure}[h!]
+\begin{figure}[H]
 	\includegraphics[width=\textwidth]{./img/run.png}
 \end{figure}
 
@@ -46,9 +46,40 @@ The body is added with the given parameters, and follows the path of its orbit.
 A message box will appear to tell the user that the parameters given are not
 valid, and should be changed.
 \paragraph{Actual Outcome}
-
+A message box appears warning the user, however the system still adds the body
+with the erroneous value, causing the program to crash.
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{./img/add2.png}
+\end{figure}
 \paragraph{Comments and Corrective actions}
-
+The code before initially was this lambda function that is called when the
+submit button is pressed. 
+\begin{lstlisting}
+	(lambda ()
+	   (apply #`add-body
+		  (append
+		   (mapcar #`parse-int
+			   (list
+			    (ltk:text in-posx)
+			    (ltk:text in-posy)
+			    (ltk:text in-velx)
+			    (ltk:text in-vely)))
+		   (list :size (parse-int (ltk:text in-size))
+			 :id (ltk:text in-id)
+			 :colour `a)))
+	   (listbox-update bod-list))
+\end{lstlisting}
+And parse-int looked like this:
+\begin{lstlisting}
+(defun parse-int (str)
+  "Converts a string to an int, and creates an error message if its invalid"
+  (let ((int (parse-integer str :junk-allowed 't)))
+    (if int
+	int
+	(error-message "Please Enter a valid integer"))))
+\end{lstlisting}
+As you can see, it does check if parse-integer return a valid answer, but the
+only error handling it did was to create a message for the user.
 \subsection{Extreme}
 \paragraph{Expected Outcome}
 A message box will appear to tell the user that the values given could cause

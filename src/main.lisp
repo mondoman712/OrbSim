@@ -59,9 +59,11 @@
 		 :id id))
 
 (defparameter *G* 6.67e-11) ; Gravitational Constant
-(defparameter *screen-size* (make-instance 'point :x 640 :y 640)) ; The size of the SDL window
-(defparameter *bodies* (read-bodies "bodies.txt"))
 
+; The size of the SDL window
+(defparameter *screen-size* (make-instance 'point :x 640 :y 640)) 
+
+(defparameter *bodies* (read-bodies "bodies.txt"))
 (defparameter *quit* 'nil)
 
 (defun pos2pos (pos)
@@ -191,6 +193,7 @@
 
 (defun main ()
   (progn 
+    (setf *quit* 'nil)
     (sb-thread:make-thread 
      #'(lambda () (progn
 		    (sdl:with-init ()
