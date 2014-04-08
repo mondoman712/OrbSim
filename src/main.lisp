@@ -79,6 +79,11 @@
   "Calculates the acceleration due to gravity"
   (/ (* *G* M) (* r r)))
 
+(defun dist (a b)
+  "Calculates the distance between 2 points"
+  (sqrt (+ (expt (abs (- (x a) (x b))) 2)
+	   (expt (abs (- (y a) (y b))) 2))))
+
 (defun ang (a b)
   "Calculates the bearing of a line between a and b"
   (atan (- (y a) (y b))
