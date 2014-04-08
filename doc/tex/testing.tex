@@ -97,7 +97,27 @@ However the lambda function that's called when the button is pressed still needs
 to handle the error. The way to do this would be to have a return-from called
 when the error is signalled but this requires the block that it is returning
 from to be named, and this one isn't, so we have to wrap the contents of the
-lambda function in a named block.
+lambda function in a named block. The lambda is now:
+\begin{lstlisting}
+	(lambda ()
+	   (block submit
+	     (apply #`add-body
+		    (append
+		     (mapcar #`(lambda (x)
+				 (handler-case
+				     (parse-int x)
+				     (invalid-input ()
+				       (return-from submit `nil))))
+			     (list
+			      (ltk:text in-posx)
+			      (ltk:text in-posy)
+			      (ltk:text in-velx)
+			      (ltk:text in-vely)))
+		     (list :size (parse-int (ltk:text in-size))
+			   :id (ltk:text in-id)
+			   :colour `a)))
+	     (listbox-update bod-list)))
+\end{lstlisting}
 \subsection{Extreme}
 \paragraph{Expected Outcome}
 A message box will appear to tell the user that the values given could cause

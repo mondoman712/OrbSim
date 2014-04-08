@@ -144,7 +144,10 @@
 				      (ltk:text in-velx)
 				      (ltk:text in-vely)))
 		      	     ; Creates list of size, id and colour
-			     (list :size (parse-int (ltk:text in-size))
+			     (list :size (handler-case 
+					     (parse-int (ltk:text in-size))
+					   (invalid-input ()
+					     (return-from submit 'nil)))
 				   :id (ltk:text in-id)
 				   :colour 'a)))
 		     ; Updates the listbox in remove body
