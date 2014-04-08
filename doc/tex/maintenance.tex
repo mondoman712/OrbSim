@@ -90,6 +90,18 @@ within the main list into a body in the system. \\
 				      :b (nth 8 bod)))))
 \end{lstlisting}
 
+\subsection{remove-nth}
+This is used to remove the nth item from a list, which I am using to remove a
+body from the system. \\
+\begin{pseudocode}{remove-nth}{n, list}
+	\IF n == 0 \OR list $ is empty$ 
+	\THEN \RETURN{\CALL{cdr}{list}} 
+	\ELSE \RETURN{\CALL{cons}{\CALL{car}{list}, \CALL{remove-nth}{n-1},
+			\CALL{cdr}{list}}} \\
+\end{pseudocode}
+
+
+
 \section{Variable and Function Listings}
 \subsection{Global Variable List}
 \begin{tabular}{p{0.2\textwidth}p{0.2\textwidth}p{0.6\textwidth}}
@@ -98,31 +110,6 @@ within the main list into a body in the system. \\
 	screen-size & Point & Stores the screen size of the SDL window. \\
 	bodies & list & Stores all of the bodies in the system \\
 
-\end{tabular}
-
-\subsection{Function List --- io.lisp}
-\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
-	Name & Arguments & Description\\ \hline
-	body-to-list & body & Converts an instance of the body class into a list
-	of values \\ 
-	bodies-to-list & bodies & Calls body-to-list on a list of bodies \\
-	save-list & lst, filename & Opens a file and prints a list into it \\
-	save-bodies & filename & Calls save-list and bodies-to-list on the
-	global variable bodies \\
-	read-list & filename & Reads a list from a file \\
-	read-bodies & filename & Reads a list from a file and converts it into a
-	list of bodies \\ 
-\end{tabular}
-
-\subsection{Function List --- menu.lisp}
-\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
-	Name & Arguments & Description\\ \hline
-	parse-int & str & Turns a string into an integer, and makes sure its
-	valid \\
-	remove-nth &n, list & removes the nth value from a list \\
-	listbox-update & listbox & Updates the listbox in the menu when called
-	\\
-	main & \emph{none}  & Creates the menu \\
 \end{tabular}
 
 \subsection{Function List --- main.lisp}
@@ -156,6 +143,30 @@ within the main list into a body in the system. \\
 	and the menu in another
 \end{tabular}
 
+\subsection{Function List --- io.lisp}
+\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
+	Name & Arguments & Description\\ \hline
+	body-to-list & body & Converts an instance of the body class into a list
+	of values \\ 
+	bodies-to-list & bodies & Calls body-to-list on a list of bodies \\
+	save-list & lst, filename & Opens a file and prints a list into it \\
+	save-bodies & filename & Calls save-list and bodies-to-list on the
+	global variable bodies \\
+	read-list & filename & Reads a list from a file \\
+	read-bodies & filename & Reads a list from a file and converts it into a
+	list of bodies \\ 
+\end{tabular}
+
+\subsection{Function List --- menu.lisp}
+\begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
+	Name & Arguments & Description\\ \hline
+	parse-int & str & Turns a string into an integer, and makes sure its
+	valid \\
+	remove-nth &n, list & removes the nth value from a list \\
+	listbox-update & listbox & Updates the listbox in the menu when called
+	\\
+	main & \emph{none}  & Creates the menu \\
+\end{tabular}
 
 \section{Development Environment}
 Orbsim has developed using, and has been tested with SBCL (Steel Bank Common
