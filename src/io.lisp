@@ -18,6 +18,23 @@
   "Calls body-to-list on a list of bodies"
   (mapcar #'body-to-list bodies))
 
+(define-condition invalid-filename (error)
+  ((filename :initarg :filename :accessor filename)))
+
+(defun check-filename (filename)
+  (if 
+   (zerop
+    (count-if #'characterp
+	      (mapcar #'(lambda (c) (find c filename :test #'equalp))
+		      (cond ((string= (software-type) "Linux")
+			     '(#\/ #\NULL #\; #\: #\|))
+			    ((string= (software-type) "Windows")
+			     '(#\< #\> #\: #\" #\/ #\\ #\| #\? #\*))
+			    (t 'nil)))))
+   filename
+   (progn (error-message "Please enter a valid filename")
+	  (error 'invalid-filename))))
+
 (defun save-list (lst filename)
   "Saves the list given to a file with the name given"
   ; Open file
@@ -32,7 +49,9 @@
 
 (defun save-bodies (filename)
   "Calls save-list and body-to-list"
-  (save-list (bodies-to-list *bodies*) filename))
+  (save-list (bodies-to-list *bodies*)
+	     (handler-case
+		 (check-filename filename))
 
 (defun read-list (filename)
   "Reads from a file with the name given"
