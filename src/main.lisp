@@ -139,14 +139,17 @@
 
 (defun col (colour)
   "converts a symbol of a colour name to an sdl colour"
+  ; Creates a list of the SDL colour variables, and their
+  ;  names stored as a symbol
   (let* ((colours (list (list 'red sdl:*red*)
 			(list 'blue sdl:*blue*)
 			(list 'green sdl:*green*)
 			(list 'yellow sdl:*yellow*)
 			(list 'white sdl:*white*)
 			(list 'magenta sdl:*magenta*)))
+	 ; checks if the given colour is in the list
 	 (pos (position colour colours :key #'car)))
-    (if pos
+    (if pos ; If colour is fount return it, else pick a random one
 	(cdr (nth pos colours))
 	(cadr (nth (random (length colours)) colours)))))
 
