@@ -10,7 +10,7 @@
       (cdr list)
       (cons (car list) (remove-nth (1- n) (cdr list)))))
 
-(defun error-message (message &optional (button-text "OK") button2-text)
+(defun error-message (message &optional (button-text "OK"))
   "Makes a box appear with the message given"
   (ltk:with-ltk ()
     (let (; Label that displays the message
@@ -20,23 +20,13 @@
 	  (button (make-instance 'ltk:button 
 				 :text button-text
 				 :command (lambda ()
-					    (setf ltk:*break-mainloop* t))))
-	  (button2 (make-instance 'ltk:button
-				  :text button2-text
-				  :command (lambda ()
-					     (setf ltk:*break-mainloop* t)
-					     (error 'extreme-input :str 'nil)))))
+					    (setf ltk:*break-mainloop* t)))))
       ; Place the items into the window
       (ltk:pack label)
-      (when button2-text
-	(ltk:pack button2))
       (ltk:pack button)
       (ltk:mainloop))))
 
 (define-condition invalid-input (error)
-  ((str :initarg :str :reader str)))
-
-(define-condition extreme-input (error)
   ((str :initarg :str :reader str)))
 
 (defun parse-int (str &key min max)

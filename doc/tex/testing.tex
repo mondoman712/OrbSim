@@ -130,20 +130,39 @@ problems with the simulation, and it is advised that they change them.
 \paragraph{Actual Outcome}
 The Body is added regardless.
 \paragraph{Comments and Corrective actions}
-
+I've added extra optional arguments to parse-int that allow you to pass in a min
+and/or a max value for the number, and it will signal an error and create an
+error message if the value is outside of these.
+\begin{lstlisting}
+(defun parse-int (str &key min max)
+  "Converts a string to an int, and creates an error message if its invalid"
+  (let ((int (parse-integer str :junk-allowed `t)))
+    (if int
+	(if (or (and (and min max) (> int min) (< int max))
+		(and min (> int min))
+		(and max (< int max)))
+	    int
+	    (progn (error-message "Please enter a valid integer")
+		   (error `invalid-input)))
+	(progn (error-message "Please enter a valid integer")
+	       (error `invalid-input)))))
+\end{lstlisting}
+And the minimum and maximum values for different parameters are passed into
+parse-int when it is called later.
 
 \section{Removing a body}
 \subsection{Typical}
 \paragraph{Expected Outcome}
 The selected body will be removed from the simulation.
 \paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
+The selected body is removed from the simulation.
 
 \subsection{Erroneous}
 \paragraph{Expected Outcome}
 A message box will appear to tell the user that they need to select a body
 before they can remove one.
 \paragraph{Actual Outcome}
+A technical error message from LTK appearers, aimed at the programmer.
 \paragraph{Comments and Corrective actions}
 
 
