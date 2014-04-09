@@ -45,20 +45,12 @@
     ; If parse-integer returns a value, return it,
     ;  else create an error message
     (if int
-	(cond ((and min max) (if (and (> int min)
-				      (< int max))
-				 int
-				   (error-message "This input could cause errors,
-                                            would you like to continue?" "Yes" "No")))
-	      (min (if (> int min)
-		       int
-		       (error-message "This input could cause errors,
-                                          would you like to continue?" "Yes" "No")))
-	      (max (if (< int max)
-		       int
-		       (error-message "This input could cause errors,
-                                          would you like to continue?" "Yes" "No")))
-	      ('t int))
+	(if (or (and (and min max) (> int min) (< int max))
+		(and min (> int min))
+		(and max (< int max)))
+	    int
+	    (progn (error-message "Please enter a valid integer")
+		   (error 'invalid-input)))
 	(progn (error-message "Please enter a valid integer")
 	       (error 'invalid-input)))))
 	  
@@ -157,8 +149,8 @@
 			     ; Calls parse-int on all of the items in the list 
 			     (mapcar #'(lambda (x)
 					 (handler-case
-					     (parse-int x :min 10000000
-							:max 100000000)
+					     (parse-int x :min 10000
+							:max 10000000000)
 					     (invalid-input ()
 					       (return-from submit 'nil))
 					     (extreme-input ()
@@ -171,7 +163,8 @@
 				      (ltk:text in-vely)))
 		      	     ; Creates list of size, id and colour
 			     (list :size (handler-case 
-					     (parse-int (ltk:text in-size) :max 40)
+					     (parse-int (ltk:text in-size) 
+							:max 100)
 					   (invalid-input ()
 					     (return-from submit 'nil))
 					   (extreme-input ()

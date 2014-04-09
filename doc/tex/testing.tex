@@ -73,7 +73,7 @@ And parse-int looked like this:
 \begin{lstlisting}
 (defun parse-int (str)
   "Converts a string to an int, and creates an error message if its invalid"
-  (let ((int (parse-integer str :junk-allowed 't)))
+  (let ((int (parse-integer str :junk-allowed `t)))
     (if int
 	int
 	(error-message "Please Enter a valid integer"))))
@@ -87,11 +87,11 @@ condition and had parse-int call it when it calls an error message.
 
 (defun parse-int (str)
   "Converts a string to an int, and creates an error message if its invalid"
-  (let ((int (parse-integer str :junk-allowed 't)))
+  (let ((int (parse-integer str :junk-allowed `t)))
     (if int
 	int
 	(progn (error-message "Please Enter a valid integer")
-	       (error 'invalid-input :str int)))))
+	       (error `invalid-input :str int)))))
 \end{lstlisting}
 However the lambda function that's called when the button is pressed still needs
 to handle the error. The way to do this would be to have a return-from called
