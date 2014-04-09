@@ -177,6 +177,29 @@ A technical error message from LTK appearers, aimed at the programmer.
 \end{figure}
 \paragraph{Comments and Corrective actions}
 
+I wrapped the function in a handler case, and added a case to call when the
+simple type error is signalled (which is the error that was being signalled when
+no body was selected, which I know thanks to the error message that was
+appearing). An error box will be created when the error is caught to ask the
+user to select a body.
+
+\begin{lstlisting}
+	(lambda ()
+  	  (handler-case 
+  	      (setf *bodies*
+		(remove-nth 
+		  (1+ 
+		    (car 
+		      (ltk:listbox-get-selection 
+		        bod-list)))
+		   *bodies*))
+	    (simple-type-error () 
+	      (error-message "Please select a body to remove"))
+	(listbox-update bod-list))
+\end{lstlisting}
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{./img/rm3.png}
+\end{figure}
 
 \section{Saving the system to a file}
 \subsection{Typical}
