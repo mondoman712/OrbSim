@@ -173,16 +173,18 @@
 			      :text "remove" :command 
 			      ;Function called when button pressed
 			      (lambda ()
-				; Set bodies to:
-				(setf *bodies*
-				 ; Remove nth item from body
-				 (remove-nth 
-				  (1+ 
-				   (car 
-				    ; Selection in listbox
-				    (ltk:listbox-get-selection 
-				     bod-list)))
-				  *bodies*))
+				(handler-case 
+				    ; Set bodies to:
+				    (setf *bodies*
+					  ; Remove nth item from body
+					  (remove-nth 
+					   (1+ 
+					    (car 
+					     ; Selection in listbox
+					     (ltk:listbox-get-selection 
+					      bod-list)))
+					   *bodies*))
+				  (simple-type-error () 'nil))
 				; Updates the list box
 				(listbox-update bod-list))))
 	   ; Entry for file name input in save system
