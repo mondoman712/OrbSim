@@ -125,6 +125,35 @@ the items but the first in the list.\\
       (cons (car list) (remove-nth (1- n) (cdr list)))))
 \end{lstlisting}
 
+\subsection{parse-int}
+Parse-int is used to convert a string into an integer, and check it for errors.
+A message box will appear, and an error will be signalled if the string is
+invalid or if it isn't between the minimum and maximum values given.
+
+\begin{pseudocode}{parse-int}{str, min, max}
+	int \GETS \CALL{parse-integer}{str}  \\
+	\IF int 
+	\THEN \BEGIN \IF min < int < max 
+		\THEN \RETURN{int} 
+		\ELSE \CALL{error-message}{} \END
+	\ELSE \CALL{error-message}{} 
+\end{pseudocode}
+
+\begin{lstlisting}
+(defun parse-int (str &key min max)
+  "Converts a string to an int, and creates an error message if its invalid"
+  (let ((int (parse-integer str :junk-allowed `t)))
+    (if int
+	(if (or (and (and min max) (> int min) (< int max))
+		(and min (> int min))
+		(and max (< int max)))
+	    int
+	    (progn (error-message "Please enter a valid integer")
+		   (error `invalid-input)))
+	(progn (error-message "Please enter a valid integer")
+	       (error `invalid-input)))))
+\end{lstlisting}
+
 \section{Variable and Function Listings}
 \subsection{Global Variable List}
 \begin{tabular}{p{0.2\textwidth}p{0.2\textwidth}p{0.6\textwidth}}
