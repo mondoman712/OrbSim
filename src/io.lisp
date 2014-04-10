@@ -32,8 +32,7 @@
 			     '(#\< #\> #\: #\" #\/ #\\ #\| #\? #\*))
 			    (t 'nil)))))
    filename
-   (progn (error-message "Please enter a valid filename")
-	  (error 'invalid-filename))))
+   (error 'invalid-filename)))
 
 (defun save-list (lst filename)
   "Saves the list given to a file with the name given"
@@ -49,9 +48,11 @@
 
 (defun save-bodies (filename)
   "Calls save-list and body-to-list"
-  (save-list (bodies-to-list *bodies*)
-	     (handler-case
+  (handler-case
+      (save-list (bodies-to-list *bodies*)
 		 (check-filename filename))
+    (invalid-filename ()
+      (error-message "Please enter a valid filename"))))
 
 (defun read-list (filename)
   "Reads from a file with the name given"
