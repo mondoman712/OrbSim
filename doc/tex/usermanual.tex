@@ -4,6 +4,7 @@
 	hyperref}
 
 \DeclareGraphicsExtensions{.png, .eps}
+\renewcommand{\arraystretch}{1.3}
 
 \pagestyle{fancy}
 \author{Sam Smith}
@@ -76,8 +77,23 @@ If it continues to happen try adding a new body and removing it, if it still
 continues try closing the program and opening it.
 
 \subsection{Invalid file name while saving}
+Some characters aren't allowed in file names. If you get this error your file
+name contains one or more of these characters. The characters that aren't
+allowed depends on the operating system that you are using. Currently only
+Windows and Linux are supported. The characters that aren't allowed are: \\
+
+\begin{tabular}{l|l}
+	Windows & \textless, \textgreater, :, /, \textbackslash{}, \textbar, ?,
+	* \\ \hline 
+	Linux & /, ;, :, \textbar
+\end{tabular}
 
 \subsection{File does not exist}
-While attempting to load a saved system
+While attempting to load a saved system this error may appear. This means that
+the file you are trying to load does not exist. If this happens check the folder
+where the OrbSim executable is stored and make sure that the file you are trying
+to load exists. If it does and the error persists, try closing the program and
+opening it again. If it continues the file you are trying to load probably
+contains errors and cannot be loaded.
 
 \end{document}
