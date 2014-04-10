@@ -185,7 +185,8 @@
 					      bod-list)))
 					   *bodies*))
 				  (simple-type-error () 
-				    (error-message "Please select a body to remove")))
+				    (error-message 
+				     "Please select a body to remove")))
 				; Updates the list box
 				(listbox-update bod-list))))
 	   ; Entry for file name input in save system

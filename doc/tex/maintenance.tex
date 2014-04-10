@@ -161,7 +161,7 @@ invalid or if it isn't between the minimum and maximum values given.
 	G & Number & Stores the gravitational constant.\\
 	screen-size & Point & Stores the screen size of the SDL window. \\
 	bodies & list & Stores all of the bodies in the system \\
-
+	quit & boolean & Used to signal quits between windows \\
 \end{tabular}
 
 \subsection{Function List --- main.lisp}
@@ -201,6 +201,8 @@ invalid or if it isn't between the minimum and maximum values given.
 	body-to-list & body & Converts an instance of the body class into a list
 	of values \\ 
 	bodies-to-list & bodies & Calls body-to-list on a list of bodies \\
+	check-filename & filename & Checks a filename for disallowed characters
+	\\
 	save-list & lst, filename & Opens a file and prints a list into it \\
 	save-bodies & filename & Calls save-list and bodies-to-list on the
 	global variable bodies \\
@@ -212,13 +214,13 @@ invalid or if it isn't between the minimum and maximum values given.
 \subsection{Function List --- menu.lisp}
 \begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
 	Name & Arguments & Description\\ \hline
-	parse-int & str & Turns a string into an integer, and makes sure its
-	valid \\
-	remove-nth &n, list & removes the nth value from a list \\
-	listbox-update & listbox & Updates the listbox in the menu when called
-	\\
+	remove-nth & n, list & removes the nth value from a list \\
 	error-message & message, (button-text) & Creates a message box with the
 	message given, and the button text can also be changed. \\
+	parse-int & str & Turns a string into an integer, and makes sure its
+	valid \\
+	listbox-update & listbox & Updates the listbox in the menu when called
+	\\
 	main & \emph{none}  & Creates the menu \\
 \end{tabular}
 

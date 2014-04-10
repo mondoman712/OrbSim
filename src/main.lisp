@@ -103,7 +103,8 @@
 (defun update-vel (body)
   "updates velocity of 'body'"
   (let ((accel (split-force 
-                 (calc-g (mass (car *bodies*)) (dist (pos body) (pos (car *bodies*))))
+                 (calc-g (mass (car *bodies*)) 
+			 (dist (pos body) (pos (car *bodies*))))
                  (ang (pos (car *bodies*)) (pos body)))))
     (sets #'+ (x (vel body)) (x accel))
     (sets #'+ (y (vel body)) (y accel))))

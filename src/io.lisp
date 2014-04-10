@@ -29,7 +29,7 @@
 		      (cond ((string= (software-type) "Linux")
 			     '(#\/ #\NULL #\; #\: #\|))
 			    ((string= (software-type) "Windows")
-			     '(#\< #\> #\: #\" #\/ #\\ #\| #\? #\*))
+			     '(#\< #\> #\: #\/ #\\ #\| #\? #\*))
 			    (t 'nil)))))
    filename
    (error 'invalid-filename)))

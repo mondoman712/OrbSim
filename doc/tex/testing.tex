@@ -238,7 +238,7 @@ disallowed character lists for any others, but they could easily be added.
 		      (cond ((string= (software-type) "Linux")
 			     `(#\/ #\NULL #\; #\: #\|))
 			    ((string= (software-type) "Windows")
-			     `(#\< #\> #\: #\"" #\/ #\\ #\| #\? #\*))
+			     `(#\< #\> #\: #\/ #\\ #\| #\? #\*))
 			    (t `nil)))))
    filename
    (error `invalid-filename)))
@@ -286,10 +286,14 @@ shouldn't see.
 \paragraph{Comments and Corrective actions}
 I added a handler case to where read-bodies is called so if the missing file
 error is signalled an error message is created.
+\begin{lstlisting}
+	(lambda () 
+	   (setf *bodies* 
+	         (handler-case 
+		     (read-bodies 
+		       (ltk:text in-fn))
+	           (sb-int:simple-file-error ()
+		     (error-message
+		       "File does not exist"))))))))
+\end{lstlisting}
 
-\subsection{Extreme}
-\paragraph{Expected Outcome}
-The details of the saved simulation will be loaded from the given file and will
-replace the current system.
-\paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
