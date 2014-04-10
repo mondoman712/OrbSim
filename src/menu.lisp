@@ -214,7 +214,7 @@
 						(read-bodies 
 						 (ltk:text in-fn))
 					      (sb-int:simple-file-error ()
-						(ierror-message
+						(error-message
 						 "File does not exist"))))))))
     (progn
       ; Puts the add body items into the window
