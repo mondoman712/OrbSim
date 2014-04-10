@@ -1,0 +1,83 @@
+\documentclass[a4paper,11pt,titlepage]{article}
+\usepackage{graphicx,
+	float,
+	hyperref}
+
+\DeclareGraphicsExtensions{.png, .eps}
+
+\pagestyle{fancy}
+\author{Sam Smith}
+\title{OrbSim User Manual}
+\date{ }
+\begin{document}
+\maketitle
+\tableofcontents
+\clearpage
+
+\section{Installation}
+OrbSim is distributed as an executable file. To use it, download the file and
+double click it.
+
+\section{Using OrbSim}
+
+After starting the program, you should see this (the actual appearance may vary
+from system to system).
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{../img/start.png}
+\end{figure}
+
+The simulation should be running already, if it isn't try closing the program
+and opening it again.
+
+\subsection{Adding a body to the simulation}
+To add a body to the simulation, just click the submit button in the menu. A new
+body should appear in the system and start  orbiting the sun. The supplied
+values are good values for a simple elliptical orbit. The parameters in the add
+body section of the menu can be used to change where the body starts, how fast
+it goes and how it looks. A higher pos-x value will make the body start further
+to the right. A higher pos-y value will make the body start further above the
+sun. A higher vel-x value will make the body start moving faster towards the
+right of the screen, and a higher vel-y value will make the body start moving
+faster towards the top of the screen. The size value is the radius of the body
+in pixels and the id is the bodies identifier, which is used in the list in the
+remove body section.
+
+\subsection{Removing a body from the simulation}
+To remove a body from the system, select the body to remove and click the remove
+button. If no body is selected an error message will appear to ask you to select
+a body.
+
+\subsection{Saving the current simulation state}
+To save the system, click the save button near the bottom of the menu. It is
+advised that you change the filename first because bodies.txt is loaded by
+default, and stores the default system.
+
+\subsection{Loading a saved simulation state}
+To load a system, enter the name of the file you wish to load and click load.
+
+\section{Common Errors}
+\subsection{Invalid integer when adding bodies}
+When adding a body to the simulation, this error may occur.
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{../img/add2.png}
+\end{figure}
+To prevent it, make sure that the position and velocity values are all between
+10000 and 10000000000, and the size is below 100. If it continues to happen try
+closing the program and opening it again.
+
+\subsection{No body selected to remove}
+When trying to remove a body, this error message may appear.
+\begin{figure}[H]
+	\includegraphics[width=\textwidth]{../img/rm3.png}
+\end{figure}
+
+If it does, click OK and try selecting the body you would like to remove again.
+If it continues to happen try adding a new body and removing it, if it still
+continues try closing the program and opening it.
+
+\subsection{Invalid file name while saving}
+
+\subsection{File does not exist}
+While attempting to load a saved system
+
+\end{document}

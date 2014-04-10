@@ -156,8 +156,6 @@
 					     (parse-int (ltk:text in-size) 
 							:max 100)
 					   (invalid-input ()
-					     (return-from submit 'nil))
-					   (extreme-input ()
 					     (return-from submit 'nil)))
 				   :id (ltk:text in-id)
 				   :colour 'a)))
@@ -216,7 +214,7 @@
 						(read-bodies 
 						 (ltk:text in-fn))
 					      (sb-int:simple-file-error ()
-						(error-message
+						(ierror-message
 						 "File does not exist"))))))))
     (progn
       ; Puts the add body items into the window
