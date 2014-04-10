@@ -209,7 +209,14 @@
 				:text "Load"
 				; Calls read-bodies with the file name given
 				:command (lambda () 
-					   (read-bodies (ltk:text in-fn))))))
+					   (setf 
+					    *bodies* 
+					    (handler-case 
+						(read-bodies 
+						 (ltk:text in-fn))
+					      (sb-int:simple-file-error ()
+						(error-message
+						 "File does not exist"))))))))
     (progn
       ; Puts the add body items into the window
       (ltk:grid label-ad 1 1)
@@ -245,3 +252,4 @@
       ; Puts the exit button in the window
       (ltk:grid exit 4 1 :padx 3 :pady 3)
       (ltk:mainloop)))))
+

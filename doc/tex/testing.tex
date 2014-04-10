@@ -221,14 +221,48 @@ a save file.
 A message box will appear to tell the user that the file name they have entered
 is not valid, and should be changed before saving.
 \paragraph{Actual Outcome}
+The file is saved regardless.
 \paragraph{Comments and Corrective actions}
+I added a function to check the filename for disallowed characters, which will
+signal an error if it's not allowed. Different lists of disallowed characters
+will be used depending on if the program is used on a Linux or Windows system,
+as the different operating systems have different reserved characters. My
+program doesn't need to run on any other operating systems so I haven't included
+disallowed character lists for any others, but they could easily be added.
+\begin{lstlisting}
+(defun check-filename (filename)
+  (if 
+   (zerop
+    (count-if #`characterp
+	      (mapcar #`(lambda (c) (find c filename :test #`equalp))
+		      (cond ((string= (software-type) "Linux")
+			     `(#\/ #\NULL #\; #\: #\|))
+			    ((string= (software-type) "Windows")
+			     `(#\< #\> #\: #\"" #\/ #\\ #\| #\? #\*))
+			    (t `nil)))))
+   filename
+   (error `invalid-filename)))
+
+(defun save-list (lst filename)
+  "Saves the list given to a file with the name given"
+  ; Open file
+  (with-open-file (out filename 
+		       ; set to output
+		       :direction :output 
+		       ; if exists, overwrite
+		       :if-exists :supersede) 
+    ; print lst to file
+    (with-standard-io-syntax
+      (print lst out)))) 
+\end{lstlisting}
 
 \subsection{Extreme}
 \paragraph{Expected Outcome}
 The current details of the simulation will be saved to a file, with the name
 given by the user.
 \paragraph{Actual Outcome}
-\paragraph{Comments and Corrective actions}
+The system will save any file name as long as it doesn't include the restricted
+characters for the operating system it is being run on.
 
 
 \section{Loading the system from a file}
@@ -237,14 +271,21 @@ given by the user.
 The details of the saved simulation will be loaded from the given file and will
 replace the current system.
 \paragraph{Actual Outcome}
+Nothing happens when the load button is pressed.
 \paragraph{Comments and Corrective actions}
+When the button was pressed, the file was being loaded but it wasn't setting the
+global variable that stores the bodies to the new one from the file.
 
 \subsection{Erroneous}
 \paragraph{Expected Outcome}
 A message box will appear to tell the user that the file name they have entered
 is invalid, or does not exist, and that they should enter a new one.
 \paragraph{Actual Outcome}
+A technical error message appears, which is aimed at the programmer and the user
+shouldn't see.
 \paragraph{Comments and Corrective actions}
+I added a handler case to where read-bodies is called so if the missing file
+error is signalled an error message is created.
 
 \subsection{Extreme}
 \paragraph{Expected Outcome}
@@ -252,5 +293,3 @@ The details of the saved simulation will be loaded from the given file and will
 replace the current system.
 \paragraph{Actual Outcome}
 \paragraph{Comments and Corrective actions}
-
-
