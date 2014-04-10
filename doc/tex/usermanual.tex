@@ -24,9 +24,16 @@ double click it.
 After starting the program, you should see this (the actual appearance may vary
 from system to system).
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{../img/start.png}
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/start.png}
 \end{figure}
 
+Or something like this:
+
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/win.png}
+\end{figure}
 The simulation should be running already, if it isn't try closing the program
 and opening it again.
 
@@ -60,7 +67,8 @@ To load a system, enter the name of the file you wish to load and click load.
 \subsection{Invalid integer when adding bodies}
 When adding a body to the simulation, this error may occur.
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{../img/add2.png}
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/add2.png}
 \end{figure}
 To prevent it, make sure that the position and velocity values are all between
 10000 and 10000000000, and the size is below 100. If it continues to happen try
@@ -69,7 +77,8 @@ closing the program and opening it again.
 \subsection{No body selected to remove}
 When trying to remove a body, this error message may appear.
 \begin{figure}[H]
-	\includegraphics[width=\textwidth]{../img/rm3.png}
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/rm3.png}
 \end{figure}
 
 If it does, click OK and try selecting the body you would like to remove again.
@@ -87,6 +96,10 @@ Windows and Linux are supported. The characters that aren't allowed are: \\
 	* \\ \hline 
 	Linux & /, ;, :, \textbar
 \end{tabular}
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/save.png}
+\end{figure}
 
 \subsection{File does not exist}
 While attempting to load a saved system this error may appear. This means that
@@ -95,5 +108,9 @@ where the OrbSim executable is stored and make sure that the file you are trying
 to load exists. If it does and the error persists, try closing the program and
 opening it again. If it continues the file you are trying to load probably
 contains errors and cannot be loaded.
+\begin{figure}[H]
+	\centering
+	\includegraphics[width=0.8\textwidth]{../img/load.png}
+\end{figure}
 
 \end{document}
