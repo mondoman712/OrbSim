@@ -42,11 +42,29 @@
 	completed. The systems lets the user add bodies with different
 	parameters (although not the eccentricity directly), but they cannot be
 	edited once they have been added. \\
-	The system needs to run smoothly on the school computers & \\
-	The system needs to be very easy to use & Partially Completed\\
+	The system needs to run smoothly on the school computers & Completed,
+	the simulation will run at 60 frames per second, as long as there is a
+	reasonable number of bodies in the system.\\
+	The system needs to be very easy to use & Partially Completed. There is
+	very few different function to learn to use, but deciding what values to
+	use when adding a body can be confusing.\\
 \end{tabular}
 
 \section{Usability}
+The system is very easy to use. It has very few different buttons and everything
+is available on the main screen (You don't have to press buttons to get to other
+buttons). There is very little latency while performing the main functions of
+the system, unless too many bodies have been added to the simulation, in which
+case it can start to struggle to process it all. There is always a way to exit
+the system available, so the user shouldn't have problems closing the problem.
+However if they use the exit button provided by windows they may have to close
+the two windows separately.
+\subsection{Learnability}
+Overall, my system is relatively easy to learn. There is only 3 main function of
+the system, and they are mostly very easy to learn. The add body function is the
+hardest to learn, as the values it takes can be odd and hard to get right. The
+remove body function is just selecting a body to remove and clicking remove. The
+save and load function is similarly easy.
 %	Learnability:
 %		How easy is your system to learn?
 %		Include examples
@@ -67,6 +85,12 @@
 %			Does it let the user know its loading?
 %		Metaphors - pictures to guide users
 %		How easy is it to navigate?
+\subsection{Readability}
+My program doesn't have any extra functionality to help users with impaired
+vision, but if they have set up their operating system to be more readable it
+should also apply to my program. My program doesn't have any large amounts of
+text to read, and the main window is just black with colourful circles on top,
+which should be easy to see.
 %		Readability
 %			High contrast?
 %			Large fonts
@@ -74,7 +98,32 @@
 %			Not too much extra info
 %		Ability to reverse/confirm certain actions
 %		A way out?
+
+\subsection{Navigating the system}
+Navigating the system is very easy because there is only two different windows,
+which are both open all the time that the system is running. The menu window
+doesn't have any sub-menus within it, so the user won't have problems finding
+the buttons that they want.
+
 \section{Maintainability}
+\subsection{Adding new features}
+Lisp generally makes it easy to write very extendible programs. While I haven't
+added functionality for people who want to add to my program, it should be easy
+to modify. Some things that users may want to add, like the ability to add moons
+to the planets, would require quite a lot of changes to the core of the program,
+but the way I have coded it should accommodate this.
+
+\subsection{Fixing Bugs}
+During my testing I found that most of the bugs could be fixed by adding handler
+cases, and telling the system what to do when it encounters certain errors. I
+expect there to be more of these that I have not found, which could also be
+fixed easily.
+
+\subsection{Changing Parameters}
+Changing certain parameters within the system should be very easy. A lot of
+parameters can be edited from within the system. The size of the simulation
+window is stored as a global variable in the program, which could be changed
+easily.
 %	Maintainability:
 %			Bug fixing
 %			Changing parameters
@@ -86,4 +135,3 @@
 %			Entry and exit points in code
 %			Minimal global use
 %		Evaluating maintenance document
-\subsection{Potential for future development}
