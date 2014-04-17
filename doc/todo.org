@@ -1,8 +1,83 @@
 Orbsim -*- mode: org -*-
 
 
-** TODO number objectives
+* Analysis
+** TODO Objectives
+   + Number them
+   + Be more specific; 'certain parameters'
+   + Include others:
+     - Easy to use
+     - Small learning curve
+     - Used by students and teachers
+** TODO DFDs
+   + For current and proposed systems
+   + Level 1 and level 2 
+** TODO Possible solutions
+   + Should be ones that already exist and I have covered in research
+
+** TODO Context diagram
+   + Textbook p237
+** TODO ADD 
+   + I need it
+** TODO Algorithms in the current system
+   + Shows you are using things correctly
+   + Shows you are using *complex* maths
+** TODO OOP
+   + Need inheritence diagrams
+** TODO Any other things not covered
+   + TODO find out what needs doing
+
+* Design
+** TODO Overall system design
+   + Either explanation of IPSO table
+   + Or flow chart
+   + Introduce the section, explain briefly what design covers
+** TODO Annotate HCI
+   + To indicate User input
+** TODO Structure chart
+   + Uses wrong shapes
+   + Has no data flow
+   + AS textbook p86
+** TODO Algorithms
+   + In structured english or pseudocode
+** TODO Data design dictionary
+** TODO ERD
+   + For class definitions
+** TODO Explain file organisation
+   + Is there any?
 
 
+* Testing
+** TODO Introduce the section
+** TODO Put it in a table
+   + ?
+** TODO Evaluation
+   + Does it work as it should?
+   + How did I approach the testing?
+   + Strengths and weaknesses of the system, based on the tests
+
+* Maintainance
+** TODO Move dev env to start
+** TODO Explain modular structure
+** TODO Talk about test results
+   + Programmers need to know which code produced which outcome
+** TODO More program listing
+   + From Implementation section to appendices,
+     then explain code and refer to program listing in appendix
+** TODO System settings and config
+   + What needs to be installed
 
 
+* User manual
+** TODO Introduction
+   + What it covers and who could use it
+** TODO Full install guide
+   + With screenshots
+** TODO More screen shots
+** TODO Describe screenshots
+
+* Evaluation
+** TODO Number Objectives
+** TODO Need to write as report
+   + With into, main body and conclusion
+   + Refer to objectives
