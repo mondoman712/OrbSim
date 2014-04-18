@@ -3,7 +3,27 @@
 
 \section{System Overview}
 
+\section{Development Environment}
+Orbsim has developed using, and has been tested with SBCL (Steel Bank Common
+Lisp). It will only run in SBCL due to the fact that I've used SBCL's threading
+features and not all Lisp Implementations support threading, and those that do
+implement it differently. The "Lispbuilder-SDL" package is required, and it is
+advised that QuickLisp is used to install it (if not the start of "main.lisp"
+will need to be changed). 
 
+\subsection{System settings and Configurations}
+To run the program, one needs the following packages to be installed:
+\begin{itemize}
+	\item SDL
+	\item Tcl/Tk
+\end{itemize}
+And to compile the program from source these additional packages are required:
+\begin{itemize}
+	\item SBCL
+	\item Quicklisp	
+\end{itemize}
+Quicklisp will automatically install a couple of packages also required when you
+try to run the program from SBCL.
 \section{Function Design}
 
 \subsection{draw-bodies}

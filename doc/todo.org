@@ -2,7 +2,7 @@ Orbsim -*- mode: org -*-
 
 
 * Analysis
-** TODO Objectives
+** DONE Objectives
    + Number them
    + Be more specific; 'certain parameters'
    + Include others:
@@ -57,11 +57,11 @@ Orbsim -*- mode: org -*-
    + Strengths and weaknesses of the system, based on the tests
 
 * Maintainance
-** TODO Move dev env to start
+** DONE Move dev env to start
 ** TODO Explain modular structure
 ** TODO Talk about test results
    + Programmers need to know which code produced which outcome
-** TODO More program listing
+** TODO Move program listing
    + From Implementation section to appendices,
      then explain code and refer to program listing in appendix
 ** TODO System settings and config
