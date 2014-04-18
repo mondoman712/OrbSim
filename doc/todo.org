@@ -27,6 +27,7 @@ Orbsim -*- mode: org -*-
 ** TODO Any other things not covered
    + TODO find out what needs doing
 
+
 * Design
 ** TODO Overall system design
    + Either explanation of IPSO table
@@ -56,6 +57,7 @@ Orbsim -*- mode: org -*-
    + How did I approach the testing?
    + Strengths and weaknesses of the system, based on the tests
 
+
 * Maintainance
 ** DONE Move dev env to start
 ** TODO Explain modular structure
@@ -76,8 +78,10 @@ Orbsim -*- mode: org -*-
 ** TODO More screen shots
 ** TODO Describe screenshots
 
+
 * Evaluation
-** TODO Number Objectives
+** DONE Number Objectives
+** TODO Write eval for new objectives
 ** TODO Need to write as report
    + With into, main body and conclusion
    + Refer to objectives
