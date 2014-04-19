@@ -78,7 +78,7 @@ this force is given by:
 \end{equation}
 
 where G is the constant of gravitation (approx. $6.67 \times 10^{-11}
-N(m/kg)^2$). We can then ignore one of the masses, because its significantly
+N{m/kg}^2$). We can then ignore one of the masses, because its significantly
 less than the other, and calculate the acceleration towards the object using:
 
 \begin{equation}
@@ -137,7 +137,7 @@ could be the Sun or a planet. It's attributes are:
 
 In its current state, the program takes up 65MB when compiled. I expect that
 this will be higher when I have completed the program but I would think that it
-would be no more than 200MB. The reason that the executable is so large for a
+would be no more than 100MB. The reason that the executable is so large for a
 small program is that the Lisp interpreter that I am using compiles itself and
 all of the libraries I use into the executable, which means that the program
 should run on any computer without having to install any extra software. \\
@@ -156,6 +156,14 @@ technically inclined student could experiment further. Also having the source
 code available means that people can see exactly what the program does before
 they decide to run it, so they can be sure that I am not trying to do anything
 malicious with their computer. \\
+
+\subsection{File Organisation}
+
+The system has very few separate files. The executable, which is the only file
+distributed, can be placed anywhere that is convenient for the user. The user
+can then create new files from within the system, which will be saved in the
+same directory that the executable is placed. \\
+
 
 %%%
 \section{Testing Plan}
