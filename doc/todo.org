@@ -58,6 +58,7 @@ Orbsim -*- mode: org -*-
 
 ** DONE Closing the program has no actual outcome
 
+
 * Maintainance
 ** DONE Move dev env to start
 ** TODO Explain modular structure
@@ -76,12 +77,11 @@ Orbsim -*- mode: org -*-
 ** TODO Full install guide
    + With screenshots
 ** TODO More screen shots
-** TODO Describe screenshots
-
+** TODO Describe screenshots 
 
 * Evaluation
 ** DONE Number Objectives
-** TODO Write eval for new objectives
+** DONE Write eval for new objectives
 ** TODO Need to write as report
    + With into, main body and conclusion
    + Refer to objectives
