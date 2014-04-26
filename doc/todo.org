@@ -43,7 +43,7 @@ Orbsim -*- mode: org -*-
 ** TODO Data design dictionary
 ** TODO ERD
    + For class definitions
-** TODO Explain file organisation
+** DONE Explain file organisation
    + Is there any?
 
 
@@ -56,7 +56,7 @@ Orbsim -*- mode: org -*-
    + How did I approach the testing?
    + Strengths and weaknesses of the system, based on the tests
 
-** TODO Closing the program has no actual outcome
+** DONE Closing the program has no actual outcome
 
 * Maintainance
 ** DONE Move dev env to start
