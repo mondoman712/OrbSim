@@ -12,9 +12,7 @@ Orbsim -*- mode: org -*-
 ** TODO DFDs
    + For current and proposed systems
    + Level 1 and level 2 
-** TODO Possible solutions
-   + Should be ones that already exist and I have covered in research
-** TODO Context diagram
+** DONE Context diagram
    + Textbook p237
 ** TODO ADD 
    + I need it
@@ -46,11 +44,8 @@ Orbsim -*- mode: org -*-
 ** DONE Explain file organisation
    + Is there any?
 
-
 * Testing
 ** TODO Introduce the section
-** TODO Put it in a table
-   + ?
 ** TODO Evaluation
    + Does it work as it should?
    + How did I approach the testing?
@@ -79,6 +74,7 @@ Orbsim -*- mode: org -*-
 ** TODO More screen shots
 ** TODO Describe screenshots 
 
+   
 * Evaluation
 ** DONE Number Objectives
 ** DONE Write eval for new objectives

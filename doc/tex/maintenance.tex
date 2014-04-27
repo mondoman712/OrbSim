@@ -2,6 +2,13 @@
 \part{Maintenance}
 
 \section{System Overview}
+\subsection{Modular Design}
+The code is split into three separate files; main.lisp, io.lisp and menu.lisp.
+They each hold different functions, for their different purposes. main.lisp
+holds the main body of the program, which contains all of the SDL graphics, all
+of the data processing and the program's main loop. io.lisp contains a
+collection of functions used to save and load the details of the system from
+files. menu.lisp contains everything related to the programs menu.
 
 \section{Development Environment}
 Orbsim has developed using, and has been tested with SBCL (Steel Bank Common
