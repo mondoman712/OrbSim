@@ -1,5 +1,10 @@
 %!TEX root =../project.tex
 \part{Testing}
+
+We need to make sure that the program runs smoothly and without error. In order
+to do this me must test each function with a range of data to make sure it
+functions as expected. Should something go wrong, we must make sure it is fixed.
+
 \section{Starting the program}
 \paragraph{Expected Outcome} 
 Two windows will open, the graphical output of the simulation and a menu. The
@@ -295,9 +300,16 @@ error is signalled an error message is created.
 		       (ltk:text in-fn))
 	           (sb-int:simple-file-error ()
 		     (error-message
-		       "File does not exist"))))))))
+		       "File does not exist")))))
 \end{lstlisting}
 
 \section{Conclusion}
 
+After the fixes made, as seen in this section, the program works as it should.
+As far as I know, there's no major bugs left in the system and each function
+works exactly as it should. For the testing I have detailed here, I used a black
+box testing method, as I wanted to make sure things worked from the user's
+perspective, and the user won't be looking at the code as they use the program.
+I also used a white box testing method while I was writing the program, to test
+each function individually as I wrote them. 
 
