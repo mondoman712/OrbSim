@@ -14,19 +14,17 @@ Orbsim -*- mode: org -*-
    + Level 1 and level 2 
 ** DONE Context diagram
    + Textbook p237
-** TODO ADD 
+** CAN'T DO ADD 
    + I need it
-** TODO Algorithms in the current system
+** CAN'T DO Algorithms in the current system
    + Shows you are using things correctly
    + Shows you are using *complex* maths
-** TODO OOP
-   + Need inheritence diagrams
 ** TODO Any other things not covered
    + TODO find out what needs doing
 
 
 * Design
-** TODO Overall system design
+** DONE Overall system design
    + Either explanation of IPSO table
    + Or flow chart
    + Introduce the section, explain briefly what design covers
@@ -39,14 +37,15 @@ Orbsim -*- mode: org -*-
 ** TODO Algorithms
    + In structured english or pseudocode
 ** TODO Data design dictionary
-** TODO ERD
+** CAN'T DO ERD
    + For class definitions
 ** DONE Explain file organisation
    + Is there any?
 
+
 * Testing
-** TODO Introduce the section
-** TODO Evaluation
+** DONE Introduce the section
+** DONE Evaluation
    + Does it work as it should?
    + How did I approach the testing?
    + Strengths and weaknesses of the system, based on the tests
@@ -56,16 +55,13 @@ Orbsim -*- mode: org -*-
 
 * Maintainance
 ** DONE Move dev env to start
-** TODO Explain modular structure
+** DONE Explain modular structure
 ** TODO Talk about test results
    + Programmers need to know which code produced which outcome
-** TODO Move program listing
-   + From Implementation section to appendices,
-     then explain code and refer to program listing in appendix
-** TODO System settings and config
+** DONE System settings and config
    + What needs to be installed
 
-
+     
 * User manual
 ** TODO Introduction
    + What it covers and who could use it
