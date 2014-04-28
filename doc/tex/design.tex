@@ -1,4 +1,4 @@
-!TEX root = ../project.tex
+%!TEX root = ../project.tex
 \part{Design}
 
 Now that we have analysed the problem, we can begin to design the program,
@@ -141,7 +141,7 @@ could be the Sun or a planet. It's attributes are:
 
 In its current state, the program takes up 65MB when compiled. I expect that
 this will be higher when I have completed the program but I would think that it
-would be no more than 100MB. The reason that the executable is so large for a
+would be no more than 100MB\@. The reason that the executable is so large for a
 small program is that the Lisp interpreter that I am using compiles itself and
 all of the libraries I use into the executable, which means that the program
 should run on any computer without having to install any extra software. \\
@@ -175,6 +175,7 @@ same directory that the executable is placed. \\
 \begin{tabular}{p{0.3\textwidth}p{0.3\textwidth}p{0.4\textwidth}} 
 	Description & Typical, Erroneous, Extreme & Expected Outcome \\ \hline
 	Starting the program & Typical & The program will start \\ 
+	Closing the program & Typical & The program will close \\
 	Running the simulation & Typical & The simulation will run as expected
 	\\
 	 & Extreme & The simulation will run as expected \\
