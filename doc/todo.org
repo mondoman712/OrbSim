@@ -14,7 +14,7 @@ Orbsim -*- mode: org -*-
    + Level 1 and level 2 
 ** DONE Context diagram
    + Textbook p237
-** CAN'T DO ADD 
+** TODO ADD 
    + I need it
 ** CAN'T DO Algorithms in the current system
    + Shows you are using things correctly
@@ -63,6 +63,13 @@ Orbsim -*- mode: org -*-
 
      
 * User manual
+** WAITING Form Cult
+   + Make sure at least 100 people join
+   + Have some random entry requirements
+   + Kill all who deny the true way
+   + Sacrifice Ralph to the Glorious Overlords
+   + Check Spelling
+   + Learn to type good
 ** TODO Introduction
    + What it covers and who could use it
 ** TODO Full install guide
