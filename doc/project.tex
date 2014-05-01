@@ -33,7 +33,6 @@
 \fancyhead[L]{Name: Sam Smith}
 \fancyhead[C]{}
 \fancyhead[R]{Center Name: King Edward VI Five Ways School}
-%\fancyfoot[L]{\bf Part \thepart: \parttitle}
 \fancyfoot[L]{\@footype}
 \fancyfoot[C]{}
 \fancyfoot[R]{\thepage}
@@ -71,7 +70,7 @@
 	columns=flexible,
 	escapeinside={#\"}{#}
 	}
-\newcommand{\add}[1]{\input{./tex/#1.tex} \clearpage}
+\newcommand\add[1]{\input{./tex/#1.tex} \clearpage}
 
 \add{analysis}
 \add{design}
@@ -87,5 +86,4 @@ program, the different states of the program and common errors that the user may
 encounter.
 \includepdf[pages=-]{./tex/usermanual.pdf}
 \add{evaluation}
-
 \end{document}
