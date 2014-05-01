@@ -1,5 +1,4 @@
-\documentclass[a4paper,11pt,titlepage]{article}
-\usepackage{graphicx,
+\documentclass[a4paper,11pt,titlepage]{article} \usepackage{graphicx,
        	fancyhdr,
        	tikz,
        	tabularx,
@@ -23,16 +22,32 @@
 
 \renewcommand{\arraystretch}{1.3}
 
-\lheadme{Sam Smith}
-\rhead{Center Name: King Edward VI Five Ways School}
+\makeatletter
+\newcommand\footype[1]{\def\@footype{#1}}
+
+\let\Oldpart\part
+\newcommand{\parttitle}{}
+\renewcommand{\part}[1]{\Oldpart{#1}\renewcommand{\parttitle}{#1}}
+
+\fancyhf{}
+\fancyhead[L]{Name: Sam Smith}
+\fancyhead[C]{}
+\fancyhead[R]{Center Name: King Edward VI Five Ways School}
+%\fancyfoot[L]{\bf Part \thepart: \parttitle}
+\fancyfoot[L]{\@footype}
+\fancyfoot[C]{}
+\fancyfoot[R]{\thepage}
+\makeatother
 
 \author{Sam Smith}
 \title{Orbit Simulator}
 \date{May? 2014}
 \begin{document}
 \maketitle
+\footype{}
 \tableofcontents
 \clearpage
+\footype{\bf Part \thepart: \parttitle}
 
 \definecolor{darkgreen}{rgb}{0,0.6,0}
 
