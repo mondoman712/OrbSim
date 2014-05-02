@@ -209,7 +209,7 @@ external files as all the data can be processed within the program. The program
 could be expanded to allow the user to save the state of the simulation to an
 external file to be restored later, but it is not necessary.
 
-\subsection{Data Dictionary}
+\subsection{Analysis Data Dictionary}
 
 \begin{tabular}{p{0.16\textwidth}p{0.25\textwidth}p{0.15\textwidth}
 			p{0.2\textwidth}p{0.15\textwidth}}
@@ -223,8 +223,10 @@ external file to be restored later, but it is not necessary.
 	10,000 and 10,000,000,000 \\
 	Vel Y & Stores the Y velocity of a body & Number & 100,000 & Between
 	10,000 and 10,000,000,000 \\
-	Size & Stores the size of a body & Number & 
-	
+	Size & Stores the size of a body & Number & 10 & Below 100 \\
+	Id & Stores an Id for each body & Symbol & earth & None \\
+	File name & The name of the file to be saved to/loaded from & String &
+	bodies.txt & Doesn't allow invalid characters for the OS \\
 \end{tabular}
 
 %%

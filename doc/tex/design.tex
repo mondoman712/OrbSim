@@ -168,6 +168,30 @@ distributed, can be placed anywhere that is convenient for the user. The user
 can then create new files from within the system, which will be saved in the
 same directory that the executable is placed. \\
 
+\section{Design Data Dictionary}
+
+\begin{tabular}{p{0.16\textwidth}p{0.25\textwidth}p{0.15\textwidth}
+			p{0.2\textwidth}p{0.15\textwidth}}
+	Field Name & Field Purpose & Field Type & Example Data &
+	Validation \\ \hline
+	Pos X & Stores the X position of a body & Number & 100,000,000 & Between
+	10,000 and 10,000,000,000 \\
+	Pos Y & Stores the Y position of a body & Number & 100,000,000 & Between
+	10,000 and 10,000,000,000 \\
+	Vel X & Stores the X velocity of a body & Number & 100,000 & Between
+	10,000 and 10,000,000,000 \\
+	Vel Y & Stores the Y velocity of a body & Number & 100,000 & Between
+	10,000 and 10,000,000,000 \\
+	Size & Stores the size of a body & Number & 10 & Below 100 \\
+	Id & Stores an Id for each body & Symbol & earth & None \\
+	File name & The name of the file to be saved to/loaded from & String &
+	bodies.txt & Doesn't allow invalid characters for the OS \\
+	Colour & The colour of a body & SDL Color & blue & none \\
+\end{tabular} \\ \\ 
+
+The "Field Size" field has been omitted because LISP automatically uses its
+bignum libraries when a number gets to large, so there isn't a limit to how big
+these can be.
 
 %%%
 \section{Testing Plan}
