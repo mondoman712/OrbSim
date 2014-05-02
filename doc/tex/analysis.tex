@@ -209,6 +209,24 @@ external files as all the data can be processed within the program. The program
 could be expanded to allow the user to save the state of the simulation to an
 external file to be restored later, but it is not necessary.
 
+\subsection{Data Dictionary}
+
+\begin{tabular}{p{0.16\textwidth}p{0.25\textwidth}p{0.15\textwidth}
+			p{0.2\textwidth}p{0.15\textwidth}}
+	Field Name & Field Purpose & Field Type & Example Data &
+	Validation \\ \hline
+	Pos X & Stores the X position of a body & Number & 100,000,000 & Between
+	10,000 and 10,000,000,000 \\
+	Pos Y & Stores the Y position of a body & Number & 100,000,000 & Between
+	10,000 and 10,000,000,000 \\
+	Vel X & Stores the X velocity of a body & Number & 100,000 & Between
+	10,000 and 10,000,000,000 \\
+	Vel Y & Stores the Y velocity of a body & Number & 100,000 & Between
+	10,000 and 10,000,000,000 \\
+	Size & Stores the size of a body & Number & 
+	
+\end{tabular}
+
 %%
 \subsection{Object Orientation Planning}
 The first class I will need to create is a point, which describes the X and Y
