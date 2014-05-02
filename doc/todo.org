@@ -1,6 +1,3 @@
-Orbsim -*- mode: org -*-
-
-
 * Analysis
 ** DONE Objectives
    + Number them
@@ -14,7 +11,7 @@ Orbsim -*- mode: org -*-
    + Level 1 and level 2 
 ** DONE Context diagram
    + Textbook p237
-** TODO ADD 
+** DONE ADD 
    + I need it
 ** CAN'T DO Algorithms in the current system
    + Shows you are using things correctly
@@ -36,7 +33,7 @@ Orbsim -*- mode: org -*-
    + AS textbook p86
 ** TODO Algorithms
    + In structured english or pseudocode
-** TODO Data design dictionary
+** DONE Data design dictionary
 ** CAN'T DO ERD
    + For class definitions
 ** DONE Explain file organisation
