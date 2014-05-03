@@ -2,6 +2,13 @@
 \part{Maintenance}
 
 \section{System Overview}
+The system works by creating an instance of the body class for each body in the
+system, and in each iteration the main loop for the SDL system, the list of
+bodies is passed into functions which calculate and update their positions. The
+system is designed to handle as many bodies as the user wants to add, although
+it will start to struggle after too many are added (the exact number of which
+depends on the computer it is being run on).
+
 \subsection{Modular Design}
 The code is split into three separate files; main.lisp, io.lisp and menu.lisp.
 They each hold different functions, for their different purposes. main.lisp
@@ -34,7 +41,17 @@ additional packages are required:
 Quicklisp will automatically install a couple of packages also required when you
 try to run the program from SBCL.
 
-%\section{Testing Results}
+\section{Testing Results}
+The testing results show that, after the corrective actions had been applied,
+the program works as it should. The testing shows that a lot of the problem was
+the lack of error messages, which has been fixed, and the error-message function
+that was added can be used to easily add more, should any be missing. Almost all
+of the code relating to the menu and error messages is within the monolithic
+menu function. The choice to contain all of that code within the single function
+was made because, due to the design of the library being used (LTK), it would
+have required at least twice as much code to split it into something more
+modular.
+
 
 \section{Function Design}
 
@@ -187,7 +204,8 @@ invalid or if it isn't between the minimum and maximum values given.
 	quit & boolean & Used to signal quits between windows \\
 \end{tabular}
 
-\subsection{Function List --- main.lisp}
+\subsection{Function Listings}
+\subsubsection{main.lisp}
 \begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
 	Name & Arguments & Description\\ \hline
 	make-body & pos-x, pos-y, vel-x, vel-y, mass, size, colour, id &
@@ -218,7 +236,7 @@ invalid or if it isn't between the minimum and maximum values given.
 	and the menu in another
 \end{tabular}
 
-\subsection{Function List --- io.lisp}
+\subsubsection{io.lisp}
 \begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
 	Name & Arguments & Description\\ \hline
 	body-to-list & body & Converts an instance of the body class into a list
@@ -234,7 +252,7 @@ invalid or if it isn't between the minimum and maximum values given.
 	list of bodies \\ 
 \end{tabular}
 
-\subsection{Function List --- menu.lisp}
+\subsubsection{menu.lisp}
 \begin{tabular}{p{0.2\textwidth}p{0.3\textwidth}p{0.5\textwidth}}
 	Name & Arguments & Description\\ \hline
 	remove-nth & n, list & removes the nth value from a list \\
