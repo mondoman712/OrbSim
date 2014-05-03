@@ -1,4 +1,4 @@
-* Analysis
+* DONE Analysis
 ** DONE Objectives
    + Number them
    + Be more specific; 'certain parameters'
@@ -6,7 +6,7 @@
      - Easy to use
      - Small learning curve
      - Used by students and teachers
-** TODO DFDs
+** DONE DFDs
    + For current and proposed systems
    + Level 1 and level 2 
 ** DONE Context diagram
@@ -20,7 +20,7 @@
    + TODO find out what needs doing
 
 
-* Design
+* IN-PROGRESS Design
 ** DONE Overall system design
    + Either explanation of IPSO table
    + Or flow chart
@@ -40,7 +40,7 @@
    + Is there any?
 
 
-* Testing
+* DONE Testing
 ** DONE Introduce the section
 ** DONE Evaluation
    + Does it work as it should?
@@ -50,16 +50,16 @@
 ** DONE Closing the program has no actual outcome
 
 
-* Maintainance
+* DONE Maintainance
 ** DONE Move dev env to start
 ** DONE Explain modular structure
-** TODO Talk about test results
+** DONE Talk about test results
    + Programmers need to know which code produced which outcome
 ** DONE System settings and config
    + What needs to be installed
 
      
-* User manual
+* TODO User manual
 ** WAITING Form Cult
    + Make sure at least 100 people join
    + Have some random entry requirements
@@ -75,9 +75,10 @@
 ** TODO Describe screenshots 
 
    
-* Evaluation
+* IN-PROGRESS Evaluation
 ** DONE Number Objectives
 ** DONE Write eval for new objectives
+** TODO Evaluate Documentation
 ** TODO Need to write as report
    + With into, main body and conclusion
    + Refer to objectives
