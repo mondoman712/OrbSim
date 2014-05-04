@@ -31,7 +31,7 @@
    + Uses wrong shapes
    + Has no data flow
    + AS textbook p86
-** TODO Algorithms
+** DONE Algorithms
    + In structured english or pseudocode
 ** DONE Data design dictionary
 ** CAN'T DO ERD
