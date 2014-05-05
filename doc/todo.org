@@ -27,15 +27,13 @@
    + Introduce the section, explain briefly what design covers
 ** TODO Annotate HCI
    + To indicate User input
-** TODO Structure chart
+** DONE Structure chart
    + Uses wrong shapes
    + Has no data flow
    + AS textbook p86
 ** DONE Algorithms
    + In structured english or pseudocode
 ** DONE Data design dictionary
-** CAN'T DO ERD
-   + For class definitions
 ** DONE Explain file organisation
    + Is there any?
 
@@ -59,7 +57,7 @@
    + What needs to be installed
 
      
-* TODO User manual
+* DONE User manual
 ** WAITING Form Cult
    + Make sure at least 100 people join
    + Have some random entry requirements
@@ -67,18 +65,15 @@
    + Sacrifice Ralph to the Glorious Overlords
    + Check Spelling
    + Learn to type good
-** TODO Introduction
+** DONE Introduction
    + What it covers and who could use it
-** TODO Full install guide
+** DONE Full install guide
    + With screenshots
-** TODO More screen shots
-** TODO Describe screenshots 
+** DONE More screen shots
+** DONE Describe screenshots 
 
    
-* IN-PROGRESS Evaluation
+* DONE Evaluation
 ** DONE Number Objectives
 ** DONE Write eval for new objectives
-** TODO Evaluate Documentation
-** TODO Need to write as report
-   + With into, main body and conclusion
-   + Refer to objectives
+** DONE Evaluate Documentation
